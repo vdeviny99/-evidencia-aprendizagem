@@ -2,7 +2,8 @@ import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { FileText, Users, Tags, Mail, MessageSquare } from "lucide-react";
+import { FileText, Users, Tags, Mail, MessageSquare, ClipboardList } from "lucide-react";
+import Link from "next/link";
 
 async function getStats() {
   const [articles, users, categories, subscribers, messages] = await Promise.all(
@@ -21,6 +22,10 @@ export default async function AdminDashboard() {
   const session = await getServerSession(authOptions);
 
   if (!session) {
+    redirect("/admin/login");
+  }
+
+  if (session.user.role !== "ADMIN") {
     redirect("/admin/login");
   }
 
@@ -62,6 +67,28 @@ export default async function AdminDashboard() {
             </p>
           </div>
         ))}
+      </div>
+
+      <div className="mt-8">
+        <Link
+          href="/admin/diagnosticos"
+          className="flex items-center justify-between rounded-xl bg-accent p-6 text-white shadow-sm transition-colors hover:bg-accent-dark"
+        >
+          <div className="flex items-center gap-4">
+            <ClipboardList className="h-8 w-8 text-gold" />
+            <div>
+              <p className="font-heading text-lg font-bold">
+                Diagnósticos recebidos
+              </p>
+              <p className="text-sm text-white/70">
+                Veja os questionários preenchidos pelos alunos
+              </p>
+            </div>
+          </div>
+          <span className="font-heading text-xs font-bold uppercase tracking-wider text-white/80">
+            Abrir →
+          </span>
+        </Link>
       </div>
     </div>
   );

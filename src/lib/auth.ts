@@ -32,6 +32,7 @@ export const authOptions: AuthOptions = {
           email: user.email,
           name: user.name,
           image: user.image,
+          role: user.role,
         };
       },
     }),
@@ -41,8 +42,11 @@ export const authOptions: AuthOptions = {
     signIn: "/admin/login",
   },
   callbacks: {
-    async jwt({ token, user }: { token: JWT; user?: { id: string } }) {
-      if (user) token.id = user.id;
+    async jwt({ token, user }: { token: JWT; user?: { id: string; role?: string } }) {
+      if (user) {
+        token.id = user.id;
+        token.role = user.role;
+      }
       return token;
     },
     async session({
@@ -54,6 +58,7 @@ export const authOptions: AuthOptions = {
     }) {
       if (session.user) {
         (session.user as { id: string }).id = token.id as string;
+        (session.user as { role: string }).role = token.role as string;
       }
       return session;
     },

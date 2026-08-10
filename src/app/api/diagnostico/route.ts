@@ -1,28 +1,45 @@
 import { NextResponse } from "next/server";
+import { z } from "zod";
 import nodemailer from "nodemailer";
 import { prisma } from "@/lib/prisma";
 
-const SCALE_LABELS: Record<number, string> = {
-  0: "Nunca",
-  1: "Raramente",
-  2: "Às vezes",
-  3: "Frequentemente",
-  4: "Sempre",
-};
+const emptyToNull = (v: unknown) =>
+  typeof v === "string" && v.trim() === "" ? null : v;
 
-function formatAnswers(answers: Record<string, number>) {
-  return Object.entries(answers)
-    .sort((a, b) => Number(a[0]) - Number(b[0]))
-    .map(([id, value]) => {
-      const label = SCALE_LABELS[value] ?? String(value);
-      return `• Item ${id}: ${label} (${value})`;
-    })
-    .join("\n");
-}
+const diagnosticoSchema = z.object({
+  name: z.string().trim().min(2).max(120),
+  age: z.preprocess(emptyToNull, z.string().trim().max(10).nullable()),
+  occupation: z.preprocess(emptyToNull, z.string().trim().max(120).nullable()),
+  course: z.preprocess(emptyToNull, z.string().trim().max(160).nullable()),
+  howMet: z.preprocess(emptyToNull, z.string().trim().max(120).nullable()),
+  whatsapp: z.string().trim().min(8).max(25),
+  email: z.preprocess(emptyToNull, z.string().trim().email().max(200).nullable()),
+  objective: z.preprocess(emptyToNull, z.string().trim().max(2000).nullable()),
+  goalSpecific: z.preprocess(emptyToNull, z.string().trim().max(2000).nullable()),
+  deadline: z.preprocess(emptyToNull, z.string().trim().max(200).nullable()),
+  relation: z.preprocess(emptyToNull, z.string().trim().max(10000).nullable()),
+  answers: z
+    .record(z.string(), z.coerce.number().int().min(0).max(4))
+    .refine((a) => Object.keys(a).length > 0, {
+      message: "Pelo menos uma resposta é obrigatória",
+    }),
+});
+
+const adminPanelUrl =
+  process.env.SITE_URL ?? process.env.NEXTAUTH_URL ?? "http://localhost:3000";
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
+    const parsed = diagnosticoSchema.safeParse(body);
+
+    if (!parsed.success) {
+      return NextResponse.json(
+        { error: "Dados inválidos", details: parsed.error.flatten() },
+        { status: 400 }
+      );
+    }
+
     const {
       name,
       age,
@@ -36,14 +53,7 @@ export async function POST(request: Request) {
       deadline,
       relation,
       answers,
-    } = body;
-
-    if (!name || !whatsapp || !answers) {
-      return NextResponse.json(
-        { error: "Nome, WhatsApp e respostas são obrigatórios" },
-        { status: 400 }
-      );
-    }
+    } = parsed.data;
 
     const submission = await prisma.diagnosticSubmission.create({
       data: {
@@ -76,25 +86,17 @@ export async function POST(request: Request) {
           },
         });
 
-        const answerCount = Object.keys(answers).length;
+        const panelLink = `${adminPanelUrl.replace(/\/$/, "")}/admin/diagnosticos`;
         await transport.sendMail({
           from: `"Eduka Cuca" <${process.env.GMAIL_USER}>`,
           to: process.env.GMAIL_TO ?? process.env.GMAIL_USER,
-          subject: `🎯 Novo diagnóstico recebido: ${name}`,
-          text: `Um novo diagnóstico foi enviado!\n\n` +
+          subject: `Novo diagnóstico recebido: ${name}`,
+          text:
+            `Um novo diagnóstico foi recebido.\n\n` +
             `Nome: ${name}\n` +
-            `Idade: ${age ?? "-"}\n` +
-            `Profissão: ${occupation ?? "-"}\n` +
-            `Curso: ${course ?? "-"}\n` +
-            `Como conheceu: ${howMet ?? "-"}\n` +
-            `WhatsApp: ${whatsapp}\n` +
-            `E-mail: ${email ?? "-"}\n\n` +
-            `Objetivo: ${objective}\n` +
-            `Objetivo específico: ${goalSpecific ?? "-"}\n` +
-            `Prazo: ${deadline ?? "-"}\n\n` +
-            `Relação com estudos:\n${relation}\n\n` +
-            `Respostas (${answerCount} itens):\n${formatAnswers(answers)}\n\n` +
-            `ID: ${submission.id}`,
+            `ID: ${submission.id}\n\n` +
+            `Acesse o painel para visualizar as respostas:\n${panelLink}\n\n` +
+            `Os dados completos ficam restritos ao painel administrativo.`,
         });
       } catch (mailError) {
         console.error("Erro ao enviar e-mail:", mailError);

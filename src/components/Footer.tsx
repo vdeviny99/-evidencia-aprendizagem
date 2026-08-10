@@ -1,7 +1,12 @@
 import Link from "next/link";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 import { BookOpen, MessageCircle, Mail } from "lucide-react";
 
-export function Footer() {
+export async function Footer() {
+  const session = await getServerSession(authOptions);
+  const isAdmin = session?.user?.role === "ADMIN";
+
   return (
     <footer className="bg-black">
       <div className="mx-auto max-w-5xl px-4 py-16">
@@ -108,6 +113,17 @@ export function Footer() {
         <div className="mt-12 border-t border-zinc-800 pt-8 text-center text-xs text-zinc-600">
           &copy; {new Date().getFullYear()} EdukaCuca. Todos os direitos
           reservados.
+          {isAdmin && (
+            <>
+              <span className="mx-2">·</span>
+              <Link
+                href="/admin"
+                className="text-zinc-500 transition-colors hover:text-gold"
+              >
+                Área administrativa
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </footer>
