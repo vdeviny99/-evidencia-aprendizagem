@@ -1,0 +1,131 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  ADMIN
+  AUTHOR
+}
+
+enum Status {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum PageType {
+  PAGE
+  PORTFOLIO
+  LANDING
+}
+
+model User {
+  id        String    @id @default(cuid())
+  name      String?
+  email     String    @unique
+  password  String?
+  image     String?
+  role      Role      @default(AUTHOR)
+  articles  Article[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Article {
+  id              String     @id @default(cuid())
+  title           String
+  subtitle        String?
+  slug            String     @unique
+  content         String
+  excerpt         String?
+  coverImage      String?
+  authorId        String
+  author          User       @relation(fields: [authorId], references: [id])
+  categories      Category[]
+  tags            Tag[]
+  status          Status     @default(DRAFT)
+  publishedAt     DateTime?
+  scheduledAt     DateTime?
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+  readingTime     Int?
+  references      Json?
+  relatedArticles Json?
+  viewCount       Int        @default(0)
+}
+
+model Category {
+  id          String    @id @default(cuid())
+  name        String    @unique
+  slug        String    @unique
+  description String?
+  articles    Article[]
+  createdAt   DateTime  @default(now())
+}
+
+model Tag {
+  id        String    @id @default(cuid())
+  name      String    @unique
+  slug      String    @unique
+  articles  Article[]
+  createdAt DateTime  @default(now())
+}
+
+model Newsletter {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+}
+
+model NewsletterCampaign {
+  id        String    @id @default(cuid())
+  subject   String
+  content   String
+  sentAt    DateTime?
+  createdAt DateTime  @default(now())
+}
+
+model Page {
+  id        String   @id @default(cuid())
+  title     String
+  slug      String   @unique
+  content   String
+  type      PageType @default(PAGE)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  subject   String
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model DiagnosticSubmission {
+  id        String   @id @default(cuid())
+  name      String
+  age       String?
+  occupation String?
+  course    String?
+  howMet    String?
+  whatsapp  String
+  email     String?
+  objective String
+  goalSpecific String?
+  deadline  String?
+  relation  String
+  answers   Json
+  notifiedAt DateTime?
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}

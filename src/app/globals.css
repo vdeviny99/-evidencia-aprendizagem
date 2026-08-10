@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+:root {
+  --c-accent: #2d3436;
+  --c-accent-dark: #1f2425;
+  --c-cream: #f9f8f6;
+  --c-gold: #d4a017;
+  --c-card: #ffffff;
+  --c-text-muted: rgba(45, 52, 54, 0.6);
+  --c-text-dim: rgba(45, 52, 54, 0.35);
+}
+
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-serif: var(--font-geist-serif);
+  --font-heading: var(--font-raleway);
+  --color-accent: var(--c-accent);
+  --color-accent-dark: var(--c-accent-dark);
+  --color-cream: var(--c-cream);
+  --color-gold: var(--c-gold);
+  --color-card: var(--c-card);
+  --color-text-muted: var(--c-text-muted);
+  --color-text-dim: var(--c-text-dim);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-heading {
+  font-family: var(--font-heading), "Raleway", sans-serif;
+}
+
+.font-sans {
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-slide-down {
+  animation: slideDown 0.3s ease-out forwards;
+}
+
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: #d4a017;
+  z-index: 9999;
+  transition: width 0.1s linear;
+}
+
+::selection {
+  background-color: #d4a017;
+  color: #1f2425;
+}
