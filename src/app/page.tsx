@@ -48,7 +48,7 @@ export default function Home() {
                 href="/diagnostico"
                 className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gold px-8 py-3 font-heading text-sm font-bold uppercase tracking-wider text-white shadow-lg shadow-gold/25 transition-all hover:bg-gold/90 hover:shadow-xl hover:shadow-gold/30 hover:-translate-y-0.5 sm:w-auto"
               >
-                <FlaskConical className="h-4 w-4" />
+                <ClipboardCheck className="h-4 w-4" />
                 Diagnóstico de Habilidades
                 <ArrowRight className="h-4 w-4" />
               </Link>
@@ -56,7 +56,7 @@ export default function Home() {
                 href="/aulas"
                 className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-accent/20 bg-white/80 px-8 py-3 font-heading text-sm font-bold uppercase tracking-wider text-accent shadow-sm transition-all hover:bg-accent/5 hover:shadow-md hover:-translate-y-0.5 sm:w-auto"
               >
-                <Languages className="h-4 w-4" />
+                <GraduationCap className="h-4 w-4" />
                 Aulas de Idiomas
                 <ArrowRight className="h-4 w-4" />
               </Link>
