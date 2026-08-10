@@ -125,7 +125,7 @@ export default function Home() {
               </Link>
             </div>
             <div className="flex items-center justify-center">
-              <div className="flex h-64 w-64 items-center justify-center rounded-3xl bg-white shadow-lg ring-1 ring-accent/10 sm:h-72 sm:w-72">
+              <div className="flex h-64 w-64 items-center justify-center rounded-3xl bg-gradient-to-br from-gold/15 via-white to-accent/15 shadow-lg ring-1 ring-accent/10 sm:h-72 sm:w-72">
                 <ClipboardCheck className="h-20 w-20 text-gold" />
               </div>
             </div>
@@ -137,7 +137,7 @@ export default function Home() {
         <div className="mx-auto max-w-5xl px-4">
           <div className="grid items-center gap-12 sm:grid-cols-2">
             <div className="order-2 flex items-center justify-center sm:order-1">
-              <div className="flex h-64 w-64 items-center justify-center rounded-3xl bg-white shadow-lg ring-1 ring-accent/10 sm:h-72 sm:w-72">
+              <div className="flex h-64 w-64 items-center justify-center rounded-3xl bg-gradient-to-br from-gold/15 via-white to-accent/15 shadow-lg ring-1 ring-accent/10 sm:h-72 sm:w-72">
                 <GraduationCap className="h-20 w-20 text-gold" />
               </div>
             </div>
