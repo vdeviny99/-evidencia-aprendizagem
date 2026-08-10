@@ -35,7 +35,7 @@ export default function Home() {
             <p className="mt-4 text-lg leading-relaxed text-accent/70 sm:text-xl">
               Aprenda a aprender com quem entende do assunto.
             </p>
-            <div className="mx-auto mt-6 max-w-2xl space-y-4 text-left text-base leading-relaxed text-accent/70 sm:text-center">
+            <div className="mx-auto mt-6 max-w-2xl space-y-4 text-left text-base leading-relaxed text-accent/70 sm:text-center text-pretty">
               <p>
                 A <strong className="font-semibold text-accent">EdukaCuca</strong> une{" "}
                 <strong className="font-semibold text-accent">neurociência, psicologia cognitiva e ensino de idiomas</strong>{" "}
@@ -49,7 +49,7 @@ export default function Home() {
                 className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gold px-8 py-3 font-heading text-sm font-bold uppercase tracking-wider text-white shadow-lg shadow-gold/25 transition-all hover:bg-gold/90 hover:shadow-xl hover:shadow-gold/30 hover:-translate-y-0.5 sm:w-auto"
               >
                 <FlaskConical className="h-4 w-4" />
-                Diagnóstico Científico
+                Diagnóstico de Habilidades
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
