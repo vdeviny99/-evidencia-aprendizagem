@@ -125,8 +125,8 @@ export default function Home() {
               </Link>
             </div>
             <div className="flex items-center justify-center">
-              <div className="flex h-64 w-64 items-center justify-center rounded-3xl bg-gradient-to-br from-accent/10 to-gold/10 shadow-inner sm:h-72 sm:w-72">
-                <FlaskConical className="h-24 w-24 text-accent/20" />
+              <div className="flex h-64 w-64 items-center justify-center rounded-3xl bg-white shadow-lg ring-1 ring-accent/10 sm:h-72 sm:w-72">
+                <FlaskConical className="h-20 w-20 text-accent" />
               </div>
             </div>
           </div>
@@ -137,8 +137,8 @@ export default function Home() {
         <div className="mx-auto max-w-5xl px-4">
           <div className="grid items-center gap-12 sm:grid-cols-2">
             <div className="order-2 flex items-center justify-center sm:order-1">
-              <div className="flex h-64 w-64 items-center justify-center rounded-3xl bg-gradient-to-br from-gold/10 to-accent/10 shadow-inner sm:h-72 sm:w-72">
-                <Languages className="h-24 w-24 text-accent/20" />
+              <div className="flex h-64 w-64 items-center justify-center rounded-3xl bg-white shadow-lg ring-1 ring-accent/10 sm:h-72 sm:w-72">
+                <Languages className="h-20 w-20 text-accent" />
               </div>
             </div>
             <div className="order-1 animate-fade-in sm:order-2">
