@@ -4,7 +4,7 @@ import Image from "next/image";
 export const metadata: Metadata = {
   title: "Sobre",
   description:
-    "Conheça o José Vinicius — professor de inglês, pesquisador em neuropsicologia e fundador do EdukaCuca.",
+    "Conheça o José Vinicius — professor de inglês e fundador do EdukaCuca.",
 };
 
 export default function SobrePage() {
@@ -38,7 +38,7 @@ export default function SobrePage() {
                     José Vinicius
                   </h2>
                   <p className="text-sm text-accent/50">
-                    Professor · Pesquisador · Fundador do EdukaCuca
+                    Professor · Fundador do EdukaCuca
                   </p>
                 </div>
               </div>
