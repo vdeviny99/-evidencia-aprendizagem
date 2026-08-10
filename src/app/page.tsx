@@ -35,15 +35,12 @@ export default function Home() {
             <p className="mt-4 text-lg leading-relaxed text-accent/70 sm:text-xl">
               Aprenda a aprender com quem entende do assunto.
             </p>
-            <div className="mx-auto mt-6 max-w-2xl space-y-4 text-center text-base leading-relaxed text-accent/70 text-pretty">
+            <div className="mx-auto mt-6 max-w-2xl text-center text-base leading-relaxed text-accent/70 text-pretty">
               <p>
                 A <strong className="font-semibold text-accent">EdukaCuca</strong> une{" "}
                 <strong className="font-semibold text-accent">neurociência, psicologia cognitiva e ensino de idiomas</strong>{" "}
-                para transformar sua relação com o aprendizado.
-              </p>
-              <p>
-                Se você sente que estuda, mas não aprende, ou quer levar sua fluência em inglês e francês para o próximo nível,
-                você está no lugar certo.
+                para transformar sua relação com o aprendizado. Se você sente que estuda, mas não aprende, ou quer levar sua fluência
+                em inglês e francês para o próximo nível, você está no lugar certo.
               </p>
             </div>
             <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
