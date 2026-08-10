@@ -47,23 +47,26 @@ export default function SobrePage() {
             <div className="sm:col-span-3">
               <div className="rounded-xl bg-card p-8 shadow-sm sm:p-10">
                 <p className="leading-relaxed text-accent/80">
-                  Sou professor particular de inglês e francês há 7 anos, com passagem por escolas, empresas e aulas particulares. Em paralelo, há 6 anos estudo a fundo como aprender a aprender de forma eficaz, e esse tema já me levou a dar palestras em universidades, escolas e empresas.
+                  Sou professor particular de inglês e francês há 7 anos, com experiência em escolas, empresas e aulas individuais. Paralelamente ao ensino de idiomas, há 6 anos estudo profundamente como aprendemos e como podemos tornar esse processo mais eficaz.
                 </p>
                 <p className="mt-4 leading-relaxed text-accent/80">
-                  Fui um dos selecionados para a primeira turma de formação em neuropsicologia clínica da{" "}
+                  Esse interesse me levou a ministrar palestras em universidades, escolas e empresas sobre aprendizagem e estratégias de estudo. Também fui selecionado para a primeira turma de formação em neuropsicologia clínica da{" "}
                   <a href="https://instagram.com/neuropsicoterapiabh" target="_blank" rel="noopener noreferrer" className="font-medium text-accent underline underline-offset-2">
                     @neuropsicoterapiabh
                   </a>
-                  , onde tive um ano de aulas com a vice-presidente da Sociedade Brasileira de Neuropsicologia. Também participei de pesquisas com professores renomados das áreas de psicologia e neurociências.
+                  , onde tive um ano de formação com a vice-presidente da Sociedade Brasileira de Neuropsicologia. Ao longo desse percurso, também participei de pesquisas com professores e pesquisadores das áreas de psicologia e neurociências.
                 </p>
                 <p className="mt-4 leading-relaxed text-accent/80">
-                  Sou apaixonado por desafios. Nas redes sociais, já me propus a aprender italiano, holandês, russo e até piano, sempre com o objetivo de divulgar boas estratégias de estudo e, principalmente, me colocar no lugar do estudante para continuar aprimorando minha própria técnica.
+                  Sou apaixonado por desafios, inclusive por aqueles que me colocam novamente no lugar de estudante. Nas redes sociais, já me propus a aprender italiano, holandês, russo e até piano, sempre buscando testar estratégias de aprendizagem na prática, compartilhar o que descubro e aprimorar continuamente minha própria metodologia.
                 </p>
                 <p className="mt-4 leading-relaxed text-accent/80">
-                  Minha metodologia integra neurociência da aprendizagem, pedagogia e psicologia cognitiva e educacional. No ensino de idiomas, uso a abordagem Dogme, centrada no aluno, com conversação autêntica e sempre conectada à necessidade real de cada estudante.
+                  Meu trabalho integra conhecimentos da neurociência da aprendizagem, da psicologia cognitiva e educacional e da pedagogia. No ensino de idiomas, utilizo a abordagem Dogme, que coloca o aluno no centro da aula e prioriza a comunicação autêntica, a interação e situações relacionadas às suas necessidades reais.
                 </p>
                 <p className="mt-4 leading-relaxed text-accent/80">
-                  Se você se sente inseguro em relação à aprendizagem e quer usar técnicas de estudo que funcionam de verdade, para melhorar sua relação com os estudos, você está no lugar certo.
+                  Mais do que ensinar um conteúdo, meu objetivo é ajudar você a entender melhor como aprende, para estudar com mais autonomia, segurança e eficiência.
+                </p>
+                <p className="mt-4 leading-relaxed text-accent/80">
+                  Se você quer aprender idiomas ou desenvolver estratégias de estudo baseadas em evidências, este é o meu trabalho.
                 </p>
               </div>
             </div>
