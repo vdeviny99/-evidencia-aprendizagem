@@ -1,4 +1,4 @@
-import { Sparkles, Library, Users, ArrowRight, FlaskConical, Languages, CheckCircle } from "lucide-react";
+import { Sparkles, Library, Users, ArrowRight, ClipboardCheck, GraduationCap, CheckCircle } from "lucide-react";
 import Link from "next/link";
 
 const highlights = [
@@ -126,7 +126,7 @@ export default function Home() {
             </div>
             <div className="flex items-center justify-center">
               <div className="flex h-64 w-64 items-center justify-center rounded-3xl bg-white shadow-lg ring-1 ring-accent/10 sm:h-72 sm:w-72">
-                <FlaskConical className="h-20 w-20 text-accent" />
+                <ClipboardCheck className="h-20 w-20 text-gold" />
               </div>
             </div>
           </div>
@@ -138,7 +138,7 @@ export default function Home() {
           <div className="grid items-center gap-12 sm:grid-cols-2">
             <div className="order-2 flex items-center justify-center sm:order-1">
               <div className="flex h-64 w-64 items-center justify-center rounded-3xl bg-white shadow-lg ring-1 ring-accent/10 sm:h-72 sm:w-72">
-                <Languages className="h-20 w-20 text-accent" />
+                <GraduationCap className="h-20 w-20 text-gold" />
               </div>
             </div>
             <div className="order-1 animate-fade-in sm:order-2">
