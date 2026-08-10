@@ -47,20 +47,23 @@ export default function SobrePage() {
             <div className="sm:col-span-3">
               <div className="rounded-xl bg-card p-8 shadow-sm sm:p-10">
                 <p className="leading-relaxed text-accent/80">
-                  Sou professor particular de inglês e francês há 7 anos com experiência em escolas, empresas e aulas particulares. Paralelamente, há 6 anos estudo intensamente como aprender a aprender de forma eficaz, tendo dado palestras em universidades, escolas e empresas sobre o tema. Fui um dos alunos selecionados para a primeira turma de formação de neuropsicologia clínica pela{" "}
+                  Sou professor particular de inglês e francês há 7 anos, com passagem por escolas, empresas e aulas particulares. Em paralelo, há 6 anos estudo a fundo como aprender a aprender de forma eficaz, e esse tema já me levou a dar palestras em universidades, escolas e empresas.
+                </p>
+                <p className="mt-4 leading-relaxed text-accent/80">
+                  Fui um dos selecionados para a primeira turma de formação em neuropsicologia clínica da{" "}
                   <a href="https://instagram.com/neuropsicoterapiabh" target="_blank" rel="noopener noreferrer" className="font-medium text-accent underline underline-offset-2">
                     @neuropsicoterapiabh
                   </a>
-                  , em que tive 1 ano de aulas com a vice-presidente da Sociedade Brasileira de Neuropsicologia. Participei de pesquisas com professores renomados da área de psicologia e neurociências do Brasil.
+                  , onde tive um ano de aulas com a vice-presidente da Sociedade Brasileira de Neuropsicologia. Também participei de pesquisas com professores renomados das áreas de psicologia e neurociências.
                 </p>
                 <p className="mt-4 leading-relaxed text-accent/80">
-                  Sou apaixonado por desafios — na minha jornada como aprendiz já fiz desafios nas redes sociais em que me propus a aprender italiano, holandês, russo e até mesmo piano. Todos com o intuito de divulgar estratégias e também me colocar no lugar do estudante para que possa sempre estar aprimorando minha técnica.
+                  Sou apaixonado por desafios. Nas redes sociais, já me propus a aprender italiano, holandês, russo e até piano, sempre com o objetivo de divulgar boas estratégias de estudo e, principalmente, me colocar no lugar do estudante para continuar aprimorando minha própria técnica.
                 </p>
                 <p className="mt-4 leading-relaxed text-accent/80">
-                  Minha metodologia de ensino é baseada na integração entre neurociência da aprendizagem, pedagogia, psicologia cognitiva e educacional. Além de utilizar a abordagem Dogme para ensino de segundo idioma, com foco no aluno e em conversação autêntica, ligada à demanda real do estudante.
+                  Minha metodologia integra neurociência da aprendizagem, pedagogia e psicologia cognitiva e educacional. No ensino de idiomas, uso a abordagem Dogme, centrada no aluno, com conversação autêntica e sempre conectada à necessidade real de cada estudante.
                 </p>
                 <p className="mt-4 leading-relaxed text-accent/80">
-                  Se você se sente inseguro em relação à aprendizagem e gostaria de aprender a utilizar técnicas adequadas de estudo e melhorar sua relação com a aprendizagem, está no lugar certo!
+                  Se você se sente inseguro em relação à aprendizagem e quer usar técnicas de estudo que funcionam de verdade, para melhorar sua relação com os estudos, você está no lugar certo.
                 </p>
               </div>
             </div>
