@@ -26,7 +26,7 @@ export default function SobrePage() {
               <div className="sticky top-24">
                 <div className="relative mx-auto aspect-[4/5] w-full max-w-xs overflow-hidden rounded-2xl shadow-lg sm:mx-0">
                   <Image
-                    src="/images/fotovini2.jpeg"
+                    src="/images/vinift.jpg"
                     alt="José Vinicius — Fundador do EdukaCuca"
                     fill
                     className="object-cover"
