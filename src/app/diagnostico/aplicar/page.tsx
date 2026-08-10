@@ -76,6 +76,7 @@ export default function AplicarDiagnostico() {
       goalSpecific: formData.get("goalSpecific"),
       deadline: formData.get("deadline"),
       relation: formData.get("relation"),
+      consent: formData.get("consent") === "on",
       answers,
     };
 
@@ -265,6 +266,33 @@ export default function AplicarDiagnostico() {
                 <ClipboardList className="h-3 w-3" />
                 {status === "sending" ? "Enviando..." : "Enviar Diagnóstico"}
               </button>
+            </div>
+
+            <div className="rounded-xl border border-accent/15 bg-cream p-5">
+              <label className="flex items-start gap-3">
+                <input
+                  type="checkbox"
+                  name="consent"
+                  required
+                  className="mt-0.5 h-4 w-4 accent-gold"
+                />
+                <span className="text-xs leading-relaxed text-accent/70">
+                  Autorizo o Eduka Cuca a coletar e armazenar meus dados (nome,
+                  WhatsApp, e-mail e respostas) para fins de análise do
+                  diagnóstico e envio do feedback personalizado. Entendo que
+                  posso solicitar a exclusão dos meus dados a qualquer momento,
+                  conforme a{" "}
+                  <a
+                    href="/privacidade"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold text-gold underline hover:text-accent"
+                  >
+                    Política de Privacidade
+                  </a>{" "}
+                  (Lei Geral de Proteção de Dados – LGPD).
+                </span>
+              </label>
             </div>
 
             {status === "error" && (

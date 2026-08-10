@@ -125,6 +125,8 @@ model DiagnosticSubmission {
   deadline  String?
   relation  String
   answers   Json
+  consentAt DateTime?
+  consentVersion String?
   notifiedAt DateTime?
   read      Boolean  @default(false)
   createdAt DateTime @default(now())

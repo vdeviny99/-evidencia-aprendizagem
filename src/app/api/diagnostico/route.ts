@@ -8,22 +8,27 @@ const emptyToNull = (v: unknown) =>
 
 const diagnosticoSchema = z.object({
   name: z.string().trim().min(2).max(120),
-  age: z.preprocess(emptyToNull, z.string().trim().max(10).nullable()),
-  occupation: z.preprocess(emptyToNull, z.string().trim().max(120).nullable()),
-  course: z.preprocess(emptyToNull, z.string().trim().max(160).nullable()),
-  howMet: z.preprocess(emptyToNull, z.string().trim().max(120).nullable()),
+  age: z.preprocess(emptyToNull, z.string().trim().max(10).nullish()),
+  occupation: z.preprocess(emptyToNull, z.string().trim().max(120).nullish()),
+  course: z.preprocess(emptyToNull, z.string().trim().max(160).nullish()),
+  howMet: z.preprocess(emptyToNull, z.string().trim().max(120).nullish()),
   whatsapp: z.string().trim().min(8).max(25),
-  email: z.preprocess(emptyToNull, z.string().trim().email().max(200).nullable()),
-  objective: z.preprocess(emptyToNull, z.string().trim().max(2000).nullable()),
-  goalSpecific: z.preprocess(emptyToNull, z.string().trim().max(2000).nullable()),
-  deadline: z.preprocess(emptyToNull, z.string().trim().max(200).nullable()),
-  relation: z.preprocess(emptyToNull, z.string().trim().max(10000).nullable()),
+  email: z.preprocess(emptyToNull, z.string().trim().email().max(200).nullish()),
+  objective: z.preprocess(emptyToNull, z.string().trim().max(2000).nullish()),
+  goalSpecific: z.preprocess(emptyToNull, z.string().trim().max(2000).nullish()),
+  deadline: z.preprocess(emptyToNull, z.string().trim().max(200).nullish()),
+  relation: z.preprocess(emptyToNull, z.string().trim().max(10000).nullish()),
   answers: z
     .record(z.string(), z.coerce.number().int().min(0).max(4))
     .refine((a) => Object.keys(a).length > 0, {
       message: "Pelo menos uma resposta é obrigatória",
     }),
+  consent: z.boolean().refine((v) => v === true, {
+    message: "É necessário aceitar a Política de Privacidade",
+  }),
 });
+
+const CONSENT_VERSION = "v1";
 
 const adminPanelUrl =
   process.env.SITE_URL ?? process.env.NEXTAUTH_URL ?? "http://localhost:3000";
@@ -69,6 +74,8 @@ export async function POST(request: Request) {
         deadline: deadline ?? null,
         relation: relation ?? "",
         answers,
+        consentAt: new Date(),
+        consentVersion: CONSENT_VERSION,
       },
     });
 
