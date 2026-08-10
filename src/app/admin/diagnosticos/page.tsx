@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { decryptField } from "@/lib/encryption";
 import Link from "next/link";
 import { ArrowLeft, ClipboardList } from "lucide-react";
 
@@ -60,6 +61,9 @@ export default async function AdminDiagnosticos() {
             const total = Object.values(answers).reduce((a, b) => a + b, 0);
             const count = Object.keys(answers).length;
             const avg = count ? (total / count).toFixed(2) : "-";
+            const name = decryptField(sub.name);
+            const whatsapp = decryptField(sub.whatsapp);
+            const email = sub.email ? decryptField(sub.email) : null;
 
             return (
               <details
@@ -70,11 +74,11 @@ export default async function AdminDiagnosticos() {
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-5">
                   <div className="min-w-0">
                     <p className="truncate font-heading font-bold text-accent">
-                      {sub.name}
+                      {name}
                     </p>
                     <p className="truncate text-sm text-accent/60">
-                      {sub.whatsapp}
-                      {sub.email ? ` · ${sub.email}` : ""}
+                      {whatsapp}
+                      {email ? ` · ${email}` : ""}
                     </p>
                   </div>
                   <div className="flex shrink-0 items-center gap-3">
@@ -100,8 +104,8 @@ export default async function AdminDiagnosticos() {
                     {sub.occupation && <Info label="Ocupação" value={sub.occupation} />}
                     {sub.course && <Info label="Curso" value={sub.course} />}
                     {sub.howMet && <Info label="Como conheceu" value={sub.howMet} />}
-                    <Info label="WhatsApp" value={sub.whatsapp} />
-                    {sub.email && <Info label="E-mail" value={sub.email} />}
+                    <Info label="WhatsApp" value={whatsapp} />
+                    {email && <Info label="E-mail" value={email} />}
                     {sub.deadline && <Info label="Prazo" value={sub.deadline} />}
                   </dl>
 

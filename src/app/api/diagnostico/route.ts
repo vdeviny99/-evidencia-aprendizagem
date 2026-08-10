@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import nodemailer from "nodemailer";
 import { prisma } from "@/lib/prisma";
+import { encryptField } from "@/lib/encryption";
 
 const emptyToNull = (v: unknown) =>
   typeof v === "string" && v.trim() === "" ? null : v;
@@ -62,13 +63,13 @@ export async function POST(request: Request) {
 
     const submission = await prisma.diagnosticSubmission.create({
       data: {
-        name,
+        name: encryptField(name),
         age: age ?? null,
         occupation: occupation ?? null,
         course: course ?? null,
         howMet: howMet ?? null,
-        whatsapp,
-        email: email ?? null,
+        whatsapp: encryptField(whatsapp),
+        email: email ? encryptField(email) : null,
         objective: objective ?? "",
         goalSpecific: goalSpecific ?? null,
         deadline: deadline ?? null,
