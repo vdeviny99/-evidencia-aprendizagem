@@ -45,7 +45,7 @@ export default function Home() {
             </div>
             <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
               <Link
-                href="/diagnostico"
+                href="/diagnostico/aplicar"
                 className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gold px-8 py-3 font-heading text-sm font-bold uppercase tracking-wider text-white shadow-lg shadow-gold/25 transition-all hover:bg-gold/90 hover:shadow-xl hover:shadow-gold/30 hover:-translate-y-0.5 sm:w-auto"
               >
                 <ClipboardCheck className="h-4 w-4" />
@@ -117,7 +117,7 @@ export default function Home() {
                 ))}
               </ul>
               <Link
-                href="/diagnostico"
+                href="/diagnostico/aplicar"
                 className="mt-8 inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-heading text-sm font-bold uppercase tracking-wider text-white shadow-md transition-all hover:bg-accent/90 hover:shadow-lg hover:-translate-y-0.5"
               >
                 Fazer Diagnóstico
