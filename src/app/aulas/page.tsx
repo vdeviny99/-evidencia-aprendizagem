@@ -108,10 +108,15 @@ export default async function AulasPage() {
                       {aula.nivel}
                     </span>
                   )}
-                  <span className="flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-accent/60 opacity-0 transition-opacity group-hover:opacity-100">
+                  <a
+                    href="https://wa.me/5511926599367"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-accent/60 opacity-0 transition-opacity group-hover:opacity-100"
+                  >
                     Saiba mais
                     <ArrowRight className="h-3 w-3" />
-                  </span>
+                  </a>
                 </div>
               </div>
             ))}
