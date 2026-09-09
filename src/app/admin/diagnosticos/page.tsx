@@ -105,7 +105,7 @@ export default async function AdminDiagnosticos() {
                     {sub.course && <Info label="Curso" value={sub.course} />}
                     {sub.howMet && <Info label="Como conheceu" value={sub.howMet} />}
                     <Info label="WhatsApp" value={whatsapp} />
-                    {email && <Info label="E-mail" value={email} />}
+                    {email && <Info label="E-mail / Telefone" value={email} />}
                     {sub.deadline && <Info label="Prazo" value={sub.deadline} />}
                   </dl>
 

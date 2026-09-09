@@ -14,7 +14,10 @@ const diagnosticoSchema = z.object({
   course: z.preprocess(emptyToNull, z.string().trim().max(160).nullish()),
   howMet: z.preprocess(emptyToNull, z.string().trim().max(120).nullish()),
   whatsapp: z.string().trim().min(8).max(25),
-  email: z.preprocess(emptyToNull, z.string().trim().email().max(200).nullish()),
+  email: z.preprocess(
+    emptyToNull,
+    z.string().trim().min(5).max(200).nullish()
+  ),
   objective: z.preprocess(emptyToNull, z.string().trim().max(2000).nullish()),
   goalSpecific: z.preprocess(emptyToNull, z.string().trim().max(2000).nullish()),
   deadline: z.preprocess(emptyToNull, z.string().trim().max(200).nullish()),
