@@ -22,7 +22,7 @@ const highlights = [
 export default function Home() {
   return (
     <>
-      <section className="relative overflow-hidden bg-gradient-to-br from-accent/5 via-cream to-cream">
+      <section className="relative overflow-hidden bg-gradient-to-br from-sky/25 via-cream to-cream">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(0,0,0,0.03)_0%,transparent_60%)]" />
         <div className="relative mx-auto max-w-5xl px-4 py-20 sm:py-28">
           <div className="mx-auto max-w-3xl text-center animate-fade-in">
@@ -30,7 +30,8 @@ export default function Home() {
               Escola Online
             </span>
             <h1 className="mt-6 font-heading text-4xl font-bold tracking-tight text-accent sm:text-5xl lg:text-6xl">
-              EdukaCuca
+              <span className="text-green">Eduka</span>
+              <span className="text-gold">Cuca</span>
             </h1>
             <p className="mt-4 text-lg leading-relaxed text-accent/70 sm:text-xl">
               Aprenda a aprender com quem entende do assunto.
@@ -96,18 +97,17 @@ export default function Home() {
                 Diagnóstico
               </span>
               <h2 className="mt-4 font-heading text-2xl font-bold text-accent sm:text-3xl">
-                Como Anda Seu Aprendizado?
+                Como anda seu aprendizado?
               </h2>
               <p className="mt-4 leading-relaxed text-accent/70">
-                Responda a um questionário científico de 33 itens — baseado em décadas de pesquisa em
-                autorregulação da aprendizagem, metacognição e estilos de estudo — e receba um panorama
-                completo do seu perfil como aprendiz.
+                Responda a um questionário de 5 minutos e receba um feedback personalizado sobre suas
+                habilidades de estudo, pontos fortes, pontos fracos e melhorias possíveis.
               </p>
               <ul className="mt-6 space-y-3">
                 {[
                   "Avaliação gratuita e anônima",
-                  "33 questões baseadas em instrumentos validados",
-                  "Resultado imediato com pontuações por categoria",
+                  "33 itens que avaliam 7 pilares importantes da aprendizagem",
+                  "Resultado em até 48 horas com pontuações por categoria",
                   "Recomendações personalizadas de estudo",
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-3 text-sm text-accent/70">
@@ -125,8 +125,8 @@ export default function Home() {
               </Link>
             </div>
             <div className="flex items-center justify-center">
-              <div className="flex h-64 w-64 items-center justify-center rounded-3xl bg-gradient-to-br from-gold/15 via-white to-accent/15 shadow-lg ring-1 ring-accent/10 sm:h-72 sm:w-72">
-                <ClipboardCheck className="h-20 w-20 text-gold" />
+              <div className="flex h-64 w-64 items-center justify-center rounded-3xl bg-gradient-to-br from-green/20 via-white to-sky/20 shadow-lg ring-1 ring-accent/10 sm:h-72 sm:w-72">
+                <ClipboardCheck className="h-20 w-20 text-green" />
               </div>
             </div>
           </div>
@@ -137,8 +137,8 @@ export default function Home() {
         <div className="mx-auto max-w-5xl px-4">
           <div className="grid items-center gap-12 sm:grid-cols-2">
             <div className="order-2 flex items-center justify-center sm:order-1">
-              <div className="flex h-64 w-64 items-center justify-center rounded-3xl bg-gradient-to-br from-gold/15 via-white to-accent/15 shadow-lg ring-1 ring-accent/10 sm:h-72 sm:w-72">
-                <GraduationCap className="h-20 w-20 text-gold" />
+              <div className="flex h-64 w-64 items-center justify-center rounded-3xl bg-gradient-to-br from-sky/30 via-white to-gold/15 shadow-lg ring-1 ring-accent/10 sm:h-72 sm:w-72">
+                <GraduationCap className="h-20 w-20 text-sky-deep" />
               </div>
             </div>
             <div className="order-1 animate-fade-in sm:order-2">
@@ -146,12 +146,12 @@ export default function Home() {
                 Aulas
               </span>
               <h2 className="mt-4 font-heading text-2xl font-bold text-accent sm:text-3xl">
-                Inglês e Francês com Método Científico
+                Inglês e francês - comunicação autêntica
               </h2>
               <p className="mt-4 leading-relaxed text-accent/70">
-                Aulas particulares online que combinam a abordagem Dogme (comunicação autêntica e
-                centrada no aluno) com técnicas de neurociência da aprendizagem. Não é um curso
-                engessado — cada aula é desenhada para a sua necessidade real.
+                Aulas particulares online que combinam abordagem Dogme (comunicação autêntica e centrada
+                no aluno) com técnicas de neurociência da aprendizagem. Curso flexível com aulas
+                desenhadas para a sua necessidade real.
               </p>
               <ul className="mt-6 space-y-3">
                 {[

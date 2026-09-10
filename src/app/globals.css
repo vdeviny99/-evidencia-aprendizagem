@@ -1,13 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --c-accent: #2d3436;
-  --c-accent-dark: #1f2425;
-  --c-cream: #f9f8f6;
-  --c-gold: #d4a017;
+  --c-accent: #2e3a33;
+  --c-accent-dark: #222b26;
+  --c-cream: #f6f8f6;
+  --c-gold: #ea580c;
+  --c-green: #15803d;
+  --c-sky: #7dd3fc;
+  --c-sky-deep: #38bdf8;
   --c-card: #ffffff;
-  --c-text-muted: rgba(45, 52, 54, 0.6);
-  --c-text-dim: rgba(45, 52, 54, 0.35);
+  --c-text-muted: rgba(46, 58, 51, 0.6);
+  --c-text-dim: rgba(46, 58, 51, 0.35);
 }
 
 @theme inline {
@@ -18,6 +21,9 @@
   --color-accent-dark: var(--c-accent-dark);
   --color-cream: var(--c-cream);
   --color-gold: var(--c-gold);
+  --color-green: var(--c-green);
+  --color-sky: var(--c-sky);
+  --color-sky-deep: var(--c-sky-deep);
   --color-card: var(--c-card);
   --color-text-muted: var(--c-text-muted);
   --color-text-dim: var(--c-text-dim);
@@ -79,12 +85,12 @@ body {
   top: 0;
   left: 0;
   height: 3px;
-  background: #d4a017;
+  background: var(--c-gold);
   z-index: 9999;
   transition: width 0.1s linear;
 }
 
 ::selection {
-  background-color: #d4a017;
-  color: #1f2425;
+  background-color: var(--c-gold);
+  color: #ffffff;
 }
