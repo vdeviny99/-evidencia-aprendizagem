@@ -26,10 +26,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(0,0,0,0.03)_0%,transparent_60%)]" />
         <div className="relative mx-auto max-w-5xl px-4 py-20 sm:py-28">
           <div className="mx-auto max-w-3xl text-center animate-fade-in">
-            <span className="inline-block rounded-full border border-accent/20 bg-white/60 px-4 py-1 font-heading text-xs font-bold uppercase tracking-widest text-accent shadow-sm backdrop-blur-sm">
-              Escola Online
-            </span>
-            <h1 className="mt-6 font-heading text-4xl font-bold tracking-tight text-accent sm:text-5xl lg:text-6xl">
+            <h1 className="font-heading text-4xl font-bold tracking-tight text-accent sm:text-5xl lg:text-6xl">
               <span className="text-green">Eduka</span>
               <span className="text-gold">Cuca</span>
             </h1>
