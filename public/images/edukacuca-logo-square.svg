@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200" role="img" aria-label="EdukaCuca">
+  <title>EdukaCuca</title>
+  <rect width="1200" height="1200" fill="#2e3a33" />
+  <!-- Book-open path, wordmark, and colors follow the public EdukaCuca site header. -->
+  <g transform="translate(372 178) scale(19)" fill="none" stroke="#ea580c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 7v14" />
+    <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" />
+  </g>
+  <text x="600" y="820" text-anchor="middle" fill="#ffffff" font-family="Raleway, Arial, sans-serif" font-weight="700" font-size="136" letter-spacing="1">EdukaCuca</text>
+</svg>
