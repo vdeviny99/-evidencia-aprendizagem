@@ -6,6 +6,8 @@ import { Footer } from "@/components/Footer";
 import { MarketingTracking } from "@/components/MarketingTracking";
 import "./globals.css";
 
+const EDUKACUCA_META_PIXEL_ID = "2180875479476314";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -46,7 +48,7 @@ export default function RootLayout({
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
-        <MarketingTracking pixelId={process.env.NEXT_PUBLIC_META_PIXEL_ID ?? ""} />
+        <MarketingTracking pixelId={EDUKACUCA_META_PIXEL_ID} />
       </body>
     </html>
   );
