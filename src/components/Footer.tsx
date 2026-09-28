@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { BookOpen, MessageCircle, Mail } from "lucide-react";
+import { PrivacyPreferencesButton } from "@/components/PrivacyPreferencesButton";
 
 export async function Footer() {
   const session = await getServerSession(authOptions);
@@ -113,6 +114,16 @@ export async function Footer() {
         <div className="mt-12 border-t border-zinc-800 pt-8 text-center text-xs text-zinc-600">
           &copy; {new Date().getFullYear()} EdukaCuca. Todos os direitos
           reservados.
+          <span className="mx-2">·</span>
+          <Link href="/privacidade" className="text-zinc-400 underline underline-offset-2 hover:text-gold">
+            Privacidade
+          </Link>
+          {process.env.NEXT_PUBLIC_META_PIXEL_ID && (
+            <>
+              <span className="mx-2">·</span>
+              <PrivacyPreferencesButton />
+            </>
+          )}
           {isAdmin && (
             <>
               <span className="mx-2">·</span>

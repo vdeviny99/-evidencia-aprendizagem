@@ -1,5 +1,9 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Marketing measurement
+
+Set `NEXT_PUBLIC_META_PIXEL_ID` to EdukaCuca's dedicated Meta dataset ID in the deployment environment and rebuild the site. The pixel runs only on `/aulas` after a visitor accepts marketing measurement. It records a page view and clicks on the EdukaCuca WhatsApp link. Visitors can reject measurement or change their choice from the footer. Do not reuse a pixel from another business or add diagnostic answers to tracking events.
+
 ## Getting Started
 
 First, run the development server:

@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Raleway } from "next/font/google";
 
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { MarketingTracking } from "@/components/MarketingTracking";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -45,6 +46,7 @@ export default function RootLayout({
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
+        <MarketingTracking pixelId={process.env.NEXT_PUBLIC_META_PIXEL_ID ?? ""} />
       </body>
     </html>
   );
