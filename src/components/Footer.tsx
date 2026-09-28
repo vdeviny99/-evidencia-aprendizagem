@@ -1,12 +1,21 @@
 import Link from "next/link";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
+import { cookies } from "next/headers";
 import { BookOpen, MessageCircle, Mail } from "lucide-react";
 import { PrivacyPreferencesButton } from "@/components/PrivacyPreferencesButton";
 
 export async function Footer() {
-  const session = await getServerSession(authOptions);
-  const isAdmin = session?.user?.role === "ADMIN";
+  const cookieStore = await cookies();
+  const hasSessionCookie = cookieStore.has("next-auth.session-token") ||
+    cookieStore.has("__Secure-next-auth.session-token");
+  let isAdmin = false;
+  if (hasSessionCookie && process.env.DATABASE_URL) {
+    const [{ getServerSession }, { authOptions }] = await Promise.all([
+      import("next-auth"),
+      import("@/lib/auth"),
+    ]);
+    const session = await getServerSession(authOptions);
+    isAdmin = session?.user?.role === "ADMIN";
+  }
 
   return (
     <footer className="bg-black">
