@@ -29,7 +29,7 @@ export default function PrivacidadePage() {
                 O EdukaCuca é um projeto educacional focado em técnicas de
                 aprendizagem baseadas em evidências. Esta política explica como
                 tratamos os dados pessoais coletados pelo nosso site, em
-                conformidade com a Lei Geral de Proteção de Dados (LGPD – Lei nº
+                conformidade com a Lei Geral de Proteção de Dados (LGPD, Lei nº
                 13.709/2018).
               </p>
             </Section>
@@ -48,34 +48,48 @@ export default function PrivacidadePage() {
                 <li>E-mail (opcional)</li>
                 <li>Objetivos e respostas do questionário de autoavaliação</li>
               </ul>
+              <p className="mt-3">
+                Se você aceitar a medição de publicidade na página de aulas,
+                também serão coletados dados de navegação, como visita à página,
+                clique no botão do WhatsApp e informações técnicas do navegador.
+                O pixel da Meta não é carregado antes dessa escolha.
+              </p>
             </Section>
 
             <Section title="3. Para que usamos seus dados">
               <p>
-                Utilizamos os dados exclusivamente para: analisar o seu
+                Usamos as respostas do diagnóstico para analisar o seu
                 diagnóstico de hábitos de estudo, preparar o feedback
-                personalizado, e entrar em contato pelo WhatsApp ou e-mail para
-                enviar esse feedback. Não vendemos, alugamos ou compartilhamos
-                seus dados com terceiros.
+                personalizado e entrar em contato pelo WhatsApp ou e-mail para
+                enviar esse feedback. Se você aceitar a medição de publicidade,
+                compartilhamos apenas os eventos de visita e clique com a Meta
+                para entender o resultado das campanhas. Não enviamos nome,
+                telefone, e-mail nem respostas do diagnóstico ao pixel. Não
+                vendemos ou alugamos seus dados.
               </p>
             </Section>
 
             <Section title="4. Base legal e consentimento">
               <p>
-                O tratamento dos seus dados é feito com base no seu
-                consentimento livre e informado (Art. 7º, I, da LGPD). O
-                consentimento é registrado com data e hora no momento do envio
-                do formulário e pode ser revogado a qualquer momento.
+                O envio do diagnóstico depende de um consentimento próprio,
+                registrado com data e hora no formulário. A medição de
+                publicidade é uma escolha separada: você pode recusá-la sem
+                perder acesso ao site e alterá-la a qualquer momento em
+                “Preferências de publicidade”, no rodapé.
               </p>
             </Section>
 
             <Section title="5. Armazenamento e retenção">
               <p>
-                Os dados ficam armazenados em serviços de hospedagem na nuvem
-                com criptografia em trânsito e em repouso. Seus dados são
-                mantidos pelo prazo de <strong>90 (noventa) dias</strong> após o
-                envio, sendo automaticamente excluídos após esse período, salvo
-                obrigação legal de retenção.
+                As respostas do diagnóstico ficam em serviços de hospedagem
+                com criptografia em trânsito e em repouso e são mantidas por
+                <strong> 90 (noventa) dias</strong> após o envio, salvo obrigação
+                legal de retenção. Se você aceitar a medição de publicidade,
+                a Meta também tratará os eventos segundo sua própria{" "}
+                <a href="https://www.facebook.com/privacy/policy/" target="_blank" rel="noopener noreferrer" className="font-medium text-accent underline underline-offset-2">
+                  Política de Privacidade
+                </a>
+                .
               </p>
             </Section>
 
