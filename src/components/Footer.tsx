@@ -127,12 +127,8 @@ export async function Footer() {
           <Link href="/privacidade" className="text-zinc-400 underline underline-offset-2 hover:text-gold">
             Privacidade
           </Link>
-          {process.env.NEXT_PUBLIC_META_PIXEL_ID && (
-            <>
-              <span className="mx-2">·</span>
-              <PrivacyPreferencesButton />
-            </>
-          )}
+          <span className="mx-2">·</span>
+          <PrivacyPreferencesButton />
           {isAdmin && (
             <>
               <span className="mx-2">·</span>
