@@ -39,9 +39,9 @@ O uso pago, o corte, as zonas de segurança, o texto visível e eventuais ajuste
 
 ## Dependências para montar e lançar
 
-1. Resolver **quem será o proprietário permanente da conta de anúncios EdukaCuca**. O fluxo de criação na empresa Nellia indicou propriedade permanente da Nellia e aceitação de termos. A decisão está com João; ainda não foi aceita nem enviada.
+1. João escolheu **Nellia** como proprietária permanente da conta dedicada EdukaCuca na decisão `68` do vitoria-gate, em 30/09. No portfólio Nellia Software, a conta `EdukaCuca | Nellia` foi preparada para revisão com moeda `BRL`, fuso `America/Sao_Paulo` e uso `Minha empresa`. A Meta avisa que a conta não poderá ser removida do portfólio depois de criada e exige aceite dos Termos Comerciais e Políticas de Publicidade em nome da Nellia Software, aplicáveis às atividades de todas as contas de anúncios do portfólio. **Criação e aceite ainda precisam de aprovação específica de João.** Nenhuma conta foi criada nem houve aceite.
 2. Identificar a conta Meta de Vinicius antes de conceder acesso ao `@edukacuca`. O nome de um usuário listado na empresa não prova qual login ele usa. Pedir somente o e-mail do login, nunca senha ou código.
-3. Ligar a conta escolhida ao Pixel `edukacuca-site`, à identidade de Instagram correta e ao contexto EdukaCuca do QG. O QG atualmente não tem `META_ADS_ACCOUNT_MAP` para esse contexto. Confirmar que a conta e os dados são somente da EdukaCuca.
+3. Depois da criação, ligar a conta dedicada Nellia ao Pixel `edukacuca-site`, à identidade de Instagram correta e ao contexto EdukaCuca do QG. O QG atualmente não tem `META_ADS_ACCOUNT_MAP` para esse contexto. Confirmar que a conta e os dados são somente da EdukaCuca; não usar Prosp ou Renenutet.
 4. No Ads Manager, escolher objetivo, público, região, posicionamentos e opção de otimização, conferir prévias e URL final das duas peças e registrar os IDs de campanha, conjunto e anúncio em um registro posterior. Uma hipótese inicial é Brasil, adultos, para aulas online; não há público aprovado neste momento.
 5. Obter aprovação específica de orçamento, prazo e ativação antes de qualquer entrega paga. Após ativar, comparar gasto, cliques, eventos consentidos e conversas reais sem chamar evento de teste de lead.
 
