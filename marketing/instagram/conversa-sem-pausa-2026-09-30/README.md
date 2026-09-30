@@ -1,6 +1,11 @@
 # Conversa sem pausa
 
-Status: pronto para publicação orgânica em `@edukacuca`.
+Status: publicado organicamente em `@edukacuca` em 2026-09-30.
+
+Publicação: https://www.instagram.com/p/Dd5-asznFn4/
+Instagram media ID: `18639356263012673`.
+
+Verificação: a Graph API retornou o mesmo texto da legenda, `media_type=IMAGE` e `username=edukacuca`. A página pública foi aberta e conferida visualmente com a imagem e a legenda corretas.
 
 ## Ideia
 
