@@ -4,11 +4,25 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 
-const CONSENT_KEY = "edukacuca:marketing-consent:v1";
+const META_CONSENT_KEY = "edukacuca:marketing-consent:v1";
+const META_GOOGLE_CONSENT_KEY = "edukacuca:marketing-consent:meta-google:v1";
 const CONSENT_CHANGE_EVENT = "edukacuca:marketing-consent-changed";
 const OPEN_PREFERENCES_EVENT = "edukacuca:open-marketing-preferences";
 const META_SCRIPT_URL = "https://connect.facebook.net/en_US/fbevents.js";
+const GOOGLE_TAG_URL = "https://www.googletagmanager.com/gtag/js?id=";
 const WHATSAPP_URL = "https://wa.me/5511926599367";
+const GOOGLE_CONSENT_DENIED = {
+  ad_storage: "denied",
+  ad_user_data: "denied",
+  ad_personalization: "denied",
+  analytics_storage: "denied",
+};
+const GOOGLE_CONSENT_MEASUREMENT = {
+  ad_storage: "granted",
+  ad_user_data: "granted",
+  ad_personalization: "denied",
+  analytics_storage: "denied",
+};
 
 type Choice = "accepted" | "rejected" | null | "loading";
 type MetaPixel = ((...args: unknown[]) => void) & {
@@ -23,6 +37,8 @@ declare global {
   interface Window {
     fbq?: MetaPixel;
     _fbq?: MetaPixel;
+    dataLayer?: unknown[][];
+    gtag?: (...args: unknown[]) => void;
   }
 }
 
@@ -50,6 +66,26 @@ function startPixel(pixelId: string) {
   document.head.appendChild(script);
 }
 
+function startGoogleTag(adsId: string) {
+  if (!window.gtag) {
+    window.dataLayer ??= [];
+    window.gtag = (...args: unknown[]) => { window.dataLayer?.push(args); };
+    window.gtag("consent", "default", GOOGLE_CONSENT_DENIED);
+    window.gtag("js", new Date());
+  }
+
+  window.gtag("consent", "update", GOOGLE_CONSENT_MEASUREMENT);
+  window.gtag("config", adsId);
+
+  if (!document.querySelector("script[data-edukacuca-google-tag]")) {
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = `${GOOGLE_TAG_URL}${encodeURIComponent(adsId)}`;
+    script.dataset.edukacucaGoogleTag = "true";
+    document.head.appendChild(script);
+  }
+}
+
 function subscribeToConsent(onChange: () => void) {
   window.addEventListener("storage", onChange);
   window.addEventListener(CONSENT_CHANGE_EVENT, onChange);
@@ -59,21 +95,35 @@ function subscribeToConsent(onChange: () => void) {
   };
 }
 
-function readConsent(): Choice {
-  const stored = window.localStorage.getItem(CONSENT_KEY);
-  return stored === "accepted" || stored === "rejected" ? stored : null;
+function readConsent(key: string): Choice {
+  const stored = window.localStorage.getItem(key);
+  if (stored === "accepted" || stored === "rejected") return stored;
+  // An earlier rejection remains a rejection. Earlier Meta acceptance alone
+  // cannot authorize the newly configured Google Ads tag.
+  if (key === META_GOOGLE_CONSENT_KEY && window.localStorage.getItem(META_CONSENT_KEY) === "rejected") {
+    return "rejected";
+  }
+  return null;
 }
 
 function serverConsent(): Choice {
   return "loading";
 }
 
-export function MarketingTracking({ pixelId }: { pixelId: string }) {
+export function MarketingTracking({ pixelId, googleAdsId, googleConversionLabel }: {
+  pixelId: string;
+  googleAdsId: string;
+  googleConversionLabel: string;
+}) {
   const pathname = usePathname();
-  const choice = useSyncExternalStore(subscribeToConsent, readConsent, serverConsent);
   const [preferencesOpen, setPreferencesOpen] = useState(false);
   const lastPageView = useRef<string | null>(null);
-  const configured = /^\d{8,20}$/.test(pixelId);
+  const metaConfigured = /^\d{8,20}$/.test(pixelId);
+  const googleConfigured = /^AW-\d{8,20}$/.test(googleAdsId)
+    && /^[A-Za-z0-9_-]{1,100}$/.test(googleConversionLabel);
+  const consentKey = googleConfigured ? META_GOOGLE_CONSENT_KEY : META_CONSENT_KEY;
+  const choice = useSyncExternalStore(subscribeToConsent, () => readConsent(consentKey), serverConsent);
+  const configured = metaConfigured || googleConfigured;
   const onLanding = pathname === "/aulas";
 
   useEffect(() => {
@@ -83,19 +133,23 @@ export function MarketingTracking({ pixelId }: { pixelId: string }) {
   }, []);
 
   useEffect(() => {
-    if (!configured || choice !== "accepted" || !onLanding) {
+    if (choice !== "accepted" || !onLanding) {
       window.fbq?.("consent", "revoke");
+      window.gtag?.("consent", "update", GOOGLE_CONSENT_DENIED);
       lastPageView.current = null;
       return;
     }
 
-    startPixel(pixelId);
-    window.fbq?.("consent", "grant");
-    if (lastPageView.current !== pathname) {
-      window.fbq?.("track", "PageView");
-      lastPageView.current = pathname;
+    if (metaConfigured) {
+      startPixel(pixelId);
+      window.fbq?.("consent", "grant");
+      if (lastPageView.current !== pathname) {
+        window.fbq?.("track", "PageView");
+        lastPageView.current = pathname;
+      }
     }
-  }, [choice, configured, onLanding, pathname, pixelId]);
+    if (googleConfigured) startGoogleTag(googleAdsId);
+  }, [choice, googleAdsId, googleConfigured, metaConfigured, onLanding, pathname, pixelId]);
 
   useEffect(() => {
     if (!configured || choice !== "accepted" || !onLanding) return;
@@ -105,22 +159,27 @@ export function MarketingTracking({ pixelId }: { pixelId: string }) {
       if (!(target instanceof Element)) return;
       const link = target.closest<HTMLAnchorElement>("a[href]");
       if (link?.href.startsWith(WHATSAPP_URL)) {
-        window.fbq?.("track", "Contact", { content_name: "aulas_whatsapp" });
+        if (metaConfigured) window.fbq?.("track", "Contact", { content_name: "aulas_whatsapp" });
+        if (googleConfigured) window.gtag?.("event", "conversion", {
+          send_to: `${googleAdsId}/${googleConversionLabel}`,
+        });
       }
     };
 
     document.addEventListener("click", trackContact, true);
     return () => document.removeEventListener("click", trackContact, true);
-  }, [choice, configured, onLanding]);
+  }, [choice, configured, googleAdsId, googleConfigured, googleConversionLabel, metaConfigured, onLanding]);
 
   if (!configured || choice === "loading" || (!onLanding && !preferencesOpen)) return null;
   if (choice !== null && !preferencesOpen) return null;
 
   const saveChoice = (next: "accepted" | "rejected") => {
     const wasAccepted = choice === "accepted";
-    window.localStorage.setItem(CONSENT_KEY, next);
+    window.localStorage.setItem(consentKey, next);
+    if (googleConfigured) window.localStorage.setItem(META_CONSENT_KEY, next);
     if (next === "rejected" && wasAccepted) {
       window.fbq?.("consent", "revoke");
+      window.gtag?.("consent", "update", GOOGLE_CONSENT_DENIED);
       window.location.reload();
       return;
     }
@@ -135,7 +194,7 @@ export function MarketingTracking({ pixelId }: { pixelId: string }) {
     >
       <h2 className="font-heading text-lg font-bold">Publicidade e privacidade</h2>
       <p className="mt-2 text-sm leading-relaxed text-accent/75">
-        Com sua permissão, usamos o pixel da Meta nesta página para medir visitas
+        Com sua permissão, usamos o pixel da Meta{googleConfigured ? " e a tag do Google Ads" : ""} nesta página para medir visitas
         e cliques no WhatsApp. Você pode recusar e continuar navegando. O
         diagnóstico e suas respostas não são enviados ao pixel. Leia a{" "}
         <Link href="/privacidade" className="font-semibold underline underline-offset-2">

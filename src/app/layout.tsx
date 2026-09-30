@@ -7,6 +7,8 @@ import { MarketingTracking } from "@/components/MarketingTracking";
 import "./globals.css";
 
 const EDUKACUCA_META_PIXEL_ID = "2180875479476314";
+const EDUKACUCA_GOOGLE_ADS_ID = process.env.NEXT_PUBLIC_EDUKACUCA_GOOGLE_ADS_ID ?? "";
+const EDUKACUCA_GOOGLE_WHATSAPP_CONVERSION_LABEL = process.env.NEXT_PUBLIC_EDUKACUCA_GOOGLE_WHATSAPP_CONVERSION_LABEL ?? "";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -48,7 +50,11 @@ export default function RootLayout({
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
-        <MarketingTracking pixelId={EDUKACUCA_META_PIXEL_ID} />
+        <MarketingTracking
+          pixelId={EDUKACUCA_META_PIXEL_ID}
+          googleAdsId={EDUKACUCA_GOOGLE_ADS_ID}
+          googleConversionLabel={EDUKACUCA_GOOGLE_WHATSAPP_CONVERSION_LABEL}
+        />
       </body>
     </html>
   );
