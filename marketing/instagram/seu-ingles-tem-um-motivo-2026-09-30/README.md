@@ -1,6 +1,10 @@
 # Seu inglês tem um motivo
 
-Status: rascunho editorial. Não foi agendado nem publicado.
+Status: publicado em 30/09/2026 no perfil `@edukacuca`.
+
+Publicação: https://www.instagram.com/p/Dd6IAjuHCK7/
+
+Conferência: API da Meta confirmou o ID `17968452053960317`, tipo `IMAGE`, usuário `edukacuca` e legenda idêntica à versão abaixo.
 
 ## Ideia
 
@@ -36,4 +40,4 @@ Pôster vertical sobre papel creme. Em azul-marinho, a frase “Seu inglês tem 
 
 Prompt final: “Create one finished 4:5 Instagram feed poster for EdukaCuca, a Brazilian teacher-led online English tutoring business. Visual direction: refined editorial still life, tactile warm ivory paper, layered cobalt-blue index cards and one small coral pencil mark suggesting a learning route tailored to a personal goal. The composition must be fresh and visually distinct from speech-bubble or ribbon imagery. Strong hierarchy, sophisticated ample space, carefully typeset dark navy Portuguese text, high contrast and perfect legibility on a phone. Include exactly these three text elements, spelled exactly: large headline 'SEU INGLÊS TEM UM MOTIVO.' second large line 'SUA AULA TAMBÉM.' small footer 'EDUKACUCA'. No other letters, numbers, logo, faces, flags, brand marks or watermark. No em dash, double hyphen or ellipsis. A credible premium teaching brand, not a generic motivational quote. Portrait aspect ratio 4:5, suitable for an Instagram feed post.”
 
-Antes de publicar, confirmar o texto e a arte no perfil de destino `@edukacuca` e obter a aprovação específica do João para esta peça.
+João autorizou explicitamente a criação e publicação de uma peça original da EdukaCuca nesta sessão. O perfil de destino e a arte foram conferidos antes da publicação.
