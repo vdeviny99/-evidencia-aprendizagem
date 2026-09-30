@@ -52,7 +52,8 @@ export default function PrivacidadePage() {
                 Se você aceitar a medição de publicidade na página de aulas,
                 também serão coletados dados de navegação, como visita à página,
                 clique no botão do WhatsApp e informações técnicas do navegador.
-                O pixel da Meta não é carregado antes dessa escolha.
+                O pixel da Meta e, quando configurada, a tag do Google Ads não
+                são carregados antes dessa escolha.
               </p>
             </Section>
 
@@ -63,8 +64,9 @@ export default function PrivacidadePage() {
                 personalizado e entrar em contato pelo WhatsApp ou e-mail para
                 enviar esse feedback. Se você aceitar a medição de publicidade,
                 compartilhamos apenas os eventos de visita e clique com a Meta
-                para entender o resultado das campanhas. Não enviamos nome,
-                telefone, e-mail nem respostas do diagnóstico ao pixel. Não
+                e, quando configurada, com o Google Ads para entender o resultado
+                das campanhas. Não enviamos nome, telefone, e-mail nem respostas
+                do diagnóstico a essas ferramentas. Não
                 vendemos ou alugamos seus dados.
               </p>
             </Section>
@@ -87,6 +89,11 @@ export default function PrivacidadePage() {
                 legal de retenção. Se você aceitar a medição de publicidade,
                 a Meta também tratará os eventos segundo sua própria{" "}
                 <a href="https://www.facebook.com/privacy/policy/" target="_blank" rel="noopener noreferrer" className="font-medium text-accent underline underline-offset-2">
+                  Política de Privacidade
+                </a>
+                . Quando a medição do Google Ads estiver configurada, o Google
+                também tratará esses eventos segundo sua{" "}
+                <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="font-medium text-accent underline underline-offset-2">
                   Política de Privacidade
                 </a>
                 .
