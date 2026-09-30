@@ -4,7 +4,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 
-const CONSENT_KEY = "edukacuca:marketing-consent:v1";
+const META_CONSENT_KEY = "edukacuca:marketing-consent:v1";
+const META_GOOGLE_CONSENT_KEY = "edukacuca:marketing-consent:meta-google:v1";
 const CONSENT_CHANGE_EVENT = "edukacuca:marketing-consent-changed";
 const OPEN_PREFERENCES_EVENT = "edukacuca:open-marketing-preferences";
 const META_SCRIPT_URL = "https://connect.facebook.net/en_US/fbevents.js";
@@ -94,9 +95,15 @@ function subscribeToConsent(onChange: () => void) {
   };
 }
 
-function readConsent(): Choice {
-  const stored = window.localStorage.getItem(CONSENT_KEY);
-  return stored === "accepted" || stored === "rejected" ? stored : null;
+function readConsent(key: string): Choice {
+  const stored = window.localStorage.getItem(key);
+  if (stored === "accepted" || stored === "rejected") return stored;
+  // An earlier rejection remains a rejection. Earlier Meta acceptance alone
+  // cannot authorize the newly configured Google Ads tag.
+  if (key === META_GOOGLE_CONSENT_KEY && window.localStorage.getItem(META_CONSENT_KEY) === "rejected") {
+    return "rejected";
+  }
+  return null;
 }
 
 function serverConsent(): Choice {
@@ -109,12 +116,13 @@ export function MarketingTracking({ pixelId, googleAdsId, googleConversionLabel 
   googleConversionLabel: string;
 }) {
   const pathname = usePathname();
-  const choice = useSyncExternalStore(subscribeToConsent, readConsent, serverConsent);
   const [preferencesOpen, setPreferencesOpen] = useState(false);
   const lastPageView = useRef<string | null>(null);
   const metaConfigured = /^\d{8,20}$/.test(pixelId);
   const googleConfigured = /^AW-\d{8,20}$/.test(googleAdsId)
     && /^[A-Za-z0-9_-]{1,100}$/.test(googleConversionLabel);
+  const consentKey = googleConfigured ? META_GOOGLE_CONSENT_KEY : META_CONSENT_KEY;
+  const choice = useSyncExternalStore(subscribeToConsent, () => readConsent(consentKey), serverConsent);
   const configured = metaConfigured || googleConfigured;
   const onLanding = pathname === "/aulas";
 
@@ -167,7 +175,8 @@ export function MarketingTracking({ pixelId, googleAdsId, googleConversionLabel 
 
   const saveChoice = (next: "accepted" | "rejected") => {
     const wasAccepted = choice === "accepted";
-    window.localStorage.setItem(CONSENT_KEY, next);
+    window.localStorage.setItem(consentKey, next);
+    if (googleConfigured) window.localStorage.setItem(META_CONSENT_KEY, next);
     if (next === "rejected" && wasAccepted) {
       window.fbq?.("consent", "revoke");
       window.gtag?.("consent", "update", GOOGLE_CONSENT_DENIED);
