@@ -7,8 +7,8 @@ import { MarketingTracking } from "@/components/MarketingTracking";
 import "./globals.css";
 
 const EDUKACUCA_META_PIXEL_ID = "2180875479476314";
-const EDUKACUCA_GOOGLE_ADS_ID = process.env.NEXT_PUBLIC_EDUKACUCA_GOOGLE_ADS_ID ?? "";
-const EDUKACUCA_GOOGLE_WHATSAPP_CONVERSION_LABEL = process.env.NEXT_PUBLIC_EDUKACUCA_GOOGLE_WHATSAPP_CONVERSION_LABEL ?? "";
+const EDUKACUCA_GOOGLE_ADS_ID = process.env.NEXT_PUBLIC_EDUKACUCA_GOOGLE_ADS_ID?.trim() || "AW-18387265025";
+const EDUKACUCA_GOOGLE_WHATSAPP_CONVERSION_LABEL = process.env.NEXT_PUBLIC_EDUKACUCA_GOOGLE_WHATSAPP_CONVERSION_LABEL?.trim() || "W63kCJrQm48dEIHM3b9E";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
