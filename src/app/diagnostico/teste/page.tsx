@@ -42,11 +42,11 @@ const questions = [
 ];
 
 const scale = [
-  { value: 0, label: "0 Nunca" },
-  { value: 1, label: "1 Raramente" },
-  { value: 2, label: "2 Às vezes" },
-  { value: 3, label: "3 Frequentemente" },
-  { value: 4, label: "4 Sempre" },
+  { value: 0, label: "Nunca" },
+  { value: 1, label: "Raramente" },
+  { value: 2, label: "Às vezes" },
+  { value: 3, label: "Frequentemente" },
+  { value: 4, label: "Sempre" },
 ];
 
 export default function TesteGratuito() {
