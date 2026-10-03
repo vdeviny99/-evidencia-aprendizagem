@@ -1,177 +1,130 @@
-import { Sparkles, Library, Users, ArrowRight, ClipboardCheck, GraduationCap, CheckCircle } from "lucide-react";
+import { ArrowRight, BookOpen, Brain, ClipboardCheck, GraduationCap, Languages, MessageCircle, Sparkles } from "lucide-react";
 import Link from "next/link";
 
-const highlights = [
+const ecosystem = [
   {
-    icon: Library,
-    title: "Base Científica",
-    desc: "Conteúdo fundamentado em pesquisas revisadas por pares nas áreas de psicologia cognitiva e neurociência educacional.",
+    icon: ClipboardCheck,
+    label: "Diagnóstico",
+    title: "Entenda seu estilo de aprendizagem",
+    text: "Um ponto de partida educativo para identificar tendências, dificuldades e caminhos possíveis para estudar melhor.",
+    href: "/diagnostico",
   },
   {
-    icon: Sparkles,
-    title: "Na Prática",
-    desc: "Técnicas validadas que você pode aplicar imediatamente nos seus estudos para aprender mais em menos tempo.",
+    icon: Languages,
+    label: "Aulas",
+    title: "Idiomas com comunicação autêntica",
+    text: "Inglês e francês com o aluno no centro: objetivo, ritmo, contexto e necessidades reais orientam cada aula.",
+    href: "/aulas",
   },
   {
-    icon: Users,
-    title: "Para Você",
-    desc: "Linguagem acessível sem sacrificar o rigor científico. Atendimento personalizado para adultos e jovens.",
+    icon: BookOpen,
+    label: "Cursos",
+    title: "Aprender a aprender com método",
+    text: "Curso básico, mentoria de aprendizagem e palestras para transformar ciência em prática de estudo.",
+    href: "/cursos",
   },
 ];
+
+const principles = [
+  [Brain, "Ciência sem complicar", "Estratégias baseadas em psicologia cognitiva, neurociência e educação, explicadas em linguagem clara."],
+  [GraduationCap, "Autonomia do estudante", "A ideia não é só entregar conteúdo, mas ajudar você a entender melhor como aprende."],
+  [Sparkles, "Prática com sentido", "Menos fórmula pronta. Mais conexão com objetivos reais, rotina e contexto de quem está aprendendo."],
+] as const;
 
 export default function Home() {
   return (
     <>
-      <section className="relative overflow-hidden bg-gradient-to-br from-sky/25 via-cream to-cream">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(0,0,0,0.03)_0%,transparent_60%)]" />
-        <div className="relative mx-auto max-w-5xl px-4 py-20 sm:py-28">
-          <div className="mx-auto max-w-3xl text-center animate-fade-in">
-            <h1 className="font-heading text-4xl font-bold tracking-tight text-accent sm:text-5xl lg:text-6xl">
-              <span className="text-green">Eduka</span>
-              <span className="text-gold">Cuca</span>
+      <section className="relative overflow-hidden bg-[radial-gradient(circle_at_top_left,rgba(234,88,12,0.10),transparent_30%),linear-gradient(135deg,#f6f8f6_0%,#ffffff_54%,#eef7f2_100%)] py-20 sm:py-28">
+        <div className="absolute left-1/2 top-12 hidden h-80 w-80 -translate-x-1/2 rounded-full bg-green/10 blur-3xl lg:block" />
+        <div className="relative mx-auto max-w-6xl px-4">
+          <div className="mx-auto max-w-4xl text-center">
+            <span className="inline-flex items-center gap-2 rounded-full border border-accent/10 bg-white/80 px-4 py-2 font-heading text-xs font-bold uppercase tracking-[0.22em] text-accent shadow-sm">
+              <Sparkles className="h-4 w-4 text-gold" />
+              EdukaCuca
+            </span>
+            <h1 className="mt-7 font-heading text-4xl font-black tracking-tight text-accent sm:text-6xl lg:text-7xl">
+              Um lugar para aprender melhor, não apenas estudar mais
             </h1>
-            <p className="mt-4 text-lg leading-relaxed text-accent/70 sm:text-xl">
-              Aprenda a aprender com quem entende do assunto.
+            <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-accent/72 sm:text-xl">
+              A EdukaCuca reúne diagnóstico, aulas, cursos e mentoria para ajudar estudantes a entenderem como aprendem, criarem melhores estratégias e usarem o conhecimento com mais autonomia.
             </p>
-            <div className="mx-auto mt-6 max-w-2xl text-center text-base leading-relaxed text-accent/70 text-pretty">
-              <p>
-                A <strong className="font-semibold text-accent">EdukaCuca</strong> une{" "}
-                <strong className="font-semibold text-accent">neurociência, psicologia cognitiva e ensino de idiomas</strong>{" "}
-                para transformar sua relação com o aprendizado. Se você sente que estuda, mas não aprende, ou quer levar sua fluência
-                em inglês e francês para o próximo nível, você está no lugar certo.
-              </p>
-            </div>
-            <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-              <Link
-                href="/diagnostico/aplicar"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gold px-8 py-3 font-heading text-sm font-bold uppercase tracking-wider text-white shadow-lg shadow-gold/25 transition-all hover:bg-gold/90 hover:shadow-xl hover:shadow-gold/30 hover:-translate-y-0.5 sm:w-auto"
-              >
-                <ClipboardCheck className="h-4 w-4" />
-                Diagnóstico de Habilidades
+            <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
+              <Link href="/diagnostico" className="inline-flex items-center justify-center gap-2 rounded-full bg-gold px-7 py-3.5 font-heading text-sm font-bold uppercase tracking-wider text-white shadow-lg shadow-gold/25 transition-all hover:-translate-y-0.5 hover:bg-gold/90">
+                Começar pelo diagnóstico
                 <ArrowRight className="h-4 w-4" />
               </Link>
-              <Link
-                href="/aulas"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-accent/20 bg-white/80 px-8 py-3 font-heading text-sm font-bold uppercase tracking-wider text-accent shadow-sm transition-all hover:bg-accent/5 hover:shadow-md hover:-translate-y-0.5 sm:w-auto"
-              >
-                <GraduationCap className="h-4 w-4" />
-                Aulas de Idiomas
-                <ArrowRight className="h-4 w-4" />
+              <Link href="/aulas" className="inline-flex items-center justify-center rounded-full border border-accent/15 bg-white px-7 py-3.5 font-heading text-sm font-bold uppercase tracking-wider text-accent shadow-sm transition-all hover:-translate-y-0.5 hover:bg-accent/5">
+                Conhecer aulas
               </Link>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-cream pb-8">
-        <div className="mx-auto max-w-5xl px-4">
-          <div className="grid gap-6 sm:grid-cols-3">
-            {highlights.map((item, i) => (
-              <div
-                key={item.title}
-                className={`animate-fade-in-up stagger-${i + 1} rounded-xl bg-card px-6 py-16 shadow-sm transition-all hover:shadow-md hover:-translate-y-0.5`}
-              >
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10">
-                  <item.icon className="h-6 w-6 text-accent" />
-                </div>
-                <h3 className="mt-6 font-heading text-sm font-bold uppercase tracking-wider text-accent">
-                  {item.title}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-accent/60">
-                  {item.desc}
-                </p>
+      <section className="bg-white py-16 sm:py-24">
+        <div className="mx-auto max-w-6xl px-4">
+          <div className="grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:items-start">
+            <div className="lg:sticky lg:top-28">
+              <span className="font-heading text-xs font-bold uppercase tracking-[0.25em] text-green">visão geral</span>
+              <h2 className="mt-3 font-heading text-3xl font-bold text-accent sm:text-4xl">O ecossistema EdukaCuca</h2>
+              <p className="mt-4 leading-relaxed text-accent/65">
+                Cada frente resolve uma parte diferente da aprendizagem. Você pode começar por onde fizer mais sentido para o seu momento.
+              </p>
+            </div>
+
+            <div className="space-y-4">
+              {ecosystem.map((item, index) => {
+                const Icon = item.icon;
+                return (
+                  <Link key={item.title} href={item.href} className="group grid gap-5 rounded-[2rem] border border-accent/10 bg-cream p-5 transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-xl hover:shadow-accent/8 sm:grid-cols-[76px_1fr_auto] sm:items-center sm:p-6">
+                    <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white text-gold shadow-sm">
+                      <Icon className="h-8 w-8" />
+                    </div>
+                    <div>
+                      <p className="font-heading text-[0.65rem] font-bold uppercase tracking-[0.22em] text-accent/45">0{index + 1} · {item.label}</p>
+                      <h3 className="mt-2 font-heading text-2xl font-bold text-accent">{item.title}</h3>
+                      <p className="mt-2 leading-relaxed text-accent/62">{item.text}</p>
+                    </div>
+                    <div className="hidden h-11 w-11 items-center justify-center rounded-full border border-accent/10 text-accent transition-colors group-hover:bg-accent group-hover:text-white sm:flex">
+                      <ArrowRight className="h-4 w-4" />
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-cream py-16 sm:py-24">
+        <div className="mx-auto max-w-6xl px-4">
+          <div className="mx-auto max-w-2xl text-center">
+            <span className="font-heading text-xs font-bold uppercase tracking-[0.25em] text-gold">olhar pedagógico</span>
+            <h2 className="mt-3 font-heading text-3xl font-bold text-accent sm:text-4xl">Aulas, cursos e diagnóstico partem da mesma base</h2>
+          </div>
+          <div className="mt-10 grid gap-4 md:grid-cols-3">
+            {principles.map(([Icon, title, text]) => (
+              <div key={title} className="rounded-3xl border border-accent/10 bg-white p-6 shadow-sm">
+                <Icon className="h-8 w-8 text-gold" />
+                <h3 className="mt-5 font-heading text-lg font-bold text-accent">{title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-accent/62">{text}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-accent/5 py-16 sm:py-20">
-        <div className="mx-auto max-w-5xl px-4">
-          <div className="grid items-center gap-12 sm:grid-cols-2">
-            <div className="animate-fade-in">
-              <span className="inline-block rounded-full bg-accent/10 px-4 py-1 font-heading text-xs font-bold uppercase tracking-widest text-accent">
-                Diagnóstico
-              </span>
-              <h2 className="mt-4 font-heading text-2xl font-bold text-accent sm:text-3xl">
-                Como anda seu aprendizado?
-              </h2>
-              <p className="mt-4 leading-relaxed text-accent/70">
-                Responda a um questionário de 5 minutos e receba um feedback personalizado sobre suas
-                habilidades de estudo, pontos fortes, pontos fracos e melhorias possíveis.
-              </p>
-              <ul className="mt-6 space-y-3">
-                {[
-                  "Avaliação gratuita e anônima",
-                  "33 itens que avaliam 7 pilares importantes da aprendizagem",
-                  "Resultado em até 48 horas com pontuações por categoria",
-                  "Recomendações personalizadas de estudo",
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-sm text-accent/70">
-                    <CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-              <Link
-                href="/diagnostico/aplicar"
-                className="mt-8 inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-heading text-sm font-bold uppercase tracking-wider text-white shadow-md transition-all hover:bg-accent/90 hover:shadow-lg hover:-translate-y-0.5"
-              >
-                Fazer Diagnóstico
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-            <div className="flex items-center justify-center">
-              <div className="flex h-64 w-64 items-center justify-center rounded-3xl bg-gradient-to-br from-green/20 via-white to-sky/20 shadow-lg ring-1 ring-accent/10 sm:h-72 sm:w-72">
-                <ClipboardCheck className="h-20 w-20 text-green" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-card py-16 sm:py-20">
-        <div className="mx-auto max-w-5xl px-4">
-          <div className="grid items-center gap-12 sm:grid-cols-2">
-            <div className="order-2 flex items-center justify-center sm:order-1">
-              <div className="flex h-64 w-64 items-center justify-center rounded-3xl bg-gradient-to-br from-sky/30 via-white to-gold/15 shadow-lg ring-1 ring-accent/10 sm:h-72 sm:w-72">
-                <GraduationCap className="h-20 w-20 text-sky-deep" />
-              </div>
-            </div>
-            <div className="order-1 animate-fade-in sm:order-2">
-              <span className="inline-block rounded-full bg-gold/10 px-4 py-1 font-heading text-xs font-bold uppercase tracking-widest text-gold">
-                Aulas
-              </span>
-              <h2 className="mt-4 font-heading text-2xl font-bold text-accent sm:text-3xl">
-                Inglês e francês - comunicação autêntica
-              </h2>
-              <p className="mt-4 leading-relaxed text-accent/70">
-                Aulas particulares online que combinam abordagem Dogme (comunicação autêntica e centrada
-                no aluno) com técnicas de neurociência da aprendizagem. Curso flexível com aulas
-                desenhadas para a sua necessidade real.
-              </p>
-              <ul className="mt-6 space-y-3">
-                {[
-                  "Aulas individuais sob medida para seu nível e objetivo",
-                  "Foco em conversação autêntica desde o primeiro dia",
-                  "Estratégias de estudo personalizadas com base na ciência",
-                  "Flexibilidade de horários e 100% online",
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-sm text-accent/70">
-                    <CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-              <Link
-                href="/aulas"
-                className="mt-8 inline-flex items-center gap-2 rounded-full bg-gold px-6 py-3 font-heading text-sm font-bold uppercase tracking-wider text-white shadow-md transition-all hover:bg-gold/90 hover:shadow-lg hover:-translate-y-0.5"
-              >
-                Quero Aulas
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-          </div>
+      <section className="bg-white py-16 sm:py-20">
+        <div className="mx-auto max-w-4xl px-4 text-center">
+          <MessageCircle className="mx-auto h-10 w-10 text-gold" />
+          <h2 className="mt-4 font-heading text-3xl font-bold text-accent">Quer entender qual caminho combina com você?</h2>
+          <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-accent/65">
+            Se você ainda não sabe se começa por aula, diagnóstico, curso ou mentoria, mande uma mensagem e eu te ajudo a escolher o melhor ponto de partida.
+          </p>
+          <a href="https://wa.me/5511926599367" target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-accent px-7 py-4 font-heading text-sm font-bold uppercase tracking-wider text-white transition-colors hover:bg-accent-dark">
+            Falar pelo WhatsApp
+            <ArrowRight className="h-4 w-4" />
+          </a>
         </div>
       </section>
     </>

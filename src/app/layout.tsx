@@ -33,6 +33,11 @@ export const metadata: Metadata = {
   },
   description:
     "Aprender a aprender com ciência, prática e criatividade.",
+  icons: {
+    icon: "/images/eduka3.jpeg",
+    shortcut: "/images/eduka3.jpeg",
+    apple: "/images/eduka3.jpeg",
+  },
 };
 
 export default function RootLayout({

@@ -1,0 +1,124 @@
+import { ArrowRight, LockKeyhole, Mail, MessageCircle, UserRound } from "lucide-react";
+import Link from "next/link";
+
+const goals = ["Escola", "Vestibular", "ENEM", "Reforço", "Organização dos estudos", "Outro"];
+
+export default function CapturaDiagnosticoCompleto() {
+  return (
+    <section className="bg-[linear-gradient(135deg,#f6f8f6_0%,#ffffff_55%,#eef7f2_100%)] py-16 sm:py-24">
+      <div className="mx-auto grid max-w-6xl gap-10 px-4 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+        <div className="lg:sticky lg:top-24">
+          <span className="inline-flex rounded-full bg-gold/10 px-4 py-2 font-heading text-xs font-bold uppercase tracking-[0.22em] text-gold">
+            diagnóstico completo
+          </span>
+          <h1 className="mt-5 font-heading text-4xl font-black tracking-tight text-accent sm:text-5xl">
+            Agora conte um pouco mais sobre você
+          </h1>
+          <p className="mt-5 text-lg leading-relaxed text-accent/70">
+            Essas respostas abertas ajudam a Edukacuca a preparar uma devolutiva mais individual, conectada ao seu contexto, objetivo e rotina de estudos.
+          </p>
+          <div className="mt-8 space-y-4 rounded-3xl border border-accent/10 bg-white p-6 shadow-sm">
+            <div className="flex gap-3 text-sm text-accent/70">
+              <LockKeyhole className="mt-0.5 h-4 w-4 shrink-0 text-green" />
+              <span>Suas respostas serão usadas para interpretar seu diagnóstico e produzir recomendações personalizadas.</span>
+            </div>
+            <div className="flex gap-3 text-sm text-accent/70">
+              <Mail className="mt-0.5 h-4 w-4 shrink-0 text-green" />
+              <span>Depois de preencher esta etapa, você responde aos 33 itens do diagnóstico de aprendizagem.</span>
+            </div>
+          </div>
+        </div>
+
+        <form className="rounded-[2rem] border border-accent/10 bg-white p-6 shadow-xl shadow-accent/5 sm:p-8">
+          <div className="grid gap-5 sm:grid-cols-2">
+            <label className="block sm:col-span-2">
+              <span className="font-heading text-xs font-bold uppercase tracking-wider text-accent/60">Nome</span>
+              <input className="mt-2 w-full rounded-2xl border border-accent/15 bg-cream px-4 py-3 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/20" placeholder="Seu nome" />
+            </label>
+            <label className="block">
+              <span className="font-heading text-xs font-bold uppercase tracking-wider text-accent/60">E-mail</span>
+              <input type="email" className="mt-2 w-full rounded-2xl border border-accent/15 bg-cream px-4 py-3 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/20" placeholder="voce@email.com" />
+            </label>
+            <label className="block">
+              <span className="font-heading text-xs font-bold uppercase tracking-wider text-accent/60">WhatsApp</span>
+              <input className="mt-2 w-full rounded-2xl border border-accent/15 bg-cream px-4 py-3 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/20" placeholder="(11) 99999-9999" />
+            </label>
+            <label className="block">
+              <span className="font-heading text-xs font-bold uppercase tracking-wider text-accent/60">Idade</span>
+              <input className="mt-2 w-full rounded-2xl border border-accent/15 bg-cream px-4 py-3 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/20" placeholder="Ex.: 16" />
+            </label>
+            <label className="block">
+              <span className="font-heading text-xs font-bold uppercase tracking-wider text-accent/60">Profissão ou ocupação</span>
+              <input className="mt-2 w-full rounded-2xl border border-accent/15 bg-cream px-4 py-3 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/20" placeholder="Ex.: estudante, professor, designer..." />
+            </label>
+            <label className="block sm:col-span-2">
+              <span className="font-heading text-xs font-bold uppercase tracking-wider text-accent/60">Série/ano escolar, curso ou fase de estudo</span>
+              <input className="mt-2 w-full rounded-2xl border border-accent/15 bg-cream px-4 py-3 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/20" placeholder="Ex.: 2º ano, vestibular, faculdade..." />
+            </label>
+            <label className="block sm:col-span-2">
+              <span className="font-heading text-xs font-bold uppercase tracking-wider text-accent/60">Como conheceu a Edukacuca?</span>
+              <input className="mt-2 w-full rounded-2xl border border-accent/15 bg-cream px-4 py-3 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/20" placeholder="Ex.: Instagram, indicação, Google..." />
+            </label>
+          </div>
+
+          <div className="mt-6">
+            <span className="font-heading text-xs font-bold uppercase tracking-wider text-accent/60">Objetivo principal</span>
+            <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {goals.map((goal) => (
+                <label key={goal} className="flex cursor-pointer items-center gap-2 rounded-2xl border border-accent/10 bg-cream px-4 py-3 text-sm text-accent/70 transition hover:border-gold/50 hover:bg-gold/5">
+                  <input type="radio" name="goal" className="accent-gold" />
+                  {goal}
+                </label>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-8 space-y-5 rounded-3xl border border-accent/10 bg-white p-5 shadow-sm">
+            <h2 className="font-heading text-lg font-bold text-accent">Perguntas abertas para a devolutiva</h2>
+            <label className="block">
+              <span className="font-heading text-xs font-bold uppercase tracking-wider text-accent/60">O que te trouxe até aqui? O que você gostaria de aprender ou melhorar?</span>
+              <textarea rows={3} className="mt-2 w-full rounded-2xl border border-accent/15 bg-cream px-4 py-3 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/20" placeholder="Conte um pouco sobre sua motivação..." />
+            </label>
+            <label className="block">
+              <span className="font-heading text-xs font-bold uppercase tracking-wider text-accent/60">Existe algum objetivo específico?</span>
+              <input className="mt-2 w-full rounded-2xl border border-accent/15 bg-cream px-4 py-3 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/20" placeholder="Ex.: passar no ENEM, melhorar matemática, organizar a rotina..." />
+            </label>
+            <label className="block">
+              <span className="font-heading text-xs font-bold uppercase tracking-wider text-accent/60">Qual seu prazo ideal para alcançar esse objetivo?</span>
+              <input className="mt-2 w-full rounded-2xl border border-accent/15 bg-cream px-4 py-3 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/20" placeholder="Ex.: 3 meses, 6 meses, até a prova..." />
+            </label>
+            <label className="block">
+              <span className="font-heading text-xs font-bold uppercase tracking-wider text-accent/60">Como é sua relação com os estudos hoje?</span>
+              <textarea rows={5} className="mt-2 w-full rounded-2xl border border-accent/15 bg-cream px-4 py-3 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/20" placeholder="Fique à vontade para falar sobre gostos, dificuldades, hábitos, motivações e bloqueios..." />
+            </label>
+          </div>
+
+          <div className="mt-8 space-y-3 rounded-3xl bg-cream p-5">
+            <label className="flex gap-3 text-sm leading-relaxed text-accent/75">
+              <input type="checkbox" required className="mt-1 accent-gold" />
+              <span>Aceito os Termos de Uso e a Política de Privacidade.</span>
+            </label>
+            <label className="flex gap-3 text-sm leading-relaxed text-accent/75">
+              <input type="checkbox" className="mt-1 accent-gold" />
+              <span>Autorizo o uso das minhas respostas para fins de melhoria do diagnóstico e produção de dados educacionais, de forma responsável.</span>
+            </label>
+            <label className="flex gap-3 text-sm leading-relaxed text-accent/75">
+              <input type="checkbox" className="mt-1 accent-gold" />
+              <span>Quero receber conteúdos, recomendações e atualizações por e-mail e WhatsApp.</span>
+            </label>
+          </div>
+
+          <Link href="/diagnostico/teste" className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-gold px-7 py-4 font-heading text-sm font-bold uppercase tracking-wider text-white shadow-lg shadow-gold/20 transition-all hover:-translate-y-0.5 hover:bg-gold/90">
+            <UserRound className="h-4 w-4" />
+            Continuar para os 33 itens
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+          <a href="https://wa.me/5511926599367" target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full border border-accent/15 px-7 py-3 font-heading text-xs font-bold uppercase tracking-wider text-accent transition-colors hover:bg-accent/5">
+            <MessageCircle className="h-4 w-4" />
+            Tirar dúvida pelo WhatsApp
+          </a>
+        </form>
+      </div>
+    </section>
+  );
+}
