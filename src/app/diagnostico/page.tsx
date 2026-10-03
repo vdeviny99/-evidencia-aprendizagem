@@ -176,7 +176,6 @@ export default function DiagnosticoPage() {
                 </div>
                 <h3 className="mt-5 font-heading text-lg font-bold text-accent">{profile.name}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-accent/65">{profile.desc}</p>
-                <button className="mt-5 font-heading text-xs font-bold uppercase tracking-wider text-green">ver mais</button>
               </div>
             ))}
           </div>

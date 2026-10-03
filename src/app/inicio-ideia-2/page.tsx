@@ -13,7 +13,7 @@ const outcomes = [
   ["03", "Construir autonomia", "O objetivo é o aluno entender o próprio processo e ganhar repertório para estudar melhor sozinho."],
 ] as const;
 
-export default function Home() {
+export default function InicioIdeia2() {
   return (
     <>
       <section className="bg-accent text-white">
