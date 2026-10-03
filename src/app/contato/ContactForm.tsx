@@ -40,7 +40,7 @@ export function ContactForm() {
   if (status === "success") {
     return (
       <div className="flex flex-col items-center py-10 text-center">
-        <CheckCircle className="h-12 w-12 text-green-600" />
+        <CheckCircle className="h-12 w-12 text-green" />
         <h3 className="mt-4 font-heading text-lg font-bold text-accent">
           Mensagem enviada!
         </h3>
@@ -67,7 +67,7 @@ export function ContactForm() {
             type="text"
             required
             placeholder="Seu nome"
-            className="mt-2 w-full rounded-lg border border-accent/20 bg-cream px-4 py-3 text-sm text-accent outline-none placeholder:text-accent/30 focus:border-accent/40 focus:ring-1 focus:ring-accent/20"
+            className="mt-2 w-full rounded-2xl border border-accent/15 bg-cream px-4 py-3 text-sm text-accent outline-none placeholder:text-accent/35 transition focus:border-gold focus:ring-2 focus:ring-gold/20"
           />
         </div>
 
@@ -84,7 +84,7 @@ export function ContactForm() {
             type="email"
             required
             placeholder="seu@email.com"
-            className="mt-2 w-full rounded-lg border border-accent/20 bg-cream px-4 py-3 text-sm text-accent outline-none placeholder:text-accent/30 focus:border-accent/40 focus:ring-1 focus:ring-accent/20"
+            className="mt-2 w-full rounded-2xl border border-accent/15 bg-cream px-4 py-3 text-sm text-accent outline-none placeholder:text-accent/35 transition focus:border-gold focus:ring-2 focus:ring-gold/20"
           />
         </div>
       </div>
@@ -102,7 +102,7 @@ export function ContactForm() {
           type="text"
           required
           placeholder="Assunto da mensagem"
-          className="mt-2 w-full rounded-lg border border-accent/20 bg-cream px-4 py-3 text-sm text-accent outline-none placeholder:text-accent/30 focus:border-accent/40 focus:ring-1 focus:ring-accent/20"
+          className="mt-2 w-full rounded-2xl border border-accent/15 bg-cream px-4 py-3 text-sm text-accent outline-none placeholder:text-accent/35 transition focus:border-gold focus:ring-2 focus:ring-gold/20"
         />
       </div>
 
@@ -119,12 +119,12 @@ export function ContactForm() {
           required
           rows={6}
           placeholder="Sua mensagem..."
-          className="mt-2 w-full resize-y rounded-lg border border-accent/20 bg-cream px-4 py-3 text-sm text-accent outline-none placeholder:text-accent/30 focus:border-accent/40 focus:ring-1 focus:ring-accent/20"
+          className="mt-2 w-full resize-y rounded-2xl border border-accent/15 bg-cream px-4 py-3 text-sm text-accent outline-none placeholder:text-accent/35 transition focus:border-gold focus:ring-2 focus:ring-gold/20"
         />
       </div>
 
       {status === "error" && (
-        <div className="flex items-center gap-2 rounded-lg bg-red-50 px-4 py-3 text-sm text-red-700">
+        <div className="flex items-center gap-2 rounded-2xl bg-red-50 px-4 py-3 text-sm text-red-700">
           <AlertCircle className="h-4 w-4 shrink-0" />
           Erro ao enviar mensagem. Tente novamente.
         </div>
@@ -133,7 +133,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={sending}
-        className="inline-flex items-center gap-2 rounded-lg bg-accent px-8 py-3 font-heading text-xs font-bold uppercase tracking-wider text-white transition-all hover:bg-accent-dark disabled:opacity-50"
+        className="inline-flex items-center justify-center gap-2 rounded-full bg-gold px-8 py-3.5 font-heading text-xs font-bold uppercase tracking-wider text-white transition-all hover:-translate-y-0.5 hover:bg-gold/90 disabled:translate-y-0 disabled:opacity-50"
       >
         {sending ? "Enviando..." : "Enviar Mensagem"}
         <Send className="h-3 w-3" />
