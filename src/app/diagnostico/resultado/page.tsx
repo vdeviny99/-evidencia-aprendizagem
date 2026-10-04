@@ -58,6 +58,8 @@ export default function ResultadoDiagnostico() {
       return fallbackResult;
     }
   });
+  const [isDownloadingPdf, setIsDownloadingPdf] = useState(false);
+  const [pdfError, setPdfError] = useState("");
 
   const visibleAxes = [
     ["Planejamento", scoreToPercent(result.groups.planejamento)],
@@ -71,6 +73,47 @@ export default function ResultadoDiagnostico() {
     ["Revisão estratégica", scoreToPercent(result.constructs.revisaoEstrategica)],
     ["Motivação e consistência", scoreToPercent(result.constructs.motivacao)],
   ] as const;
+
+  async function downloadPdf() {
+    setIsDownloadingPdf(true);
+    setPdfError("");
+
+    try {
+      const lead = JSON.parse(window.localStorage.getItem("edukacuca-diagnostico-dados") ?? "{}");
+      const answers = JSON.parse(window.localStorage.getItem("edukacuca-diagnostico-respostas") ?? "{}");
+
+      const response = await fetch("/api/diagnostico/pdf", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ lead, answers }),
+      });
+
+      if (!response.ok) {
+        const data = await response.json().catch(() => null);
+        throw new Error(data?.error ?? "Não foi possível gerar o PDF.");
+      }
+
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      const safeName = String(lead?.nome ?? "diagnostico-edukacuca")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-zA-Z0-9-_]+/g, "-")
+        .replace(/^-+|-+$/g, "")
+        .toLowerCase();
+      link.href = url;
+      link.download = `${safeName || "diagnostico-edukacuca"}-diagnostico-edukacuca.pdf`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+    } catch (error) {
+      setPdfError(error instanceof Error ? error.message : "Não foi possível gerar o PDF.");
+    } finally {
+      setIsDownloadingPdf(false);
+    }
+  }
 
   return (
     <>
@@ -174,9 +217,10 @@ export default function ResultadoDiagnostico() {
             <p className="mt-3 leading-relaxed text-accent/65">
               Acesse o PDF do seu diagnóstico gratuito com estilo de aprendizagem, mapa parcial e recomendações principais.
             </p>
-            <a href="#" className="mt-6 inline-flex rounded-full bg-accent px-6 py-3 font-heading text-xs font-bold uppercase tracking-wider text-white transition-colors hover:bg-accent-dark">
-              Baixar PDF
-            </a>
+            <button type="button" onClick={downloadPdf} disabled={isDownloadingPdf} className="mt-6 inline-flex rounded-full bg-accent px-6 py-3 font-heading text-xs font-bold uppercase tracking-wider text-white transition-colors hover:bg-accent-dark disabled:cursor-not-allowed disabled:opacity-60">
+              {isDownloadingPdf ? "Gerando PDF..." : "Baixar PDF"}
+            </button>
+            {pdfError && <p className="mt-3 text-sm text-red-700">{pdfError}</p>}
           </div>
           <div className="rounded-[2rem] bg-accent p-8 text-white shadow-lg shadow-accent/15">
             <h2 className="font-heading text-2xl font-bold">Quer uma análise personalizada do seu resultado?</h2>

@@ -63,6 +63,7 @@ export default function TesteGratuito() {
       ) as Record<number, number>;
       const result = calculateDiagnosticResult(answersByItem);
       window.localStorage.setItem("edukacuca-diagnostico-resultado", JSON.stringify(result));
+      window.localStorage.setItem("edukacuca-diagnostico-respostas", JSON.stringify(answersByItem));
       startTransition(() => setFinished(true));
       return;
     }

@@ -1,8 +1,30 @@
+"use client";
+
 import { ArrowRight, LockKeyhole, Mail, MessageCircle, UserRound } from "lucide-react";
+
+const leadStorageKey = "edukacuca-diagnostico-dados";
 
 const goals = ["Escola", "Vestibular", "ENEM", "Reforço", "Organização dos estudos", "Outro"];
 
 export default function CapturaDiagnostico() {
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const form = new FormData(event.currentTarget);
+    window.localStorage.setItem(
+      leadStorageKey,
+      JSON.stringify({
+        nome: String(form.get("nome") ?? "").trim(),
+        email: String(form.get("email") ?? "").trim(),
+        whatsapp: String(form.get("whatsapp") ?? "").trim(),
+        fase: String(form.get("fase") ?? "").trim(),
+        objetivo: String(form.get("goal") ?? "").trim(),
+        data: new Date().toISOString(),
+      }),
+    );
+    window.location.href = "/diagnostico/teste";
+  }
+
   return (
     <section className="bg-[linear-gradient(135deg,#f6f8f6_0%,#ffffff_55%,#eef7f2_100%)] py-16 sm:py-24">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
@@ -28,7 +50,7 @@ export default function CapturaDiagnostico() {
           </div>
         </div>
 
-        <form action="/diagnostico/teste" className="rounded-[2rem] border border-accent/10 bg-white p-6 shadow-xl shadow-accent/5 sm:p-8">
+        <form onSubmit={handleSubmit} className="rounded-[2rem] border border-accent/10 bg-white p-6 shadow-xl shadow-accent/5 sm:p-8">
           <div className="grid gap-5 sm:grid-cols-2">
             <label className="block sm:col-span-2">
               <span className="font-heading text-xs font-bold uppercase tracking-wider text-accent/60">Nome</span>
