@@ -33,19 +33,29 @@ const paidItems = [
 
 const profiles = [
   {
-    icon: Footprints,
-    name: "Curupira",
-    desc: "Tende a aprender melhor quando entende a lógica por trás do conteúdo.",
-  },
-  {
-    icon: TreePine,
-    name: "Caipora",
-    desc: "Tende a gostar de planejar, organizar etapas e acompanhar progresso.",
+    icon: Sparkles,
+    name: "Cuca",
+    desc: "Tende a aprender conectando ideias, imagens, histórias e exemplos.",
   },
   {
     icon: Wind,
     name: "Saci",
     desc: "Tende a aprender testando, errando, experimentando e fazendo conexões.",
+  },
+  {
+    icon: Footprints,
+    name: "Curupira",
+    desc: "Tende a aprender melhor quando entende a lógica por trás do conteúdo.",
+  },
+  {
+    icon: Flame,
+    name: "Boitatá",
+    desc: "Tende a ter boa concentração quando possui metas claras e ambiente estruturado.",
+  },
+  {
+    icon: TreePine,
+    name: "Caipora",
+    desc: "Tende a gostar de planejar, organizar etapas e acompanhar progresso.",
   },
   {
     icon: Waves,
@@ -56,16 +66,6 @@ const profiles = [
     icon: Fish,
     name: "Boto",
     desc: "Tende a precisar transformar teoria em aplicação concreta.",
-  },
-  {
-    icon: Flame,
-    name: "Boitatá",
-    desc: "Tende a ter boa concentração quando possui metas claras e ambiente estruturado.",
-  },
-  {
-    icon: Sparkles,
-    name: "Cuca",
-    desc: "Tende a aprender conectando ideias, imagens, histórias e exemplos.",
   },
   {
     icon: Bird,
