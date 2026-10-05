@@ -1,7 +1,6 @@
 "use client";
 
-import { ArrowLeft, ArrowRight, CheckCircle, Loader2 } from "lucide-react";
-import Link from "next/link";
+import { ArrowLeft, ArrowRight, Loader2 } from "lucide-react";
 import { useState, useTransition } from "react";
 import { calculateDiagnosticResult } from "@/lib/diagnosticoResultado";
 
@@ -52,7 +51,6 @@ const scale = [
 export default function TesteGratuito() {
   const [current, setCurrent] = useState(0);
   const [answers, setAnswers] = useState<Record<number, number>>({});
-  const [finished, setFinished] = useState(false);
   const [isPending, startTransition] = useTransition();
   const progress = Math.round(((current + 1) / questions.length) * 100);
 
@@ -64,29 +62,10 @@ export default function TesteGratuito() {
       const result = calculateDiagnosticResult(answersByItem);
       window.localStorage.setItem("edukacuca-diagnostico-resultado", JSON.stringify(result));
       window.localStorage.setItem("edukacuca-diagnostico-respostas", JSON.stringify(answersByItem));
-      startTransition(() => setFinished(true));
+      window.location.href = "/diagnostico/enviar-comprovante";
       return;
     }
     startTransition(() => setCurrent((value) => value + 1));
-  }
-
-  if (finished) {
-    return (
-      <section className="flex min-h-[70vh] items-center bg-cream py-16">
-        <div className="mx-auto max-w-2xl px-4 text-center">
-          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green/10 text-green">
-            <CheckCircle className="h-8 w-8" />
-          </div>
-          <h1 className="mt-6 font-heading text-4xl font-bold text-accent">Tudo certo! Estamos montando seu estilo de aprendizagem.</h1>
-          <p className="mx-auto mt-4 max-w-xl text-accent/65">
-            Seu resultado gratuito mostra tendências gerais a partir das respostas. Ele não define quem você é; apenas ajuda a identificar caminhos possíveis para estudar melhor.
-          </p>
-          <Link href="/diagnostico/resultado" className="mt-8 inline-flex rounded-full bg-gold px-8 py-4 font-heading text-sm font-bold uppercase tracking-wider text-white shadow-lg shadow-gold/20 transition-all hover:-translate-y-0.5 hover:bg-gold/90">
-            Ver meu resultado
-          </Link>
-        </div>
-      </section>
-    );
   }
 
   return (
