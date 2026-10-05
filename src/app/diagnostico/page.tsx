@@ -110,7 +110,7 @@ export default function DiagnosticoPage() {
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-accent/75 sm:text-xl">
               Entenda como você aprende, quais estratégias combinam mais com seu jeito de estudar e receba recomendações práticas para melhorar sua rotina.
             </p>
-            <p className="mt-5 max-w-2xl rounded-2xl border border-accent/10 bg-white/70 p-5 text-sm leading-relaxed text-accent/65 shadow-sm">
+            <p className="mt-5 max-w-3xl rounded-2xl border border-accent/10 bg-white/70 p-5 text-sm leading-7 text-accent/65 shadow-sm sm:p-6">
               Este diagnóstico tem finalidade educativa. Os estilos apresentados ajudam a explicar os construtos avaliados pelo teste, sem intenção de rotular, classificar definitivamente ou substituir avaliações pedagógicas especializadas.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -164,7 +164,7 @@ export default function DiagnosticoPage() {
           <div className="max-w-3xl">
             <span className="font-heading text-xs font-bold uppercase tracking-[0.25em] text-green">estilos de aprendizagem</span>
             <h2 className="mt-3 font-heading text-3xl font-bold text-accent sm:text-4xl">Estilos de aprendizagem</h2>
-            <p className="mt-4 leading-relaxed text-accent/65">
+            <p className="mt-4 max-w-3xl leading-8 text-accent/65">
               Esses estilos ajudam a explicitar os construtos do diagnóstico de forma simples e educativa. Eles não são rótulos fixos, mas caminhos para entender tendências, dificuldades e potências na forma de aprender.
             </p>
           </div>

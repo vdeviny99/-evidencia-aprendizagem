@@ -30,7 +30,7 @@ export default function ContatoPage() {
                 Falar pelo WhatsApp
                 <ArrowRight className="h-4 w-4" />
               </a>
-              <a href="mailto:contato@edukacuca.com.br" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 px-7 py-3.5 font-heading text-sm font-bold uppercase tracking-wider text-white transition-colors hover:bg-white/10">
+              <a href="mailto:almeida.jv2019@gmail.com" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 px-7 py-3.5 font-heading text-sm font-bold uppercase tracking-wider text-white transition-colors hover:bg-white/10">
                 Enviar e-mail
               </a>
             </div>
@@ -70,7 +70,7 @@ export default function ContatoPage() {
                 <Mail className="mt-0.5 h-5 w-5 shrink-0 text-gold" />
                 <div>
                   <p className="font-heading text-sm font-bold text-accent">E-mail</p>
-                  <p className="mt-1 text-sm text-accent/60">contato@edukacuca.com.br</p>
+                  <p className="mt-1 break-all text-sm text-accent/60">almeida.jv2019@gmail.com</p>
                 </div>
               </div>
               <div className="flex gap-3 rounded-3xl border border-accent/10 bg-white p-5">

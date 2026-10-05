@@ -8,7 +8,7 @@ const journey = [
 ] as const;
 
 const outcomes = [
-  ["01", "Diagnosticar padrões", "Antes de indicar técnica, a EdukaCuca identifica como o aluno organiza tempo, foco, revisão e motivação."],
+  ["01", "Diagnosticar padrões", "Antes de indicar técnica, a EdukaCuca identifica como o aluno organiza tempo, foco, revisão e reflexão."],
   ["02", "Praticar com orientação", "Aulas e mentorias transformam o diagnóstico em rotina real, com acompanhamento próximo e objetivos claros."],
   ["03", "Construir autonomia", "O objetivo é o aluno entender o próprio processo e ganhar repertório para estudar melhor sozinho."],
 ] as const;
@@ -24,13 +24,13 @@ export default function Home() {
                 <Sparkles className="h-4 w-4 text-gold" />
                 EdukaCuca
               </span>
-              <h1 className="mt-7 font-heading text-4xl font-bold leading-[1.05] tracking-[-0.04em] sm:text-6xl">
-                Estudo, idiomas e aprendizagem em um caminho só
+              <h1 className="mt-7 max-w-3xl text-balance font-heading text-4xl font-bold leading-[1.05] tracking-[-0.04em] sm:text-6xl">
+                Estudo, idiomas e aprendizagem em um lugar só
               </h1>
-              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/70">
+              <p className="mt-6 max-w-xl text-lg leading-8 text-white/70">
                 A EdukaCuca reúne diagnóstico, aulas, cursos e mentorias para ensinar estudantes e profissionais a aprender melhor.
               </p>
-              <p className="mt-4 max-w-2xl text-lg leading-relaxed text-white/70">
+              <p className="mt-4 max-w-xl text-lg leading-8 text-white/70">
                 Unimos neurociência da aprendizagem, psicologia cognitiva, pedagogia e técnicas de ensino de segundo idioma para auxiliar nossos alunos com mais eficácia.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
