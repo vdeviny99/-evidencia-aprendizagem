@@ -18,19 +18,19 @@ export default function Home() {
     <>
       <section className="bg-accent text-white">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:py-24">
-          <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+          <div className="grid gap-12 lg:grid-cols-[1fr_0.95fr] lg:items-center">
             <div>
               <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/8 px-4 py-2 font-heading text-xs font-bold uppercase tracking-[0.22em] text-white/80">
                 <Sparkles className="h-4 w-4 text-gold" />
                 EdukaCuca
               </span>
-              <h1 className="mt-7 max-w-3xl text-balance font-heading text-4xl font-bold leading-[1.05] tracking-[-0.04em] sm:text-6xl">
+              <h1 className="mt-7 max-w-[46rem] text-balance font-heading text-4xl font-bold leading-[1.05] tracking-[-0.04em] sm:text-5xl xl:text-6xl">
                 Estudo, idiomas e aprendizagem em um lugar só
               </h1>
-              <p className="mt-6 max-w-xl text-lg leading-8 text-white/70">
+              <p className="mt-6 max-w-[42rem] text-pretty text-lg leading-8 text-white/70">
                 A EdukaCuca reúne diagnóstico, aulas, cursos e mentorias para ensinar estudantes e profissionais a aprender melhor.
               </p>
-              <p className="mt-4 max-w-xl text-lg leading-8 text-white/70">
+              <p className="mt-4 max-w-[42rem] text-pretty text-lg leading-8 text-white/70">
                 Unimos neurociência da aprendizagem, psicologia cognitiva, pedagogia e técnicas de ensino de segundo idioma para auxiliar nossos alunos com mais eficácia.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
