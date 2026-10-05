@@ -35,42 +35,42 @@ const profiles = [
   {
     icon: Sparkles,
     name: "Cuca",
-    desc: "Tende a aprender conectando ideias, imagens, histórias e exemplos.",
+    desc: "Toda ideia puxa outra.",
   },
   {
     icon: Wind,
     name: "Saci",
-    desc: "Tende a aprender testando, errando, experimentando e fazendo conexões.",
+    desc: "Experimentar também é pensar.",
   },
   {
     icon: Footprints,
     name: "Curupira",
-    desc: "Tende a aprender melhor quando entende a lógica por trás do conteúdo.",
+    desc: "Entender o caminho importa.",
   },
   {
     icon: Flame,
     name: "Boitatá",
-    desc: "Tende a ter boa concentração quando possui metas claras e ambiente estruturado.",
+    desc: "Me dá uma direção e eu acendo.",
   },
   {
     icon: TreePine,
     name: "Caipora",
-    desc: "Tende a gostar de planejar, organizar etapas e acompanhar progresso.",
+    desc: "Clareza antes do próximo passo.",
   },
   {
     icon: Waves,
     name: "Iara",
-    desc: "Tende a aprender melhor explicando, debatendo e ouvindo outras pessoas.",
+    desc: "Vamos pensar juntos?",
   },
   {
     icon: Fish,
     name: "Boto",
-    desc: "Tende a precisar transformar teoria em aplicação concreta.",
+    desc: "Direção transforma energia em foco.",
   },
   {
     icon: Bird,
     name: "Uirapuru",
-    desc: "Tende a evoluir com repetição, rotina e acompanhamento consistente.",
+    desc: "Hoje um pouco, amanhã também.",
   },
 ];
 
