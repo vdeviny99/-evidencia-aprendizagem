@@ -48,21 +48,76 @@ const scale = [
   { value: 4, label: "Sempre" },
 ];
 
+const leadStorageKey = "edukacuca-diagnostico-dados";
+
+type StoredLead = {
+  plan?: "free" | "paid";
+  nome?: string;
+  email?: string;
+  whatsapp?: string;
+  fase?: string;
+  objetivo?: string;
+  idade?: string;
+  ocupacao?: string;
+  comoConheceu?: string;
+  objetivoEspecifico?: string;
+  prazo?: string;
+  relacao?: string;
+};
+
 export default function TesteGratuito() {
   const [current, setCurrent] = useState(0);
   const [answers, setAnswers] = useState<Record<number, number>>({});
   const [isPending, startTransition] = useTransition();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const progress = Math.round(((current + 1) / questions.length) * 100);
 
-  function next() {
+  async function saveSubmission(answersByItem: Record<number, number>) {
+    const stored = window.localStorage.getItem(leadStorageKey);
+    const lead = stored ? (JSON.parse(stored) as StoredLead) : null;
+    if (!lead?.nome || !lead.whatsapp) return;
+
+    const response = await fetch("/api/diagnostico", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        plan: lead.plan ?? "free",
+        name: lead.nome,
+        age: lead.idade ?? null,
+        occupation: lead.ocupacao ?? null,
+        course: lead.fase ?? null,
+        howMet: lead.comoConheceu ?? null,
+        whatsapp: lead.whatsapp,
+        email: lead.email ?? null,
+        objective: lead.objetivo ?? "",
+        goalSpecific: lead.objetivoEspecifico ?? null,
+        deadline: lead.prazo ?? null,
+        relation: lead.relacao ?? "",
+        answers: answersByItem,
+        consent: true,
+      }),
+    });
+
+    if (!response.ok) throw new Error("Erro ao salvar diagnóstico");
+  }
+
+  async function next() {
     if (current === questions.length - 1) {
+      setIsSubmitting(true);
       const answersByItem = Object.fromEntries(
         Object.entries(answers).map(([index, value]) => [Number(index) + 1, value]),
       ) as Record<number, number>;
       const result = calculateDiagnosticResult(answersByItem);
       window.localStorage.setItem("edukacuca-diagnostico-resultado", JSON.stringify(result));
       window.localStorage.setItem("edukacuca-diagnostico-respostas", JSON.stringify(answersByItem));
-      window.location.href = "/diagnostico/enviar-comprovante";
+      try {
+        await saveSubmission(answersByItem);
+      } catch (error) {
+        console.error("Erro ao salvar diagnóstico:", error);
+      }
+      const stored = window.localStorage.getItem(leadStorageKey);
+      const lead = stored ? (JSON.parse(stored) as StoredLead) : null;
+      window.location.href = lead?.plan === "paid" ? "/diagnostico/enviar-comprovante" : "/diagnostico/resultado";
       return;
     }
     startTransition(() => setCurrent((value) => value + 1));
@@ -111,7 +166,7 @@ export default function TesteGratuito() {
               type="button"
               onClick={() => setCurrent((value) => Math.max(0, value - 1))}
               disabled={current === 0 || isPending}
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-accent/15 px-6 py-3 font-heading text-xs font-bold uppercase tracking-wider text-accent transition-colors hover:bg-accent/5 disabled:cursor-not-allowed disabled:opacity-40"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-accent/15 px-6 py-3 text-center font-heading text-xs font-bold uppercase leading-snug tracking-wider text-accent transition-colors hover:bg-accent/5 disabled:cursor-not-allowed disabled:opacity-40"
             >
               <ArrowLeft className="h-4 w-4" />
               Voltar
@@ -119,11 +174,11 @@ export default function TesteGratuito() {
             <button
               type="button"
               onClick={next}
-              disabled={answers[current] === undefined || isPending}
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-7 py-3 font-heading text-xs font-bold uppercase tracking-wider text-white transition-colors hover:bg-accent-dark disabled:cursor-not-allowed disabled:opacity-40"
+              disabled={answers[current] === undefined || isPending || isSubmitting}
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-7 py-3 text-center font-heading text-xs font-bold uppercase leading-snug tracking-wider text-white transition-colors hover:bg-accent-dark disabled:cursor-not-allowed disabled:opacity-40"
             >
-              {isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : current === questions.length - 1 ? "Finalizar" : "Próxima"}
-              {!isPending && <ArrowRight className="h-4 w-4" />}
+              {isPending || isSubmitting ? <Loader2 className="h-4 w-4 animate-spin" /> : current === questions.length - 1 ? "Finalizar" : "Próxima"}
+              {!isPending && !isSubmitting && <ArrowRight className="h-4 w-4" />}
             </button>
           </div>
         </div>

@@ -26,11 +26,11 @@ export default function ContatoPage() {
               Tire dúvidas sobre diagnóstico, aulas, cursos, mentorias ou parcerias. Se preferir, fale direto pelo WhatsApp.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <a href="https://wa.me/5511926599367" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full bg-gold px-7 py-3.5 font-heading text-sm font-bold uppercase tracking-wider text-white transition-all hover:-translate-y-0.5 hover:bg-gold/90">
+              <a href="https://wa.me/5511926599367" target="_blank" rel="noopener noreferrer" className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gold px-7 py-3.5 text-center font-heading text-sm font-bold uppercase leading-snug tracking-wider text-white transition-all hover:-translate-y-0.5 hover:bg-gold/90 sm:w-auto">
                 Falar pelo WhatsApp
                 <ArrowRight className="h-4 w-4" />
               </a>
-              <a href="mailto:almeida.jv2019@gmail.com" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 px-7 py-3.5 font-heading text-sm font-bold uppercase tracking-wider text-white transition-colors hover:bg-white/10">
+              <a href="mailto:almeida.jv2019@gmail.com" className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/20 px-7 py-3.5 text-center font-heading text-sm font-bold uppercase leading-snug tracking-wider text-white transition-colors hover:bg-white/10 sm:w-auto">
                 Enviar e-mail
               </a>
             </div>

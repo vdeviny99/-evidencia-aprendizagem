@@ -113,7 +113,7 @@ export async function Footer() {
                   className="flex items-center gap-2 text-sm text-zinc-400 transition-colors hover:text-gold"
                 >
                   <Mail className="h-4 w-4 shrink-0" />
-                  <span>almeida.jv2019@gmail.com</span>
+                  <span className="break-all">almeida.jv2019@gmail.com</span>
                 </a>
               </li>
             </ul>

@@ -19,10 +19,14 @@ export default async function AdminDiagnosticos() {
     redirect("/admin/login");
   }
 
-  const submissions = await prisma.diagnosticSubmission.findMany({
-    orderBy: { createdAt: "desc" },
-    take: 100,
-  });
+  const [submissions, freeCount, paidCount] = await Promise.all([
+    prisma.diagnosticSubmission.findMany({
+      orderBy: { createdAt: "desc" },
+      take: 100,
+    }),
+    prisma.diagnosticSubmission.count({ where: { plan: "free" } }),
+    prisma.diagnosticSubmission.count({ where: { plan: "paid" } }),
+  ]);
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-12">
@@ -36,10 +40,16 @@ export default async function AdminDiagnosticos() {
             Dashboard
           </Link>
         </div>
-        <div className="flex items-center gap-2 text-accent">
+        <div className="flex flex-wrap items-center justify-end gap-2 text-accent">
           <ClipboardList className="h-5 w-5" />
           <span className="font-heading text-xs font-bold uppercase tracking-wider text-accent/60">
             {submissions.length} diagnósticos
+          </span>
+          <span className="rounded-full bg-green/10 px-3 py-1 font-heading text-xs font-bold uppercase tracking-wider text-green">
+            {freeCount} gratuitos
+          </span>
+          <span className="rounded-full bg-gold/15 px-3 py-1 font-heading text-xs font-bold uppercase tracking-wider text-gold">
+            {paidCount} pagos
           </span>
         </div>
       </div>
@@ -76,10 +86,15 @@ export default async function AdminDiagnosticos() {
                     <p className="truncate font-heading font-bold text-accent">
                       {name}
                     </p>
-                    <p className="truncate text-sm text-accent/60">
-                      {whatsapp}
-                      {email ? ` · ${email}` : ""}
-                    </p>
+                    <div className="mt-1 flex flex-wrap items-center gap-2">
+                      <span className={`rounded-full px-2 py-0.5 font-heading text-[0.65rem] font-bold uppercase tracking-wider ${sub.plan === "free" ? "bg-green/10 text-green" : "bg-gold/15 text-gold"}`}>
+                        {sub.plan === "free" ? "Gratuito" : "Pago"}
+                      </span>
+                      <p className="truncate text-sm text-accent/60">
+                        {whatsapp}
+                        {email ? ` · ${email}` : ""}
+                      </p>
+                    </div>
                   </div>
                   <div className="flex shrink-0 items-center gap-3">
                     <div className="text-right">

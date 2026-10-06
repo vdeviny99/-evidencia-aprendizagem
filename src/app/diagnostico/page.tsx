@@ -121,14 +121,14 @@ export default function DiagnosticoPage() {
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link
                 href="/diagnostico/captura"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-accent/15 bg-white px-7 py-3.5 font-heading text-sm font-bold uppercase tracking-wider text-accent shadow-sm transition-all hover:-translate-y-0.5 hover:bg-accent/5"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-accent/15 bg-white px-7 py-3.5 text-center font-heading text-sm font-bold uppercase leading-snug tracking-wider text-accent shadow-sm transition-all hover:-translate-y-0.5 hover:bg-accent/5 sm:w-auto"
               >
                 Fazer diagnóstico gratuito
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
                 href="/diagnostico/completo"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-gold px-7 py-3.5 font-heading text-sm font-bold uppercase tracking-wider text-white shadow-lg shadow-gold/25 transition-all hover:-translate-y-0.5 hover:bg-gold/90"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gold px-7 py-3.5 text-center font-heading text-sm font-bold uppercase leading-snug tracking-wider text-white shadow-lg shadow-gold/25 transition-all hover:-translate-y-0.5 hover:bg-gold/90 sm:w-auto"
               >
                 Conhecer diagnóstico completo
               </Link>
@@ -186,9 +186,9 @@ export default function DiagnosticoPage() {
           </div>
           <div className="mt-14 rounded-[2rem] bg-accent p-8 text-center text-white sm:p-10">
             <h3 className="font-heading text-2xl font-bold">Quer descobrir qual estilo de aprendizagem mais combina com você?</h3>
-            <Link href="/diagnostico/captura" className="mt-6 inline-flex rounded-full bg-gold px-7 py-3 font-heading text-xs font-bold uppercase tracking-wider text-white transition-colors hover:bg-gold/90">
-              Fazer diagnóstico gratuito
-            </Link>
+              <Link href="/diagnostico/captura" className="mt-6 inline-flex rounded-full bg-gold px-7 py-3 text-center font-heading text-xs font-bold uppercase leading-snug tracking-wider text-white transition-colors hover:bg-gold/90">
+                Fazer diagnóstico gratuito
+              </Link>
           </div>
         </div>
       </section>
@@ -220,16 +220,16 @@ export default function DiagnosticoPage() {
                 </div>
                 <p className="mt-1 text-xs leading-relaxed text-accent/55">Resultado resumido e recomendações gerais com acesso imediato.</p>
               </div>
-              <Link href="/diagnostico/captura" className="mt-8 inline-flex rounded-full bg-accent px-6 py-3 font-heading text-xs font-bold uppercase tracking-wider text-white transition-colors hover:bg-accent-dark">
+              <Link href="/diagnostico/captura" className="mt-8 inline-flex rounded-full bg-accent px-6 py-3 text-center font-heading text-xs font-bold uppercase leading-snug tracking-wider text-white transition-colors hover:bg-accent-dark">
                 Começar gratuitamente
               </Link>
             </div>
             <div className="relative flex min-h-[540px] flex-col rounded-[1.75rem] border-2 border-gold/50 bg-white p-8 shadow-xl shadow-gold/10">
-              <span className="absolute right-6 top-6 rounded-full bg-gold/10 px-3 py-1 font-heading text-[0.65rem] font-bold uppercase tracking-wider text-gold">
+              <span className="mb-4 w-fit rounded-full bg-gold/10 px-3 py-1 font-heading text-[0.65rem] font-bold uppercase tracking-wider text-gold sm:absolute sm:right-6 sm:top-6 sm:mb-0">
                 Mais completo
               </span>
               <div>
-                <h3 className="pr-32 font-heading text-2xl font-bold text-accent">Diagnóstico completo</h3>
+                <h3 className="font-heading text-2xl font-bold text-accent sm:pr-32">Diagnóstico completo</h3>
                 <p className="mt-3 min-h-[84px] leading-relaxed text-accent/65">
                   Para quem quer uma leitura mais detalhada, com avaliação personalizada e orientação individual por WhatsApp.
                 </p>
@@ -245,7 +245,7 @@ export default function DiagnosticoPage() {
                 </div>
                 <p className="mt-1 text-xs leading-relaxed text-accent/55">Devolutiva personalizada por WhatsApp em até 48h úteis.</p>
               </div>
-              <Link href="/diagnostico/completo" className="mt-8 inline-flex rounded-full bg-gold px-6 py-3 font-heading text-xs font-bold uppercase tracking-wider text-white transition-colors hover:bg-gold/90">
+              <Link href="/diagnostico/completo" className="mt-8 inline-flex rounded-full bg-gold px-6 py-3 text-center font-heading text-xs font-bold uppercase leading-snug tracking-wider text-white transition-colors hover:bg-gold/90">
                 Quero minha devolutiva completa
               </Link>
             </div>

@@ -113,6 +113,7 @@ model ContactMessage {
 
 model DiagnosticSubmission {
   id        String   @id @default(cuid())
+  plan      String   @default("paid")
   name      String
   age       String?
   occupation String?
@@ -130,4 +131,14 @@ model DiagnosticSubmission {
   notifiedAt DateTime?
   read      Boolean  @default(false)
   createdAt DateTime @default(now())
+}
+
+model SiteEvent {
+  id        String   @id @default(cuid())
+  type      String
+  path      String?
+  createdAt DateTime @default(now())
+
+  @@index([type])
+  @@index([createdAt])
 }

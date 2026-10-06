@@ -132,7 +132,7 @@ export default function AulasPage() {
               Inglês, francês e estratégias de aprendizagem com foco no aluno, comunicação autêntica e acompanhamento próximo.
             </p>
             <div className="mt-8 flex">
-              <a href="#aulas" className="inline-flex items-center justify-center gap-2 rounded-full bg-gold px-7 py-3.5 font-heading text-sm font-bold uppercase tracking-wider text-white shadow-lg shadow-gold/25 transition-all hover:-translate-y-0.5 hover:bg-gold/90">
+              <a href="#aulas" className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gold px-7 py-3.5 text-center font-heading text-sm font-bold uppercase leading-snug tracking-wider text-white shadow-lg shadow-gold/25 transition-all hover:-translate-y-0.5 hover:bg-gold/90 sm:w-auto">
                 Conheça as opções de aulas
                 <ArrowRight className="h-4 w-4" />
               </a>
@@ -183,7 +183,7 @@ export default function AulasPage() {
                   <h3 className="mt-7 font-heading text-2xl font-bold text-accent">{aula.titulo}</h3>
                   <p className="mt-3 text-base leading-relaxed text-accent/75">{aula.descricao}</p>
                   <p className="mt-4 flex-1 text-sm leading-relaxed text-accent/58">{aula.detail}</p>
-                  <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 font-heading text-xs font-bold uppercase tracking-wider text-white transition-colors hover:bg-accent-dark">
+                  <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 text-center font-heading text-xs font-bold uppercase leading-snug tracking-wider text-white transition-colors hover:bg-accent-dark">
                     Contratar
                     <ArrowRight className="h-4 w-4" />
                   </a>
@@ -244,7 +244,7 @@ export default function AulasPage() {
             {packages.map((pkg) => (
               <div key={pkg.title} className={`flex min-h-[520px] flex-col rounded-[2rem] border bg-gradient-to-br ${pkg.color} p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-accent/10`}>
                 <div className="min-h-[154px]">
-                  <div className="flex min-h-8 items-start justify-between gap-3">
+                  <div className="flex min-h-8 flex-col items-start gap-3 sm:flex-row sm:justify-between">
                     <h3 className="font-heading text-2xl font-bold leading-tight text-accent">{pkg.title}</h3>
                     {pkg.featured ? (
                       <span className="shrink-0 rounded-full bg-white/80 px-3 py-1 font-heading text-[0.62rem] font-bold uppercase tracking-wider text-accent/55 shadow-sm">
@@ -271,7 +271,7 @@ export default function AulasPage() {
                     </li>
                   ))}
                 </ul>
-                <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-accent px-7 py-3 font-heading text-xs font-bold uppercase tracking-wider text-white transition-colors hover:bg-accent-dark">
+                <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-accent px-7 py-3 text-center font-heading text-xs font-bold uppercase leading-snug tracking-wider text-white transition-colors hover:bg-accent-dark">
                   Contratar
                   <ArrowRight className="h-4 w-4" />
                 </a>
@@ -311,7 +311,7 @@ export default function AulasPage() {
                 </li>
               ))}
             </ul>
-            <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-gold px-7 py-4 font-heading text-sm font-bold uppercase tracking-wider text-white shadow-lg shadow-gold/20 transition-all hover:-translate-y-0.5 hover:bg-gold/90">
+            <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-gold px-7 py-4 text-center font-heading text-sm font-bold uppercase leading-snug tracking-wider text-white shadow-lg shadow-gold/20 transition-all hover:-translate-y-0.5 hover:bg-gold/90">
               <MessageCircle className="h-4 w-4" />
               Agendar conversa pelo WhatsApp
             </a>

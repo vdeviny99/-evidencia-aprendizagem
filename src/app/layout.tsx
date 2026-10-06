@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Raleway } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { MarketingTracking } from "@/components/MarketingTracking";
+import { SiteEventTracking } from "@/components/SiteEventTracking";
 import "./globals.css";
 
 const EDUKACUCA_META_PIXEL_ID = "2180875479476314";
@@ -60,6 +62,8 @@ export default function RootLayout({
           googleAdsId={EDUKACUCA_GOOGLE_ADS_ID}
           googleConversionLabel={EDUKACUCA_GOOGLE_WHATSAPP_CONVERSION_LABEL}
         />
+        <SiteEventTracking />
+        <Analytics />
       </body>
     </html>
   );

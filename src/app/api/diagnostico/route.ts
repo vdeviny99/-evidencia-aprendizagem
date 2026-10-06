@@ -8,6 +8,7 @@ const emptyToNull = (v: unknown) =>
   typeof v === "string" && v.trim() === "" ? null : v;
 
 const diagnosticoSchema = z.object({
+  plan: z.enum(["free", "paid"]).default("paid"),
   name: z.string().trim().min(2).max(120),
   age: z.preprocess(emptyToNull, z.string().trim().max(10).nullish()),
   occupation: z.preprocess(emptyToNull, z.string().trim().max(120).nullish()),
@@ -51,6 +52,7 @@ export async function POST(request: Request) {
 
     const {
       name,
+      plan,
       age,
       occupation,
       course,
@@ -67,6 +69,7 @@ export async function POST(request: Request) {
     const submission = await prisma.diagnosticSubmission.create({
       data: {
         name: encryptField(name),
+        plan,
         age: age ?? null,
         occupation: occupation ?? null,
         course: course ?? null,
@@ -82,6 +85,17 @@ export async function POST(request: Request) {
         consentVersion: CONSENT_VERSION,
       },
     });
+
+    try {
+      await prisma.siteEvent.create({
+        data: {
+          type: plan === "free" ? "diagnostic_free_completed" : "diagnostic_paid_completed",
+          path: plan === "free" ? "/diagnostico/teste" : "/diagnostico/completo/captura",
+        },
+      });
+    } catch (eventError) {
+      console.error("Erro ao registrar evento do diagnóstico:", eventError);
+    }
 
     if (!process.env.GMAIL_USER || !process.env.GMAIL_APP_PASSWORD) {
       console.warn("GMAIL_USER/GMAIL_APP_PASSWORD não configurados; e-mail não enviado");
@@ -101,9 +115,10 @@ export async function POST(request: Request) {
         await transport.sendMail({
           from: `"Eduka Cuca" <${process.env.GMAIL_USER}>`,
           to: process.env.GMAIL_TO ?? process.env.GMAIL_USER,
-          subject: `Novo diagnóstico recebido: ${name}`,
+          subject: `Novo diagnóstico ${plan === "free" ? "gratuito" : "pago"} recebido: ${name}`,
           text:
             `Um novo diagnóstico foi recebido.\n\n` +
+            `Tipo: ${plan === "free" ? "Gratuito" : "Pago / completo"}\n` +
             `Nome: ${name}\n` +
             `ID: ${submission.id}\n\n` +
             `Acesse o painel para visualizar as respostas:\n${panelLink}\n\n` +

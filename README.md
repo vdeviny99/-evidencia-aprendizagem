@@ -4,6 +4,12 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 The site uses EdukaCuca's dedicated Meta dataset `2180875479476314`. The pixel runs only on `/aulas` after a visitor accepts marketing measurement. It records a page view and clicks on the EdukaCuca WhatsApp link. Visitors can reject measurement or change their choice from the footer. Do not reuse a pixel from another business or add diagnostic answers to tracking events.
 
+## Analytics
+
+General traffic and most visited pages are measured with Vercel Analytics. Check them in the Vercel project under Analytics.
+
+EdukaCuca-specific conversion actions are stored in the application database and shown in `/admin`: free diagnostic clicks, WhatsApp clicks, completed free diagnostics, and completed paid diagnostics. These internal events do not store personal data.
+
 ## Getting Started
 
 First, run the development server:

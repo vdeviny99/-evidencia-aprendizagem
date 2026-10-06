@@ -1,9 +1,36 @@
-import { ArrowRight, LockKeyhole, Mail, MessageCircle, UserRound } from "lucide-react";
-import Link from "next/link";
+"use client";
 
+import { ArrowRight, LockKeyhole, Mail, MessageCircle, UserRound } from "lucide-react";
+
+const leadStorageKey = "edukacuca-diagnostico-dados";
 const goals = ["Escola", "Vestibular", "ENEM", "Reforço", "Organização dos estudos", "Outro"];
 
 export default function CapturaDiagnosticoCompleto() {
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const form = new FormData(event.currentTarget);
+    window.localStorage.setItem(
+      leadStorageKey,
+      JSON.stringify({
+        plan: "paid",
+        nome: String(form.get("nome") ?? "").trim(),
+        email: String(form.get("email") ?? "").trim(),
+        whatsapp: String(form.get("whatsapp") ?? "").trim(),
+        idade: String(form.get("idade") ?? "").trim(),
+        ocupacao: String(form.get("ocupacao") ?? "").trim(),
+        fase: String(form.get("fase") ?? "").trim(),
+        comoConheceu: String(form.get("comoConheceu") ?? "").trim(),
+        objetivo: String(form.get("objetivo") ?? form.get("goal") ?? "").trim(),
+        objetivoEspecifico: String(form.get("objetivoEspecifico") ?? "").trim(),
+        prazo: String(form.get("prazo") ?? "").trim(),
+        relacao: String(form.get("relacao") ?? "").trim(),
+        data: new Date().toISOString(),
+      }),
+    );
+    window.location.href = "/diagnostico/teste";
+  }
+
   return (
     <section className="bg-[linear-gradient(135deg,#f6f8f6_0%,#ffffff_55%,#eef7f2_100%)] py-16 sm:py-24">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
@@ -29,35 +56,35 @@ export default function CapturaDiagnosticoCompleto() {
           </div>
         </div>
 
-        <form className="rounded-[2rem] border border-accent/10 bg-white p-6 shadow-xl shadow-accent/5 sm:p-8">
+        <form onSubmit={handleSubmit} className="rounded-[2rem] border border-accent/10 bg-white p-6 shadow-xl shadow-accent/5 sm:p-8">
           <div className="grid gap-5 sm:grid-cols-2">
             <label className="block sm:col-span-2">
               <span className="font-heading text-xs font-bold uppercase tracking-wider text-accent/60">Nome</span>
-              <input className="mt-2 w-full rounded-2xl border border-accent/15 bg-cream px-4 py-3 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/20" placeholder="Seu nome" />
+              <input name="nome" required className="mt-2 w-full rounded-2xl border border-accent/15 bg-cream px-4 py-3 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/20" placeholder="Seu nome" />
             </label>
             <label className="block">
               <span className="font-heading text-xs font-bold uppercase tracking-wider text-accent/60">E-mail</span>
-              <input type="email" className="mt-2 w-full rounded-2xl border border-accent/15 bg-cream px-4 py-3 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/20" placeholder="voce@email.com" />
+              <input name="email" type="email" required className="mt-2 w-full rounded-2xl border border-accent/15 bg-cream px-4 py-3 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/20" placeholder="voce@email.com" />
             </label>
             <label className="block">
               <span className="font-heading text-xs font-bold uppercase tracking-wider text-accent/60">WhatsApp</span>
-              <input className="mt-2 w-full rounded-2xl border border-accent/15 bg-cream px-4 py-3 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/20" placeholder="(11) 99999-9999" />
+              <input name="whatsapp" required className="mt-2 w-full rounded-2xl border border-accent/15 bg-cream px-4 py-3 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/20" placeholder="(11) 99999-9999" />
             </label>
             <label className="block">
               <span className="font-heading text-xs font-bold uppercase tracking-wider text-accent/60">Idade</span>
-              <input className="mt-2 w-full rounded-2xl border border-accent/15 bg-cream px-4 py-3 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/20" placeholder="Ex.: 16" />
+              <input name="idade" className="mt-2 w-full rounded-2xl border border-accent/15 bg-cream px-4 py-3 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/20" placeholder="Ex.: 16" />
             </label>
             <label className="block">
               <span className="font-heading text-xs font-bold uppercase tracking-wider text-accent/60">Profissão ou ocupação</span>
-              <input className="mt-2 w-full rounded-2xl border border-accent/15 bg-cream px-4 py-3 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/20" placeholder="Ex.: estudante, professor, designer..." />
+              <input name="ocupacao" className="mt-2 w-full rounded-2xl border border-accent/15 bg-cream px-4 py-3 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/20" placeholder="Ex.: estudante, professor, designer..." />
             </label>
             <label className="block sm:col-span-2">
               <span className="font-heading text-xs font-bold uppercase tracking-wider text-accent/60">Série/ano escolar, curso ou fase de estudo</span>
-              <input className="mt-2 w-full rounded-2xl border border-accent/15 bg-cream px-4 py-3 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/20" placeholder="Ex.: 2º ano, vestibular, faculdade..." />
+              <input name="fase" required className="mt-2 w-full rounded-2xl border border-accent/15 bg-cream px-4 py-3 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/20" placeholder="Ex.: 2º ano, vestibular, faculdade..." />
             </label>
             <label className="block sm:col-span-2">
               <span className="font-heading text-xs font-bold uppercase tracking-wider text-accent/60">Como conheceu a Edukacuca?</span>
-              <input className="mt-2 w-full rounded-2xl border border-accent/15 bg-cream px-4 py-3 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/20" placeholder="Ex.: Instagram, indicação, Google..." />
+              <input name="comoConheceu" className="mt-2 w-full rounded-2xl border border-accent/15 bg-cream px-4 py-3 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/20" placeholder="Ex.: Instagram, indicação, Google..." />
             </label>
           </div>
 
@@ -66,7 +93,7 @@ export default function CapturaDiagnosticoCompleto() {
             <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {goals.map((goal) => (
                 <label key={goal} className="flex cursor-pointer items-center gap-2 rounded-2xl border border-accent/10 bg-cream px-4 py-3 text-sm text-accent/70 transition hover:border-gold/50 hover:bg-gold/5">
-                  <input type="radio" name="goal" className="accent-gold" />
+                  <input type="radio" name="goal" value={goal} required className="accent-gold" />
                   {goal}
                 </label>
               ))}
@@ -77,19 +104,19 @@ export default function CapturaDiagnosticoCompleto() {
             <h2 className="font-heading text-lg font-bold text-accent">Perguntas abertas para a devolutiva</h2>
             <label className="block">
               <span className="font-heading text-xs font-bold uppercase tracking-wider text-accent/60">O que te trouxe até aqui? O que você gostaria de aprender ou melhorar?</span>
-              <textarea rows={3} className="mt-2 w-full rounded-2xl border border-accent/15 bg-cream px-4 py-3 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/20" placeholder="Conte um pouco sobre sua motivação..." />
+              <textarea name="objetivo" rows={3} className="mt-2 w-full rounded-2xl border border-accent/15 bg-cream px-4 py-3 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/20" placeholder="Conte um pouco sobre sua motivação..." />
             </label>
             <label className="block">
               <span className="font-heading text-xs font-bold uppercase tracking-wider text-accent/60">Existe algum objetivo específico?</span>
-              <input className="mt-2 w-full rounded-2xl border border-accent/15 bg-cream px-4 py-3 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/20" placeholder="Ex.: passar no ENEM, melhorar matemática, organizar a rotina..." />
+              <input name="objetivoEspecifico" className="mt-2 w-full rounded-2xl border border-accent/15 bg-cream px-4 py-3 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/20" placeholder="Ex.: passar no ENEM, melhorar matemática, organizar a rotina..." />
             </label>
             <label className="block">
               <span className="font-heading text-xs font-bold uppercase tracking-wider text-accent/60">Qual seu prazo ideal para alcançar esse objetivo?</span>
-              <input className="mt-2 w-full rounded-2xl border border-accent/15 bg-cream px-4 py-3 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/20" placeholder="Ex.: 3 meses, 6 meses, até a prova..." />
+              <input name="prazo" className="mt-2 w-full rounded-2xl border border-accent/15 bg-cream px-4 py-3 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/20" placeholder="Ex.: 3 meses, 6 meses, até a prova..." />
             </label>
             <label className="block">
               <span className="font-heading text-xs font-bold uppercase tracking-wider text-accent/60">Como é sua relação com os estudos hoje?</span>
-              <textarea rows={5} className="mt-2 w-full rounded-2xl border border-accent/15 bg-cream px-4 py-3 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/20" placeholder="Fique à vontade para falar sobre gostos, dificuldades, hábitos, motivações e bloqueios..." />
+              <textarea name="relacao" rows={5} className="mt-2 w-full rounded-2xl border border-accent/15 bg-cream px-4 py-3 text-sm outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/20" placeholder="Fique à vontade para falar sobre gostos, dificuldades, hábitos, motivações e bloqueios..." />
             </label>
           </div>
 
@@ -108,12 +135,12 @@ export default function CapturaDiagnosticoCompleto() {
             </label>
           </div>
 
-          <Link href="/diagnostico/teste" className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-gold px-7 py-4 font-heading text-sm font-bold uppercase tracking-wider text-white shadow-lg shadow-gold/20 transition-all hover:-translate-y-0.5 hover:bg-gold/90">
+          <button type="submit" className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-gold px-7 py-4 text-center font-heading text-sm font-bold uppercase leading-snug tracking-wider text-white shadow-lg shadow-gold/20 transition-all hover:-translate-y-0.5 hover:bg-gold/90">
             <UserRound className="h-4 w-4" />
             Continuar para os 33 itens
             <ArrowRight className="h-4 w-4" />
-          </Link>
-          <a href="https://wa.me/5511926599367" target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full border border-accent/15 px-7 py-3 font-heading text-xs font-bold uppercase tracking-wider text-accent transition-colors hover:bg-accent/5">
+          </button>
+          <a href="https://wa.me/5511926599367" target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full border border-accent/15 px-7 py-3 text-center font-heading text-xs font-bold uppercase leading-snug tracking-wider text-accent transition-colors hover:bg-accent/5">
             <MessageCircle className="h-4 w-4" />
             Tirar dúvida pelo WhatsApp
           </a>

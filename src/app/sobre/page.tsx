@@ -46,11 +46,11 @@ export default function SobrePage() {
               Sou José Vinicius, professor de inglês e francês e fundador da EdukaCuca. Meu trabalho é ajudar pessoas a aprender melhor, com método, comunicação autêntica e autonomia.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link href="/aulas" className="inline-flex items-center justify-center gap-2 rounded-full bg-gold px-7 py-3.5 font-heading text-sm font-bold uppercase tracking-wider text-white shadow-lg shadow-gold/25 transition-all hover:-translate-y-0.5 hover:bg-gold/90">
+              <Link href="/aulas" className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gold px-7 py-3.5 text-center font-heading text-sm font-bold uppercase leading-snug tracking-wider text-white shadow-lg shadow-gold/25 transition-all hover:-translate-y-0.5 hover:bg-gold/90 sm:w-auto">
                 Conhecer aulas
                 <ArrowRight className="h-4 w-4" />
               </Link>
-              <Link href="/diagnostico" className="inline-flex items-center justify-center rounded-full border border-accent/15 bg-white px-7 py-3.5 font-heading text-sm font-bold uppercase tracking-wider text-accent shadow-sm transition-all hover:-translate-y-0.5 hover:bg-accent/5">
+              <Link href="/diagnostico" className="inline-flex w-full items-center justify-center rounded-full border border-accent/15 bg-white px-7 py-3.5 text-center font-heading text-sm font-bold uppercase leading-snug tracking-wider text-accent shadow-sm transition-all hover:-translate-y-0.5 hover:bg-accent/5 sm:w-auto">
                 Fazer diagnóstico
               </Link>
             </div>

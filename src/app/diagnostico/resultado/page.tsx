@@ -163,7 +163,7 @@ export default function ResultadoDiagnostico() {
                   </div>
                   <div className="absolute inset-0 flex items-center justify-center bg-cream/65 backdrop-blur-[1px]">
                     <div className="rounded-full bg-white px-4 py-2 text-center shadow-sm">
-                      <p className="inline-flex items-center gap-2 font-heading text-xs font-bold uppercase tracking-wider text-accent">
+                      <p className="inline-flex items-center gap-2 text-center font-heading text-xs font-bold uppercase leading-snug tracking-wider text-accent">
                         <LockKeyhole className="h-3.5 w-3.5 text-gold" />
                         Mapa completo no diagnóstico premium
                       </p>
@@ -217,7 +217,7 @@ export default function ResultadoDiagnostico() {
             <p className="mt-3 leading-relaxed text-accent/65">
               Acesse o PDF do seu diagnóstico gratuito com estilo de aprendizagem, mapa parcial e recomendações principais.
             </p>
-            <button type="button" onClick={downloadPdf} disabled={isDownloadingPdf} className="mt-6 inline-flex rounded-full bg-accent px-6 py-3 font-heading text-xs font-bold uppercase tracking-wider text-white transition-colors hover:bg-accent-dark disabled:cursor-not-allowed disabled:opacity-60">
+            <button type="button" onClick={downloadPdf} disabled={isDownloadingPdf} className="mt-6 inline-flex rounded-full bg-accent px-6 py-3 text-center font-heading text-xs font-bold uppercase leading-snug tracking-wider text-white transition-colors hover:bg-accent-dark disabled:cursor-not-allowed disabled:opacity-60">
               {isDownloadingPdf ? "Gerando PDF..." : "Baixar PDF"}
             </button>
             {pdfError && <p className="mt-3 text-sm text-red-700">{pdfError}</p>}
@@ -227,7 +227,7 @@ export default function ResultadoDiagnostico() {
             <p className="mt-3 leading-relaxed text-white/75">
               No diagnóstico completo, você recebe uma devolutiva individual por WhatsApp com interpretação do seu estilo, recomendações específicas e próximos passos para melhorar sua rotina de estudos.
             </p>
-            <Link href="/diagnostico/completo" className="mt-6 inline-flex rounded-full bg-gold px-6 py-3 font-heading text-xs font-bold uppercase tracking-wider text-white transition-colors hover:bg-gold/90">
+            <Link href="/diagnostico/completo" className="mt-6 inline-flex rounded-full bg-gold px-6 py-3 text-center font-heading text-xs font-bold uppercase leading-snug tracking-wider text-white transition-colors hover:bg-gold/90">
               Quero o diagnóstico completo
             </Link>
           </div>
@@ -258,11 +258,11 @@ export default function ResultadoDiagnostico() {
           <div className="mt-14 rounded-[2rem] bg-accent p-8 text-center text-white sm:p-10">
             <h3 className="font-heading text-3xl font-bold">Pronto para transformar seu jeito de estudar?</h3>
             <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
-              <a href="https://wa.me/5511926599367" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full bg-gold px-7 py-3 font-heading text-xs font-bold uppercase tracking-wider text-white transition-colors hover:bg-gold/90">
+              <a href="https://wa.me/5511926599367" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full bg-gold px-7 py-3 text-center font-heading text-xs font-bold uppercase leading-snug tracking-wider text-white transition-colors hover:bg-gold/90">
                 <MessageCircle className="h-4 w-4" />
                 Falar pelo WhatsApp
               </a>
-              <Link href="/diagnostico/completo" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 px-7 py-3 font-heading text-xs font-bold uppercase tracking-wider text-white transition-colors hover:bg-white/10">
+              <Link href="/diagnostico/completo" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 px-7 py-3 text-center font-heading text-xs font-bold uppercase leading-snug tracking-wider text-white transition-colors hover:bg-white/10">
                 Ver diagnóstico completo
                 <ArrowRight className="h-4 w-4" />
               </Link>

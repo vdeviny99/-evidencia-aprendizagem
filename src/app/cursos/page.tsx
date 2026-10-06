@@ -97,7 +97,7 @@ export default function CursosPage() {
               Cursos, mentoria e palestras para transformar ciência da aprendizagem em prática de estudo, rotina e evolução real.
             </p>
             <div className="mt-8 flex">
-              <a href="#cursos" className="inline-flex items-center justify-center gap-2 rounded-full bg-gold px-7 py-3.5 font-heading text-sm font-bold uppercase tracking-wider text-white shadow-lg shadow-gold/25 transition-all hover:-translate-y-0.5 hover:bg-gold/90">
+              <a href="#cursos" className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gold px-7 py-3.5 text-center font-heading text-sm font-bold uppercase leading-snug tracking-wider text-white shadow-lg shadow-gold/25 transition-all hover:-translate-y-0.5 hover:bg-gold/90 sm:w-auto">
                 Conheça as opções
                 <ArrowRight className="h-4 w-4" />
               </a>
@@ -138,7 +138,7 @@ export default function CursosPage() {
               return (
                 <article key={course.title} className={`flex min-h-[560px] flex-col rounded-[2rem] border bg-gradient-to-br ${course.color} p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-accent/10`}>
                   <div className="flex min-h-[170px] flex-col">
-                    <div className="flex items-start justify-between gap-4">
+                    <div className="flex flex-col items-start gap-4 sm:flex-row sm:justify-between">
                       <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white shadow-sm">
                         <Icon className="h-7 w-7" />
                       </div>
@@ -167,7 +167,7 @@ export default function CursosPage() {
                     ))}
                   </ul>
 
-                  <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-accent px-7 py-3 font-heading text-xs font-bold uppercase tracking-wider text-white transition-colors hover:bg-accent-dark">
+                  <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-accent px-7 py-3 text-center font-heading text-xs font-bold uppercase leading-snug tracking-wider text-white transition-colors hover:bg-accent-dark">
                     {course.cta}
                     <ArrowRight className="h-4 w-4" />
                   </a>
@@ -195,7 +195,7 @@ export default function CursosPage() {
             <p className="mt-3 leading-relaxed text-accent/65">
               Me conte o público, objetivo e contexto. A partir disso, montamos uma proposta adequada.
             </p>
-            <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent px-7 py-4 font-heading text-sm font-bold uppercase tracking-wider text-white transition-colors hover:bg-accent-dark">
+            <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent px-7 py-4 text-center font-heading text-sm font-bold uppercase leading-snug tracking-wider text-white transition-colors hover:bg-accent-dark">
               <MessageCircle className="h-4 w-4" />
               Falar pelo WhatsApp
             </a>

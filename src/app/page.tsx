@@ -34,11 +34,11 @@ export default function Home() {
                 Unimos neurociência da aprendizagem, psicologia cognitiva, pedagogia e técnicas de ensino de segundo idioma para auxiliar nossos alunos com mais eficácia.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <Link href="/diagnostico" className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full bg-gold px-7 py-3.5 font-heading text-sm font-bold uppercase tracking-wider text-white transition-all hover:-translate-y-0.5 hover:bg-gold/90">
+                <Link href="/diagnostico" className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gold px-7 py-3.5 text-center font-heading text-sm font-bold uppercase leading-snug tracking-wider text-white transition-all hover:-translate-y-0.5 hover:bg-gold/90 sm:w-auto">
                   Conhecer diagnóstico gratuito
                   <ArrowRight className="h-4 w-4" />
                 </Link>
-                <Link href="/aulas" className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full border border-white/20 px-7 py-3.5 font-heading text-sm font-bold uppercase tracking-wider text-white transition-colors hover:bg-white/10">
+                <Link href="/aulas" className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/20 px-7 py-3.5 text-center font-heading text-sm font-bold uppercase leading-snug tracking-wider text-white transition-colors hover:bg-white/10 sm:w-auto">
                   Saiba mais sobre as aulas
                   <ArrowRight className="h-4 w-4" />
                 </Link>
@@ -111,7 +111,7 @@ export default function Home() {
                   O diagnóstico mostra padrões de estudo e ajuda a escolher o melhor caminho dentro da EdukaCuca.
                 </p>
               </div>
-              <Link href="/diagnostico" className="inline-flex items-center justify-center gap-2 rounded-full bg-gold px-7 py-3.5 font-heading text-sm font-bold uppercase tracking-wider text-white transition-all hover:-translate-y-0.5 hover:bg-gold/90">
+              <Link href="/diagnostico" className="inline-flex items-center justify-center gap-2 rounded-full bg-gold px-7 py-3.5 text-center font-heading text-sm font-bold uppercase leading-snug tracking-wider text-white transition-all hover:-translate-y-0.5 hover:bg-gold/90">
                 Fazer diagnóstico
                 <ArrowRight className="h-4 w-4" />
               </Link>

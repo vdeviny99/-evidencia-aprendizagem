@@ -14,6 +14,7 @@ export default function CapturaDiagnostico() {
     window.localStorage.setItem(
       leadStorageKey,
       JSON.stringify({
+        plan: "free",
         nome: String(form.get("nome") ?? "").trim(),
         email: String(form.get("email") ?? "").trim(),
         whatsapp: String(form.get("whatsapp") ?? "").trim(),
@@ -97,12 +98,12 @@ export default function CapturaDiagnostico() {
             </label>
           </div>
 
-          <button type="submit" className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-gold px-7 py-4 font-heading text-sm font-bold uppercase tracking-wider text-white shadow-lg shadow-gold/20 transition-all hover:-translate-y-0.5 hover:bg-gold/90">
+          <button type="submit" className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-gold px-7 py-4 text-center font-heading text-sm font-bold uppercase leading-snug tracking-wider text-white shadow-lg shadow-gold/20 transition-all hover:-translate-y-0.5 hover:bg-gold/90">
             <UserRound className="h-4 w-4" />
             Começar diagnóstico
             <ArrowRight className="h-4 w-4" />
           </button>
-          <a href="https://wa.me/5511926599367" target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full border border-accent/15 px-7 py-3 font-heading text-xs font-bold uppercase tracking-wider text-accent transition-colors hover:bg-accent/5">
+          <a href="https://wa.me/5511926599367" target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full border border-accent/15 px-7 py-3 text-center font-heading text-xs font-bold uppercase leading-snug tracking-wider text-accent transition-colors hover:bg-accent/5">
             <MessageCircle className="h-4 w-4" />
             Tirar dúvida pelo WhatsApp
           </a>

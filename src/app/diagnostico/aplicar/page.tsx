@@ -65,6 +65,7 @@ export default function AplicarDiagnostico() {
     const formData = new FormData(form);
 
     const payload = {
+      plan: "paid",
       name: formData.get("name"),
       age: formData.get("age"),
       occupation: formData.get("occupation"),

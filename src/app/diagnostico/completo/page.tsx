@@ -62,11 +62,11 @@ export default function DiagnosticoCompletoPage() {
               Este material tem finalidade educativa. Ele ajuda a entender tendências de aprendizagem a partir das suas respostas, sem funcionar como diagnóstico clínico, psicológico ou definitivo.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <a href="#pagamento" className="inline-flex items-center justify-center gap-2 rounded-full bg-gold px-7 py-3.5 font-heading text-sm font-bold uppercase tracking-wider text-white shadow-lg shadow-gold/25 transition-all hover:-translate-y-0.5 hover:bg-gold/90">
+              <a href="#pagamento" className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gold px-7 py-3.5 text-center font-heading text-sm font-bold uppercase leading-snug tracking-wider text-white shadow-lg shadow-gold/25 transition-all hover:-translate-y-0.5 hover:bg-gold/90 sm:w-auto">
                 Quero minha devolutiva completa
                 <ArrowRight className="h-4 w-4" />
               </a>
-              <Link href="/diagnostico" className="inline-flex items-center justify-center rounded-full border border-accent/15 bg-white px-7 py-3.5 font-heading text-sm font-bold uppercase tracking-wider text-accent shadow-sm transition-all hover:-translate-y-0.5 hover:bg-accent/5">
+              <Link href="/diagnostico" className="inline-flex w-full items-center justify-center rounded-full border border-accent/15 bg-white px-7 py-3.5 text-center font-heading text-sm font-bold uppercase leading-snug tracking-wider text-accent shadow-sm transition-all hover:-translate-y-0.5 hover:bg-accent/5 sm:w-auto">
                 Ver diagnóstico gratuito
               </Link>
             </div>
@@ -137,15 +137,15 @@ export default function DiagnosticoCompletoPage() {
                 <p className="mt-4 text-sm leading-relaxed text-accent/65">
                   Após pagar, envie o comprovante pelo WhatsApp para liberar sua devolutiva completa.
                 </p>
-                <a href={paymentUrl} target="_blank" rel="noopener noreferrer" className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-gold px-7 py-4 font-heading text-sm font-bold uppercase tracking-wider text-white shadow-lg shadow-gold/20 transition-all hover:-translate-y-0.5 hover:bg-gold/90">
+                <a href={paymentUrl} target="_blank" rel="noopener noreferrer" className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-gold px-7 py-4 text-center font-heading text-sm font-bold uppercase leading-snug tracking-wider text-white shadow-lg shadow-gold/20 transition-all hover:-translate-y-0.5 hover:bg-gold/90">
                   <QrCode className="h-4 w-4" />
                   Pagar R$ 49,90 pelo Nubank
                 </a>
-                <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-full border border-accent/15 px-7 py-3 font-heading text-xs font-bold uppercase tracking-wider text-accent transition-colors hover:bg-accent/5">
+                <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-full border border-accent/15 px-7 py-3 text-center font-heading text-xs font-bold uppercase leading-snug tracking-wider text-accent transition-colors hover:bg-accent/5">
                   <MessageCircle className="h-4 w-4" />
                   Enviar comprovante no WhatsApp
                 </a>
-                <Link href="/diagnostico/completo/captura" className="mt-3 inline-flex w-full items-center justify-center rounded-full border border-accent/15 px-7 py-3 font-heading text-xs font-bold uppercase tracking-wider text-accent transition-colors hover:bg-accent/5">
+                <Link href="/diagnostico/completo/captura" className="mt-3 inline-flex w-full items-center justify-center rounded-full border border-accent/15 px-7 py-3 text-center font-heading text-xs font-bold uppercase leading-snug tracking-wider text-accent transition-colors hover:bg-accent/5">
                   Já paguei, começar diagnóstico
                 </Link>
               </div>
@@ -161,7 +161,7 @@ export default function DiagnosticoCompletoPage() {
           <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-white/70">
             O diagnóstico completo aprofunda seu mapa de aprendizagem e traduz o resultado em recomendações práticas para sua rotina.
           </p>
-          <a href="#pagamento" className="mt-8 inline-flex rounded-full bg-gold px-8 py-4 font-heading text-sm font-bold uppercase tracking-wider text-white transition-colors hover:bg-gold/90">
+          <a href="#pagamento" className="mt-8 inline-flex rounded-full bg-gold px-8 py-4 text-center font-heading text-sm font-bold uppercase leading-snug tracking-wider text-white transition-colors hover:bg-gold/90">
             Fazer pagamento via Pix
           </a>
         </div>

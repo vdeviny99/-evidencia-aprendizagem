@@ -2,20 +2,44 @@ import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { FileText, Users, Tags, Mail, MessageSquare, ClipboardList } from "lucide-react";
+import { FileText, Users, Tags, Mail, MessageSquare, ClipboardList, MousePointerClick } from "lucide-react";
 import Link from "next/link";
 
 async function getStats() {
-  const [articles, users, categories, subscribers, messages] = await Promise.all(
+  const [
+    articles,
+    users,
+    categories,
+    subscribers,
+    messages,
+    freeDiagnostics,
+    paidDiagnostics,
+    freeDiagnosticClicks,
+    whatsappClicks,
+  ] = await Promise.all(
     [
       prisma.article.count(),
       prisma.user.count(),
       prisma.category.count(),
       prisma.newsletter.count({ where: { active: true } }),
       prisma.contactMessage.count({ where: { read: false } }),
+      prisma.diagnosticSubmission.count({ where: { plan: "free" } }),
+      prisma.diagnosticSubmission.count({ where: { plan: "paid" } }),
+      prisma.siteEvent.count({ where: { type: "diagnostic_free_click" } }),
+      prisma.siteEvent.count({ where: { type: "whatsapp_click" } }),
     ]
   );
-  return { articles, users, categories, subscribers, messages };
+  return {
+    articles,
+    users,
+    categories,
+    subscribers,
+    messages,
+    freeDiagnostics,
+    paidDiagnostics,
+    freeDiagnosticClicks,
+    whatsappClicks,
+  };
 }
 
 export default async function AdminDashboard() {
@@ -37,6 +61,10 @@ export default async function AdminDashboard() {
     { label: "Categorias", value: stats.categories, icon: Tags },
     { label: "Inscritos", value: stats.subscribers, icon: Mail },
     { label: "Msg. Não Lidas", value: stats.messages, icon: MessageSquare },
+    { label: "Diag. Gratuitos", value: stats.freeDiagnostics, icon: ClipboardList },
+    { label: "Diag. Pagos", value: stats.paidDiagnostics, icon: ClipboardList },
+    { label: "Cliques Gratuito", value: stats.freeDiagnosticClicks, icon: MousePointerClick },
+    { label: "Cliques WhatsApp", value: stats.whatsappClicks, icon: MousePointerClick },
   ];
 
   return (

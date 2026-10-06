@@ -40,11 +40,11 @@ export default function EnviarComprovantePage() {
           </div>
 
           <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
-            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full bg-gold px-8 py-4 font-heading text-sm font-bold uppercase tracking-wider text-white shadow-lg shadow-gold/20 transition-all hover:-translate-y-0.5 hover:bg-gold/90">
+            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gold px-8 py-4 text-center font-heading text-sm font-bold uppercase leading-snug tracking-wider text-white shadow-lg shadow-gold/20 transition-all hover:-translate-y-0.5 hover:bg-gold/90 sm:w-auto">
               Enviar comprovante
               <ArrowRight className="h-4 w-4" />
             </a>
-            <Link href="/diagnostico/completo" className="inline-flex items-center justify-center rounded-full border border-accent/15 px-8 py-4 font-heading text-sm font-bold uppercase tracking-wider text-accent transition-colors hover:bg-accent/5">
+            <Link href="/diagnostico/completo" className="inline-flex w-full items-center justify-center rounded-full border border-accent/15 px-8 py-4 text-center font-heading text-sm font-bold uppercase leading-snug tracking-wider text-accent transition-colors hover:bg-accent/5 sm:w-auto">
               Ver instruções de pagamento
             </Link>
           </div>

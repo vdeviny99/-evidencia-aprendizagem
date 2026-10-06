@@ -7,6 +7,7 @@
     "build": "prisma generate && next build",
     "start": "next start",
     "lint": "eslint",
+    "migrate:deploy": "prisma migrate deploy",
     "limpar-diagnosticos": "tsx --env-file=.env scripts/limpar-diagnosticos.ts",
     "criptografar-diagnosticos": "tsx --env-file=.env scripts/criptografar-diagnosticos.ts"
   },
@@ -15,6 +16,7 @@
     "@hookform/resolvers": "^5.4.0",
     "@prisma/adapter-pg": "^7.8.0",
     "@prisma/client": "^7.8.0",
+    "@vercel/analytics": "^2.0.1",
     "bcryptjs": "^3.0.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
