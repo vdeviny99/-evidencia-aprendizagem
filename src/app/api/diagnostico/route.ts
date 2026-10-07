@@ -109,7 +109,6 @@ export async function POST(request: Request) {
         deadline: deadline ?? null,
         relation: relation ?? "",
         answers,
-        diagnosticType: type,
         consentAt: new Date(),
         consentVersion: CONSENT_VERSION,
       },
