@@ -2,7 +2,7 @@
 
 import { ArrowLeft, ArrowRight, Loader2 } from "lucide-react";
 import { useState, useTransition } from "react";
-import { calculateDiagnosticResult } from "@/lib/diagnosticoResultado";
+import { calculateDiagnosticResult, isCompleteDiagnosticAnswers } from "@/lib/diagnosticoResultado";
 
 const questions = [
   "Antes de começar a estudar, defino claramente o que quero aprender naquela sessão de estudos.",
@@ -68,8 +68,9 @@ type StoredLead = {
 export default function TesteGratuito() {
   const [current, setCurrent] = useState(0);
   const [answers, setAnswers] = useState<Record<number, number>>({});
-  const [isPending, startTransition] = useTransition();
+  const [submitError, setSubmitError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isPending, startTransition] = useTransition();
   const progress = Math.round(((current + 1) / questions.length) * 100);
 
   async function saveSubmission(answersByItem: Record<number, number>) {
@@ -93,6 +94,7 @@ export default function TesteGratuito() {
         goalSpecific: lead.objetivoEspecifico ?? null,
         deadline: lead.prazo ?? null,
         relation: lead.relacao ?? "",
+        type: lead.plan === "paid" ? "completo" : "gratuito",
         answers: answersByItem,
         consent: true,
       }),
@@ -102,22 +104,44 @@ export default function TesteGratuito() {
   }
 
   async function next() {
+    setSubmitError("");
+
     if (current === questions.length - 1) {
-      setIsSubmitting(true);
       const answersByItem = Object.fromEntries(
         Object.entries(answers).map(([index, value]) => [Number(index) + 1, value]),
       ) as Record<number, number>;
+
+      if (!isCompleteDiagnosticAnswers(answersByItem)) {
+        setSubmitError("Responda todas as 33 perguntas antes de finalizar o diagnóstico.");
+        return;
+      }
+
+      const lead = JSON.parse(window.localStorage.getItem("edukacuca-diagnostico-dados") ?? "{}");
+      const missingLeadFields = [lead.nome, lead.email, lead.whatsapp, lead.idade, lead.fase, lead.objetivo].some(
+        (value) => typeof value !== "string" || value.trim().length === 0,
+      );
+
+      if (missingLeadFields) {
+        setSubmitError("Complete seus dados obrigatórios antes de finalizar o diagnóstico.");
+        window.location.href = "/diagnostico/captura";
+        return;
+      }
+
       const result = calculateDiagnosticResult(answersByItem);
       window.localStorage.setItem("edukacuca-diagnostico-resultado", JSON.stringify(result));
       window.localStorage.setItem("edukacuca-diagnostico-respostas", JSON.stringify(answersByItem));
+
+      setIsSubmitting(true);
       try {
         await saveSubmission(answersByItem);
       } catch (error) {
         console.error("Erro ao salvar diagnóstico:", error);
+      } finally {
+        setIsSubmitting(false);
       }
       const stored = window.localStorage.getItem(leadStorageKey);
-      const lead = stored ? (JSON.parse(stored) as StoredLead) : null;
-      window.location.href = lead?.plan === "paid" ? "/diagnostico/enviar-comprovante" : "/diagnostico/resultado";
+      const savedLead = stored ? (JSON.parse(stored) as StoredLead) : null;
+      window.location.href = savedLead?.plan === "paid" ? "/diagnostico/enviar-comprovante" : "/diagnostico/resultado";
       return;
     }
     startTransition(() => setCurrent((value) => value + 1));
@@ -165,7 +189,7 @@ export default function TesteGratuito() {
             <button
               type="button"
               onClick={() => setCurrent((value) => Math.max(0, value - 1))}
-              disabled={current === 0 || isPending}
+              disabled={current === 0 || isPending || isSubmitting}
               className="inline-flex items-center justify-center gap-2 rounded-full border border-accent/15 px-6 py-3 text-center font-heading text-xs font-bold uppercase leading-snug tracking-wider text-accent transition-colors hover:bg-accent/5 disabled:cursor-not-allowed disabled:opacity-40"
             >
               <ArrowLeft className="h-4 w-4" />
@@ -181,6 +205,7 @@ export default function TesteGratuito() {
               {!isPending && !isSubmitting && <ArrowRight className="h-4 w-4" />}
             </button>
           </div>
+          {submitError && <p className="mt-4 rounded-2xl bg-red-50 px-4 py-3 text-sm text-red-700">{submitError}</p>}
         </div>
       </div>
     </section>

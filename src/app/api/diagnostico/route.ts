@@ -23,14 +23,41 @@ const diagnosticoSchema = z.object({
   goalSpecific: z.preprocess(emptyToNull, z.string().trim().max(2000).nullish()),
   deadline: z.preprocess(emptyToNull, z.string().trim().max(200).nullish()),
   relation: z.preprocess(emptyToNull, z.string().trim().max(10000).nullish()),
+  type: z.enum(["gratuito", "completo"]).default("gratuito"),
   answers: z
     .record(z.string(), z.coerce.number().int().min(0).max(4))
     .refine((a) => Object.keys(a).length > 0, {
       message: "Pelo menos uma resposta é obrigatória",
+    })
+    .refine((answers) => {
+      const ids = Object.keys(answers).map(Number);
+      return ids.length === 33 && Array.from({ length: 33 }, (_, index) => index + 1).every((id) => ids.includes(id));
+    }, {
+      message: "O diagnóstico exige exatamente as 33 respostas.",
     }),
   consent: z.boolean().refine((v) => v === true, {
     message: "É necessário aceitar a Política de Privacidade",
   }),
+}).superRefine((data, ctx) => {
+  if (data.type !== "gratuito") return;
+
+  const requiredFields = [
+    ["age", data.age],
+    ["course", data.course],
+    ["objective", data.objective],
+    ["whatsapp", data.whatsapp],
+    ["email", data.email],
+  ] as const;
+
+  requiredFields.forEach(([field, value]) => {
+    if (!value || String(value).trim().length === 0) {
+      ctx.addIssue({
+        code: "custom",
+        path: [field],
+        message: "Campo obrigatório no diagnóstico gratuito.",
+      });
+    }
+  });
 });
 
 const CONSENT_VERSION = "v1";
@@ -63,6 +90,7 @@ export async function POST(request: Request) {
       goalSpecific,
       deadline,
       relation,
+      type,
       answers,
     } = parsed.data;
 
@@ -81,6 +109,7 @@ export async function POST(request: Request) {
         deadline: deadline ?? null,
         relation: relation ?? "",
         answers,
+        diagnosticType: type,
         consentAt: new Date(),
         consentVersion: CONSENT_VERSION,
       },

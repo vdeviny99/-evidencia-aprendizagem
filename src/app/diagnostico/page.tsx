@@ -35,42 +35,42 @@ const profiles = [
   {
     icon: Sparkles,
     name: "Cuca",
-    desc: "Toda ideia puxa outra.",
+    desc: "Toda boa magia começa com preparo.",
   },
   {
     icon: Wind,
     name: "Saci",
-    desc: "Experimentar também é pensar.",
+    desc: "O vento aprende enquanto se move.",
   },
   {
     icon: Footprints,
     name: "Curupira",
-    desc: "Entender o caminho importa.",
+    desc: "Quem lê as pegadas encontra o caminho.",
   },
   {
     icon: Flame,
     name: "Boitatá",
-    desc: "Me dá uma direção e eu acendo.",
+    desc: "A luz aparece quando o passo começa.",
   },
   {
     icon: TreePine,
     name: "Caipora",
-    desc: "Clareza antes do próximo passo.",
+    desc: "A floresta ensina no seu próprio ritmo.",
   },
   {
     icon: Waves,
     name: "Iara",
-    desc: "Vamos pensar juntos?",
+    desc: "Mergulhar também é uma forma de entender.",
   },
   {
     icon: Fish,
     name: "Boto",
-    desc: "Direção transforma energia em foco.",
+    desc: "Aprender também acontece no encontro.",
   },
   {
     icon: Bird,
     name: "Uirapuru",
-    desc: "Hoje um pouco, amanhã também.",
+    desc: "Antes do canto, vem a escuta.",
   },
 ];
 

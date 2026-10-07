@@ -22,6 +22,7 @@ export type DiagnosticResult = {
 };
 
 const cutoff = 2.8;
+const diagnosticItemIds = Array.from({ length: 33 }, (_, index) => index + 1);
 
 const itemConstructs: Record<number, ConstructKey> = {
   1: "planejamento",
@@ -60,6 +61,10 @@ const itemConstructs: Record<number, ConstructKey> = {
 };
 
 const invertedItems = new Set([21, 23, 24, 27, 28, 30, 31]);
+
+export function isCompleteDiagnosticAnswers(answers: Record<number, number>) {
+  return diagnosticItemIds.every((itemId) => Number.isInteger(answers[itemId]) && answers[itemId] >= 0 && answers[itemId] <= 4);
+}
 
 export const matrixConfig: Record<MatrixId, { name: string; description: string; interpretation: string[] }> = {
   1: {
