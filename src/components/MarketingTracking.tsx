@@ -124,7 +124,9 @@ export function MarketingTracking({ pixelId, googleAdsId, googleConversionLabel 
   const consentKey = googleConfigured ? META_GOOGLE_CONSENT_KEY : META_CONSENT_KEY;
   const choice = useSyncExternalStore(subscribeToConsent, () => readConsent(consentKey), serverConsent);
   const configured = metaConfigured || googleConfigured;
-  const onLanding = pathname === "/aulas";
+  // Paid-traffic destinations: /aulas and the ICP landing pages under /para/ (NEL-516).
+  const onLanding = pathname === "/aulas" || pathname.startsWith("/para/");
+  const contactName = pathname === "/aulas" ? "aulas_whatsapp" : `${pathname.slice(1).replace(/\//g, "_")}_whatsapp`;
 
   useEffect(() => {
     const openPreferences = () => setPreferencesOpen(true);
@@ -159,7 +161,7 @@ export function MarketingTracking({ pixelId, googleAdsId, googleConversionLabel 
       if (!(target instanceof Element)) return;
       const link = target.closest<HTMLAnchorElement>("a[href]");
       if (link?.href.startsWith(WHATSAPP_URL)) {
-        if (metaConfigured) window.fbq?.("track", "Contact", { content_name: "aulas_whatsapp" });
+        if (metaConfigured) window.fbq?.("track", "Contact", { content_name: contactName });
         if (googleConfigured) window.gtag?.("event", "conversion", {
           send_to: `${googleAdsId}/${googleConversionLabel}`,
         });
@@ -168,7 +170,7 @@ export function MarketingTracking({ pixelId, googleAdsId, googleConversionLabel 
 
     document.addEventListener("click", trackContact, true);
     return () => document.removeEventListener("click", trackContact, true);
-  }, [choice, configured, googleAdsId, googleConfigured, googleConversionLabel, metaConfigured, onLanding]);
+  }, [choice, configured, contactName, googleAdsId, googleConfigured, googleConversionLabel, metaConfigured, onLanding]);
 
   if (!configured || choice === "loading" || (!onLanding && !preferencesOpen)) return null;
   if (choice !== null && !preferencesOpen) return null;
