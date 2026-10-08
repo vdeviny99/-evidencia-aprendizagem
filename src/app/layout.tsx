@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Raleway } from "next/font/google";
+import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 
 import { Header } from "@/components/Header";
@@ -9,7 +10,7 @@ import { SiteEventTracking } from "@/components/SiteEventTracking";
 import "./globals.css";
 
 const EDUKACUCA_META_PIXEL_ID = "2180875479476314";
-const EDUKACUCA_GOOGLE_ADS_ID = process.env.NEXT_PUBLIC_EDUKACUCA_GOOGLE_ADS_ID?.trim() || "AW-18387265025";
+const EDUKACUCA_GOOGLE_ADS_ID = process.env.NEXT_PUBLIC_EDUKACUCA_GOOGLE_ADS_ID?.trim() || "AW-18354282148";
 const EDUKACUCA_GOOGLE_WHATSAPP_CONVERSION_LABEL = process.env.NEXT_PUBLIC_EDUKACUCA_GOOGLE_WHATSAPP_CONVERSION_LABEL?.trim() || "W63kCJrQm48dEIHM3b9E";
 
 const geistSans = Geist({
@@ -54,6 +55,15 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${raleway.variable} h-full`}
     >
       <body className="flex min-h-full flex-col bg-cream text-accent antialiased">
+        <Script src={`https://www.googletagmanager.com/gtag/js?id=${EDUKACUCA_GOOGLE_ADS_ID}`} strategy="afterInteractive" />
+        <Script id="edukacuca-google-tag" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${EDUKACUCA_GOOGLE_ADS_ID}');
+          `}
+        </Script>
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
