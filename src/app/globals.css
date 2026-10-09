@@ -44,7 +44,7 @@ body {
 }
 
 .font-heading {
-  font-family: var(--font-heading), "Raleway", sans-serif;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 .font-sans {
