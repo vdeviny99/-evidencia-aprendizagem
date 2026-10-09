@@ -21,6 +21,7 @@ const outcomes = [
   {
     number: "02",
     title: "Aplicar ciência na prática",
+    recommended: false,
     text: (
       <>
         Traduzimos <strong className="font-semibold text-accent">neurociência da aprendizagem, psicologia cognitiva e pedagogia</strong> em estratégias possíveis para a sua rotina, sem depender de fórmulas prontas.
@@ -30,6 +31,7 @@ const outcomes = [
   {
     number: "03",
     title: "Construir autonomia",
+    recommended: false,
     text: (
       <>
         Nosso objetivo é ajudar você a entender o próprio processo e ganhar <strong className="font-semibold text-accent">repertório para escolher o que funciona melhor</strong> na hora de estudar sozinho.
