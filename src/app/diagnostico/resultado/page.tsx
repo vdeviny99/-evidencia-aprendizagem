@@ -1,8 +1,11 @@
 "use client";
 
-import { ArrowRight, BarChart3, Bird, BookOpen, CalendarCheck, Download, Fish, Flame, Footprints, Languages, LockKeyhole, MessageCircle, Presentation, Sparkles, TreePine, Waves, Wind } from "lucide-react";
+import { ArrowRight, BarChart3, BookOpen, CalendarCheck, Download, Languages, LockKeyhole, MessageCircle, Presentation, } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import Image from "next/image";
+import { LearningLandscape } from "@/components/LearningLandscape";
+import { learningGuides } from "@/lib/learningJourney";
+import { useState, useMemo, useSyncExternalStore } from "react";
 import { calculateDiagnosticResult, DiagnosticResult, isCompleteDiagnosticAnswers, matrixConfig, MatrixId, scoreToPercent } from "@/lib/diagnosticoResultado";
 
 type LeadData = {
@@ -50,14 +53,14 @@ const products = [
 ] as const;
 
 const profileReveal = {
-  Cuca: { icon: Sparkles, quote: "Para um bom feitiço, é preciso conhecer a receita, o tempo e a intenção.", animation: "animate-profile-glow", effect: "profile-effect-sparkles" },
-  Saci: { icon: Wind, quote: "Nem todo redemoinho nasce perdido; às vezes, só precisa de direção.", animation: "animate-profile-wind", effect: "profile-effect-wind" },
-  Curupira: { icon: Footprints, quote: "Mesmo com trilha marcada, é preciso olhar as próprias pegadas.", animation: "animate-profile-step", effect: "profile-effect-steps" },
-  Boitatá: { icon: Flame, quote: "A clareza só vira aprendizagem quando a luz encontra ação.", animation: "animate-profile-flame", effect: "profile-effect-flame" },
-  Caipora: { icon: TreePine, quote: "Planejar a entrada na mata é só o começo; é preciso perceber seus sinais e voltar para revisar.", animation: "animate-profile-sway", effect: "profile-effect-leaves" },
-  Iara: { icon: Waves, quote: "Entender o que acontece por dentro é força; organizar o mergulho é o próximo passo.", animation: "animate-profile-wave", effect: "profile-effect-water" },
-  Boto: { icon: Fish, quote: "Praticar é parte da dança; planejar e perceber o passo fazem a música durar.", animation: "animate-profile-swim", effect: "profile-effect-water" },
-  Uirapuru: { icon: Bird, quote: "Antes do canto mais bonito, existe o silêncio de quem aprende a escutar.", animation: "animate-profile-song", effect: "profile-effect-song" },
+  Cuca: { quote: "Para um bom feitiço, é preciso conhecer a receita, o tempo e a intenção.", animation: "animate-profile-glow", effect: "profile-effect-sparkles" },
+  Saci: { quote: "Nem todo redemoinho nasce perdido; às vezes, só precisa de direção.", animation: "animate-profile-wind", effect: "profile-effect-wind" },
+  Curupira: { quote: "Mesmo com trilha marcada, é preciso olhar as próprias pegadas.", animation: "animate-profile-step", effect: "profile-effect-steps" },
+  Boitatá: { quote: "A clareza só vira aprendizagem quando a luz encontra ação.", animation: "animate-profile-flame", effect: "profile-effect-flame" },
+  Caipora: { quote: "Planejar a entrada na mata é só o começo; é preciso perceber seus sinais e voltar para revisar.", animation: "animate-profile-sway", effect: "profile-effect-leaves" },
+  Iara: { quote: "Entender o que acontece por dentro é força; organizar o mergulho é o próximo passo.", animation: "animate-profile-wave", effect: "profile-effect-water" },
+  Boto: { quote: "Praticar é parte da dança; planejar e perceber o passo fazem a música durar.", animation: "animate-profile-swim", effect: "profile-effect-water" },
+  Uirapuru: { quote: "Antes do canto mais bonito, existe o silêncio de quem aprende a escutar.", animation: "animate-profile-song", effect: "profile-effect-song" },
 } as const;
 
 const highlightTermsByMatrix: Record<number, string[]> = {
@@ -94,6 +97,8 @@ function formatStoredDate(value?: string) {
 function readLeadData(): LeadData {
   if (typeof window === "undefined") return {};
 
+  if (getPreviewMatrixId()) return { nome: "Respondente fictício (prévia)", idade: "Não se aplica", fase: "Dados sintéticos", objetivo: "Demonstração visual", data: "Não se aplica" };
+
   try {
     return JSON.parse(window.localStorage.getItem("edukacuca-diagnostico-dados") ?? "{}") as LeadData;
   } catch {
@@ -104,8 +109,9 @@ function readLeadData(): LeadData {
 function getPreviewMatrixId() {
   if (typeof window === "undefined") return null;
 
-  const matrix = Number(new URLSearchParams(window.location.search).get("matriz"));
-  return matrix >= 1 && matrix <= 8 ? matrix as MatrixId : null;
+  const raw = new URLSearchParams(window.location.search).get("matriz");
+  // A canonical integer avoids fractional, exponential and whitespace previews.
+  return raw && /^[1-8]$/.test(raw) ? Number(raw) as MatrixId : null;
 }
 
 function buildPreviewResult(matrixId: MatrixId): DiagnosticResult {
@@ -172,29 +178,40 @@ function PracticeText({ title, text }: { title: string; text: string }) {
   return <>{markText(text, practiceBoldTerms[title] ?? [], "font-bold text-accent")}</>;
 }
 
+const subscribeToHydration = () => () => {};
+const browserSnapshot = () => true;
+const serverSnapshot = () => false;
+
 export default function ResultadoDiagnostico() {
-  const [lead] = useState<LeadData>(() => readLeadData());
+  // Trade-offs: wait for hydration before reading browser-only identity/results.
+  // This keeps the initial server and browser render identical without a fake result.
+  const hydrated = useSyncExternalStore(subscribeToHydration, browserSnapshot, serverSnapshot);
+  const lead = useMemo<LeadData>(() => hydrated ? readLeadData() : {}, [hydrated]);
   const [pdfStatus, setPdfStatus] = useState<"idle" | "loading" | "error">("idle");
-  const [result] = useState<DiagnosticResult | null>(() => {
-    if (typeof window === "undefined") return null;
+  const result = useMemo<DiagnosticResult | null>(() => {
+    if (!hydrated) return null;
 
     const previewMatrixId = getPreviewMatrixId();
     if (previewMatrixId) return buildPreviewResult(previewMatrixId);
 
-    const storedAnswers = window.localStorage.getItem("edukacuca-diagnostico-respostas");
-    if (!storedAnswers) return null;
-
     try {
+      const storedAnswers = window.localStorage.getItem("edukacuca-diagnostico-respostas");
+      if (!storedAnswers) return null;
       const answers = JSON.parse(storedAnswers) as Record<string, number>;
       const answersByItem = Object.fromEntries(Object.entries(answers).map(([id, value]) => [Number(id), value])) as Record<number, number>;
       if (!isCompleteDiagnosticAnswers(answersByItem)) return null;
       const calculated = calculateDiagnosticResult(answersByItem);
-      window.localStorage.setItem("edukacuca-diagnostico-resultado", JSON.stringify(calculated));
+      // Trade-offs: recompute from complete answers; displaying a valid result
+      // does not depend on storage being writable and creates no preview record.
       return calculated;
     } catch {
       return null;
     }
-  });
+  }, [hydrated]);
+
+  if (!hydrated) {
+    return <section className="px-4 py-20 text-center" aria-busy="true"><p role="status">Preparando sua leitura de aprendizagem.</p></section>;
+  }
 
   if (!result) {
     return (
@@ -224,7 +241,9 @@ export default function ResultadoDiagnostico() {
     ["Motivação", scoreToPercent(result.constructs.motivacao)],
   ] as const;
 
+  const isPreview = getPreviewMatrixId() !== null;
   const identification = [
+    ["Origem:", isPreview ? "Prévia sintética · não corresponde a um diagnóstico respondido" : "Calculado a partir das respostas completas neste navegador"],
     ["Respondente:", lead.nome || "Aluno EdukaCuca"],
     ["Idade:", lead.idade || "-"],
     ["Estudando:", lead.fase || "-"],
@@ -233,13 +252,13 @@ export default function ResultadoDiagnostico() {
     ["Tipo de diagnóstico:", "Gratuito"],
   ] as const;
   const reveal = profileReveal[result.styleName as keyof typeof profileReveal] ?? profileReveal.Cuca;
-  const RevealIcon = reveal.icon;
+  const guide = learningGuides.find((item) => item.name === result.styleName) ?? learningGuides[0];
 
   function downloadPdf() {
     setPdfStatus("loading");
     requestAnimationFrame(() => {
       const originalTitle = document.title;
-      document.title = `diagnostico-edukacuca-${(lead.nome || "aluno").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "")}`;
+      document.title = `diagnostico-edukacuca-${isPreview ? "previa-sintetica-" : ""}${(lead.nome || "aluno").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "")}`;
       window.print();
       document.title = originalTitle;
       setPdfStatus("idle");
@@ -247,9 +266,11 @@ export default function ResultadoDiagnostico() {
   }
 
   return (
-    <main className="diagnostic-result-page bg-[linear-gradient(135deg,#f6f8f6_0%,#ffffff_45%,#eef7f2_100%)] py-10 sm:py-16">
-      <article id="devolutiva-gratuita" className="mx-auto max-w-5xl overflow-hidden rounded-[2rem] border border-accent/10 bg-white shadow-2xl shadow-accent/10">
+    <div className="diagnostic-result-page relative isolate overflow-hidden py-10 sm:py-16">
+      <LearningLandscape guide={guide} moving={false} />
+      <article id="devolutiva-gratuita" className="relative z-10 mx-auto max-w-5xl overflow-hidden rounded-[2rem] border border-accent/10 bg-white shadow-2xl shadow-accent/10">
         <header className="border-b border-accent/10 bg-cream px-6 py-8 text-center sm:px-10">
+          {isPreview && <p role="status" className="mb-4 rounded-xl border border-amber-400 bg-amber-50 p-3 font-bold text-amber-950">Prévia sintética · dados fictícios para demonstração visual. Não é um resultado respondido.</p>}
           <p className="font-heading text-xs font-bold uppercase tracking-[0.24em] text-green">EdukaCuca · Resultado Gratuito</p>
           <h1 className="mt-3 font-heading text-3xl font-black tracking-tight text-accent sm:text-5xl">Feedback do Diagnóstico de Aprendizagem</h1>
           <button
@@ -268,7 +289,7 @@ export default function ResultadoDiagnostico() {
             <div className="profile-reveal-stage relative mx-auto flex h-44 w-44 items-center justify-center rounded-full border border-[#A97C2B]/55 bg-[radial-gradient(circle_at_38%_28%,#F4E1A2_0%,#D6B866_30%,#C9A44C_58%,#A97C2B_100%)] shadow-2xl shadow-[#B9933D]/30 ring-1 ring-white/50 sm:h-56 sm:w-56">
               <div className="absolute inset-4 rounded-full bg-[#6B4A16]/20 blur-2xl" />
               <div className={`absolute inset-0 ${reveal.effect}`} />
-              <RevealIcon className={`relative h-28 w-28 text-cream drop-shadow-[0_0_18px_rgba(255,255,255,0.75)] [filter:drop-shadow(0_10px_18px_rgba(46,58,51,0.30))] sm:h-36 sm:w-36 ${reveal.animation}`} strokeWidth={1.45} />
+              <Image src={`/para/personagens/${guide.id}.png`} alt={`Emblema de ${result.styleName}`} width={224} height={224} priority className="relative h-36 w-36 object-contain drop-shadow-lg sm:h-48 sm:w-48" />
             </div>
             <h2 className="animate-fade-in-up relative mx-auto mt-6 inline-flex px-6 py-1 font-heading text-4xl font-black tracking-tight text-accent sm:text-6xl">
               <span className="absolute inset-x-0 bottom-2 -z-0 h-4 rounded-full bg-[#D6B866]/35" />
@@ -420,6 +441,6 @@ export default function ResultadoDiagnostico() {
           </section>
         </div>
       </article>
-    </main>
+    </div>
   );
 }

@@ -1,17 +1,10 @@
-import {
-  ArrowRight,
-  CheckCircle,
-  Bird,
-  Fish,
-  Flame,
-  Footprints,
-  ShieldCheck,
-  Sparkles,
-  TreePine,
-  Waves,
-  Wind,
-} from "lucide-react";
+import { ArrowRight, CheckCircle, ShieldCheck, Sparkles } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
+import { LearningLandscape } from "@/components/LearningLandscape";
+import { learningGuides } from "@/lib/learningJourney";
+import explorerStyles from "@/components/LearningStyleExplorer.module.css";
+import LearningStyleExplorer from "@/components/LearningStyleExplorer";
 
 const freeItems = [
   "Resultado resumido",
@@ -30,59 +23,6 @@ const paidItems = [
   "Devolutiva personalizada por WhatsApp",
   "Pago",
 ];
-
-const profiles = [
-  {
-    icon: Sparkles,
-    name: "Cuca",
-    desc: "Toda boa magia começa com preparo.",
-  },
-  {
-    icon: Wind,
-    name: "Saci",
-    desc: "O vento aprende enquanto se move.",
-  },
-  {
-    icon: Footprints,
-    name: "Curupira",
-    desc: "Quem lê as pegadas encontra o caminho.",
-  },
-  {
-    icon: Flame,
-    name: "Boitatá",
-    desc: "A luz aparece quando o passo começa.",
-  },
-  {
-    icon: TreePine,
-    name: "Caipora",
-    desc: "A floresta ensina no seu próprio ritmo.",
-  },
-  {
-    icon: Waves,
-    name: "Iara",
-    desc: "Mergulhar também é uma forma de entender.",
-  },
-  {
-    icon: Fish,
-    name: "Boto",
-    desc: "Aprender também acontece no encontro.",
-  },
-  {
-    icon: Bird,
-    name: "Uirapuru",
-    desc: "Antes do canto, vem a escuta.",
-  },
-];
-
-const learningMap = [
-  ["Planejamento", 82],
-  ["Metacognição", 74],
-  ["Gestão do tempo", 68],
-  ["Busca de ajuda", 63],
-  ["Aprendizagem ativa", 79],
-  ["Revisão estratégica", 71],
-  ["Motivação e consistência", 76],
-] as const;
 
 function CheckItem({ children }: { children: React.ReactNode }) {
   return (
@@ -134,64 +74,29 @@ export default function DiagnosticoPage() {
               </Link>
             </div>
           </div>
-          <div className="rounded-[2rem] border border-accent/10 bg-white/80 p-5 shadow-2xl shadow-accent/10 backdrop-blur">
-            <div className="rounded-[1.5rem] bg-accent p-6 text-white">
-              <div className="flex items-center justify-between gap-4">
-                <div>
-                  <p className="font-heading text-xs font-bold uppercase tracking-[0.25em] text-white/55">Mapa educativo</p>
-                  <h2 className="mt-2 font-heading text-2xl font-bold">Hábitos de estudo em foco</h2>
-                </div>
-                <Sparkles className="h-10 w-10 text-gold" />
+          <div className={explorerStyles.heroCard}>
+            <div className={explorerStyles.heroArt} aria-hidden="true">
+              <LearningLandscape guide={learningGuides[0]} moving={false} />
+              <div className={explorerStyles.heroCharacters}>
+                {learningGuides.map((guide) => <Image key={guide.id} src={`/para/personagens/${guide.id}.png`} width={100} height={100} sizes="(max-width: 640px) 64px, 80px" alt="" />)}
               </div>
-              <div className="mt-8 space-y-4">
-                {learningMap.map(([label, value]) => (
-                  <div key={label}>
-                    <div className="mb-2 flex justify-between text-sm text-white/75">
-                      <span>{label}</span>
-                      <span>{value}%</span>
-                    </div>
-                    <div className="h-3 rounded-full bg-white/10">
-                      <div
-                        className="h-3 rounded-full bg-gradient-to-r from-gold to-sky"
-                        style={{ width: `${value}%` }}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <span className={explorerStyles.heroCaption}>Personagens da nossa jornada</span>
+            </div>
+            <div className="bg-accent p-6 text-white sm:p-8">
+              <Sparkles className="h-7 w-7 text-gold" aria-hidden="true" />
+              <p className="mt-5 font-heading text-xs font-bold uppercase tracking-[0.2em] text-white/75">Um convite à descoberta</p>
+              <h2 className="mt-3 font-heading text-3xl font-bold">Oito personagens. Muitos caminhos para aprender.</h2>
+              <p className="mt-5 leading-7 text-white/85">Passeie pelos estilos, conheça suas histórias e encontre ideias para observar sua rotina de estudo.</p>
+              <div className="mt-6 rounded-2xl border border-white/20 bg-white/10 p-4 text-sm leading-6 text-white/85">Este passeio não é um resultado. Seu estilo não está predeterminado: o diagnóstico considera suas respostas.</div>
+              <Link href="#explorar-estilos" className="mt-7 inline-flex min-h-12 items-center gap-3 rounded-full bg-white px-6 py-3 font-heading text-sm font-bold text-accent outline-offset-4 focus-visible:outline-2 focus-visible:outline-white">
+                Explorar os estilos <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-white py-16 sm:py-24">
-        <div className="mx-auto max-w-6xl px-4">
-          <div className="max-w-5xl">
-            <span className="font-heading text-xs font-bold uppercase tracking-[0.25em] text-green">estilos de aprendizagem</span>
-            <h2 className="mt-3 font-heading text-3xl font-bold text-accent sm:text-4xl">Estilos de aprendizagem</h2>
-            <p className="mt-4 max-w-5xl text-pretty leading-8 text-accent/65">
-              Esses estilos ajudam a explicitar os construtos do diagnóstico de forma simples e educativa. Eles não são rótulos fixos, mas caminhos para entender tendências, dificuldades e potências na forma de aprender.
-            </p>
-          </div>
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {profiles.map((profile) => (
-              <div key={profile.name} className="group rounded-3xl border border-accent/10 bg-cream p-6 transition-all hover:-translate-y-1 hover:bg-white hover:shadow-lg hover:shadow-accent/5">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-gold shadow-sm group-hover:bg-gold group-hover:text-white">
-                  <profile.icon className="h-6 w-6" />
-                </div>
-                <h3 className="mt-5 font-heading text-lg font-bold text-accent">{profile.name}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-accent/65">{profile.desc}</p>
-              </div>
-            ))}
-          </div>
-          <div className="mt-14 rounded-[2rem] bg-accent p-8 text-center text-white sm:p-10">
-            <h3 className="font-heading text-2xl font-bold">Quer descobrir qual estilo de aprendizagem mais combina com você?</h3>
-              <Link href="/diagnostico/captura" className="mt-6 inline-flex rounded-full bg-gold px-7 py-3 text-center font-heading text-xs font-bold uppercase leading-snug tracking-wider text-white transition-colors hover:bg-gold/90">
-                Fazer diagnóstico gratuito
-              </Link>
-          </div>
-        </div>
-      </section>
+      <LearningStyleExplorer />
 
       <section id="diagnostico-completo" className="bg-cream py-16 sm:py-24">
         <div className="mx-auto max-w-6xl px-4">

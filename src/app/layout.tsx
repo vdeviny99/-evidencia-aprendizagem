@@ -9,6 +9,9 @@ import { MarketingTracking } from "@/components/MarketingTracking";
 import { SiteEventTracking } from "@/components/SiteEventTracking";
 import "./globals.css";
 
+// Local visual review must not send production analytics or advertising events.
+const localPreview = process.env.EDUKACUCA_LOCAL_PREVIEW === "1";
+
 const EDUKACUCA_META_PIXEL_ID = "2180875479476314";
 const EDUKACUCA_GOOGLE_ADS_ID = process.env.NEXT_PUBLIC_EDUKACUCA_GOOGLE_ADS_ID?.trim() || "AW-18354282148";
 const EDUKACUCA_GOOGLE_WHATSAPP_CONVERSION_LABEL = process.env.NEXT_PUBLIC_EDUKACUCA_GOOGLE_WHATSAPP_CONVERSION_LABEL?.trim() || "W63kCJrQm48dEIHM3b9E";
@@ -55,6 +58,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${raleway.variable} h-full`}
     >
       <body className="flex min-h-full flex-col bg-cream text-accent antialiased">
+        {!localPreview && <>
         <Script src={`https://www.googletagmanager.com/gtag/js?id=${EDUKACUCA_GOOGLE_ADS_ID}`} strategy="afterInteractive" />
         <Script id="edukacuca-google-tag" strategy="afterInteractive">
           {`
@@ -64,9 +68,11 @@ export default function RootLayout({
             gtag('config', '${EDUKACUCA_GOOGLE_ADS_ID}');
           `}
         </Script>
+        </>}
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
+        {!localPreview && <>
         <MarketingTracking
           pixelId={EDUKACUCA_META_PIXEL_ID}
           googleAdsId={EDUKACUCA_GOOGLE_ADS_ID}
@@ -74,6 +80,7 @@ export default function RootLayout({
         />
         <SiteEventTracking />
         <Analytics />
+        </>}
       </body>
     </html>
   );

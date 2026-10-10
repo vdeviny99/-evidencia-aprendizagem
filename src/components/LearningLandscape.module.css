@@ -1,0 +1,13 @@
+.landscape { position: absolute; inset: 0; overflow: hidden; pointer-events: none; background: var(--world-pale); }
+.art { width: 100%; height: 100%; min-height: 100%; position: absolute; inset: 0; }
+.wash { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 45%, #fffaf06b, transparent 65%); }
+.plants, .leaves { transform-origin: 50% 100%; }
+.moving .plants, .moving .leaves { animation: sway 12s ease-in-out infinite alternate; }
+.moving .clouds { animation: drift 20s ease-in-out infinite alternate; }
+.moving .sparks { animation: glimmer 5s ease-in-out infinite alternate; }
+.moving .birds { animation: drift 14s ease-in-out infinite alternate-reverse; }
+.moving .sun { animation: glimmer 8s ease-in-out infinite alternate; }
+@keyframes sway { from { transform: rotate(-1deg); } to { transform: rotate(1.5deg); } }
+@keyframes drift { from { transform: translateX(-8px); } to { transform: translateX(15px); } }
+@keyframes glimmer { from { opacity: .45; } to { opacity: .95; } }
+@media (prefers-reduced-motion: reduce) { .moving * { animation: none !important; } }
