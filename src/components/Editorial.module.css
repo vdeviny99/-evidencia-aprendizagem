@@ -1,0 +1,130 @@
+.page {
+  color: var(--c-accent);
+  background: #faf7ef;
+  background-image: radial-gradient(rgba(46, 58, 51, .045) .6px, transparent .6px);
+  background-size: 7px 7px;
+}
+.page :is(h1, h2, h3) { text-wrap: balance; }
+.page p { text-wrap: pretty; }
+.page a:focus-visible { outline: 3px solid var(--c-gold); outline-offset: 5px; }
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+  border-bottom: 1px solid rgba(46, 58, 51, .12);
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  width: 20rem;
+  height: 15rem;
+  right: -10rem;
+  top: 5rem;
+  border: 1px solid rgba(21, 128, 61, .15);
+  border-radius: 48% 52% 65% 35%;
+  transform: rotate(-24deg);
+  pointer-events: none;
+}
+.paper { background: transparent; }
+.panel {
+  border: 1px solid rgba(46, 58, 51, .15);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, .5);
+  box-shadow: none;
+  backdrop-filter: none;
+}
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  color: var(--c-accent);
+  font-family: var(--font-heading), sans-serif;
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+.eyebrow::before { content: ""; width: 1.6rem; height: 2px; background: var(--c-gold); }
+.row {
+  border: 0;
+  border-top: 1px solid rgba(46, 58, 51, .14);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  transition: background-color .2s;
+}
+.row:hover { transform: none; box-shadow: none; background: rgba(21, 128, 61, .035); }
+.number {
+  display: flex;
+  align-items: flex-start;
+  padding-top: .25rem;
+  color: var(--c-gold);
+  font-family: var(--font-heading), sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+}
+.button {
+  display: inline-flex;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: center;
+  gap: .65rem;
+  padding: .85rem 1.4rem;
+  border: 1px solid var(--c-accent);
+  border-radius: .5rem;
+  background: var(--c-accent);
+  color: white;
+  font-family: var(--font-heading), sans-serif;
+  font-size: .875rem;
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: center;
+  transition: background-color .2s, border-color .2s;
+}
+.button:hover { background: var(--c-accent-dark); border-color: var(--c-accent-dark); }
+.secondary { background: transparent; color: var(--c-accent); border-color: rgba(46, 58, 51, .28); }
+.secondary:hover { background: rgba(46, 58, 51, .06); }
+.accent { width: 5.5rem; flex-shrink: 0; pointer-events: none; }
+.cta {
+  position: relative;
+  border: 1px solid rgba(46, 58, 51, .16);
+  border-radius: 1rem;
+  background: #eaf0e4;
+  box-shadow: none;
+  color: var(--c-accent);
+}
+.ctaHeading { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.cta p { color: rgba(46, 58, 51, .76); }
+.courseGrid { display: grid; gap: 1.5rem; margin-top: 3rem; }
+.course {
+  display: grid;
+  grid-template-rows: auto auto auto 1fr auto;
+  gap: 1.5rem;
+  padding: 1.75rem;
+  border: 1px solid rgba(46, 58, 51, .18);
+  border-top: 3px solid var(--course-color, var(--c-green));
+  border-radius: .75rem;
+  background: rgba(255, 255, 255, .65);
+}
+.courseIntro { display: grid; gap: .75rem; align-content: start; }
+.courseIntro h3 { margin: 0; font-size: 1.5rem; }
+.courseIntro p { margin: 0; }
+.investment { padding-block: 1.25rem; border-block: 1px solid rgba(46, 58, 51, .12); }
+.investment strong { font-family: var(--font-heading), sans-serif; font-size: 2rem; line-height: 1.2; }
+.course ul { margin: 0; }
+.portrait { border-radius: 48% 48% .75rem .75rem; box-shadow: none; border: 1px solid rgba(46, 58, 51, .15); }
+.biography { border-left: 1px solid rgba(46, 58, 51, .18); padding-left: 2rem; }
+@media (min-width: 1024px) {
+  .courseGrid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .course { grid-row: span 5; grid-template-rows: subgrid; }
+}
+@media (max-width: 639px) {
+  .button { width: 100%; }
+  .accent { width: 4.25rem; }
+  .ctaHeading { align-items: flex-start; }
+  .course { padding: 1.25rem; }
+  .biography { padding-left: 0; border-left: 0; border-top: 1px solid rgba(46, 58, 51, .18); padding-top: 1.5rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .page a { transition: none; }
+}

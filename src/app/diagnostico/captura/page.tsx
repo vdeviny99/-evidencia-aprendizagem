@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowRight, LockKeyhole, Mail, MessageCircle, UserRound } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
 import { LearningCharacter } from "@/components/LearningCharacter";
 import revealStyles from "@/components/LearningReveal.module.css";
@@ -127,10 +128,11 @@ export default function CapturaDiagnostico() {
   }
 
   return (
-    <section className="relative isolate overflow-hidden py-12 sm:py-20">
+    <section className="relative isolate min-h-dvh overflow-hidden px-[env(safe-area-inset-left)] pb-[max(24px,env(safe-area-inset-bottom))] pt-[max(16px,env(safe-area-inset-top))] sm:py-12">
+      <Link href="/diagnostico" className="relative z-20 mx-auto mb-6 flex min-h-11 w-fit items-center rounded-full border border-accent/15 bg-cream px-5 text-sm font-semibold text-accent">Voltar ao site</Link>
       <LearningLandscape guide={guide} moving={false} />
       <div className="relative z-10 mx-auto grid max-w-6xl gap-10 px-4 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-        <div className="rounded-[2rem] bg-white/85 p-6 backdrop-blur-sm lg:sticky lg:top-24">
+        <div className="rounded-[2rem] bg-white/85 p-6 backdrop-blur-sm lg:sticky lg:top-8">
           <span className="inline-flex rounded-full bg-gold/10 px-4 py-2 font-heading text-xs font-bold uppercase tracking-[0.22em] text-gold">
             Sua jornada · primeiro passo
           </span>

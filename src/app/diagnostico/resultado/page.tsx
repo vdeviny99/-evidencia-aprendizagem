@@ -268,7 +268,8 @@ export default function ResultadoDiagnostico() {
   }
 
   return (
-    <div className="diagnostic-result-page relative isolate overflow-hidden py-10 sm:py-16">
+    <div className="diagnostic-result-page relative isolate min-h-dvh overflow-hidden px-[env(safe-area-inset-left)] pb-[max(24px,env(safe-area-inset-bottom))] pt-[max(16px,env(safe-area-inset-top))] sm:py-12">
+      <Link href="/diagnostico" className="no-export relative z-20 mx-auto mb-6 flex min-h-11 w-fit items-center rounded-full border border-accent/15 bg-cream px-5 text-sm font-semibold text-accent">Voltar ao site</Link>
       <LearningLandscape guide={guide} moving={false} />
       <article id="devolutiva-gratuita" className="relative z-10 mx-auto max-w-5xl overflow-hidden rounded-[2rem] border border-accent/10 bg-white shadow-2xl shadow-accent/10">
         <header className="border-b border-accent/10 bg-cream px-6 py-8 text-center sm:px-10">

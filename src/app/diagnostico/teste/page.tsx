@@ -96,7 +96,8 @@ export default function TesteGratuito() {
   const [moving, setMoving] = useState(true);
   const [mapOpen, setMapOpen] = useState(false);
   const questionHeading = useRef<HTMLHeadingElement>(null);
-  const lastQuestion = useRef(0);
+  const lastQuestion = useRef(-1);
+  const questionPanel = useRef<HTMLDivElement>(null);
   const journeyTop = useRef<HTMLDivElement>(null);
   const guide = guideForQuestion(current);
   const chapter = Math.min(7, Math.floor(current / 4));
@@ -104,12 +105,13 @@ export default function TesteGratuito() {
   const progress = Math.round((answeredCount / questions.length) * 100);
 
   useEffect(() => {
-    if (lastQuestion.current !== current) {
+    if (started && lastQuestion.current !== current) {
+      questionPanel.current?.scrollTo({ top: 0, behavior: "instant" });
       questionHeading.current?.focus({ preventScroll: true });
       journeyTop.current?.scrollIntoView({ behavior: "instant", block: "start" });
       lastQuestion.current = current;
     }
-  }, [current]);
+  }, [current, started]);
 
   async function saveSubmission(answersByItem: Record<number, number>) {
     const stored = window.localStorage.getItem(leadStorageKey);
@@ -192,7 +194,7 @@ export default function TesteGratuito() {
   }
 
   return (
-    <section data-moving={moving} className={styles.journey} style={{ "--journey-color": guide.color, "--journey-ink": guide.ink } as React.CSSProperties}>
+    <section data-started={started} data-moving={moving} className={styles.journey} style={{ "--journey-color": guide.color, "--journey-ink": guide.ink } as React.CSSProperties}>
       <LearningLandscape guide={guide} moving={moving} />
       <div className={styles.content}>
         <div ref={journeyTop} className={styles.topbar}>
@@ -238,7 +240,7 @@ export default function TesteGratuito() {
             <p className={styles.quote}>“{guide.quote}”</p>
             <p className={styles.guideNote}>Um guia para este trecho, não uma previsão do seu resultado.</p>
           </aside>
-          <div className={styles.card}>
+          <div ref={questionPanel} className={styles.card}>
             <div className={styles.cardMeta}><span>QUESTÃO {current + 1} / 33</span><span>NO SEU RITMO</span></div>
             <div key={current} className={moving ? styles.questionEnter : ""}>
               <h1 ref={questionHeading} tabIndex={-1} className={styles.question}>{questions[current]}</h1>

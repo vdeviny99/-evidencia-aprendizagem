@@ -9,21 +9,21 @@ export const metadata: Metadata = {
 export default function PrivacidadePage() {
   return (
     <>
-      <section className="bg-gradient-to-b from-accent/5 to-cream pb-16 pt-12 sm:pt-20">
-        <div className="mx-auto max-w-3xl px-4">
-          <div className="mb-10 text-center animate-fade-in">
-            <span className="inline-block rounded-full bg-accent/10 px-4 py-1 font-heading text-xs font-bold uppercase tracking-widest text-accent">
+      <section className="bg-cream pb-16 pt-12 sm:pb-24 sm:pt-20">
+        <div className="mx-auto max-w-3xl px-5 sm:px-8">
+          <div className="mb-10 border-b border-accent/15 pb-8 sm:mb-12 sm:pb-10">
+            <span className="inline-block border-l-2 border-gold pl-3 py-1 font-heading text-xs font-bold uppercase tracking-widest text-accent">
               Privacidade
             </span>
-            <h1 className="mt-4 font-heading text-3xl font-bold text-accent sm:text-4xl">
+            <h1 className="mt-4 font-serif text-3xl font-medium leading-tight text-accent sm:text-4xl">
               Política de Privacidade
             </h1>
-            <p className="mx-auto mt-3 max-w-xl text-accent/60">
+            <p className="mt-5 max-w-xl text-accent/70">
               Última atualização: {new Date().toLocaleDateString("pt-BR")}
             </p>
           </div>
 
-          <div className="space-y-8 rounded-xl bg-card p-8 shadow-sm sm:p-10">
+          <div className="space-y-10 rounded-2xl border border-accent/10 bg-card p-5 sm:space-y-12 sm:p-10">
             <Section title="1. Quem somos">
               <p>
                 O EdukaCuca é um projeto educacional focado em técnicas de
@@ -145,10 +145,10 @@ function Section({
 }) {
   return (
     <section>
-      <h2 className="mb-3 font-heading text-lg font-bold text-accent">
+      <h2 className="mb-3 font-serif text-xl font-medium leading-tight text-accent">
         {title}
       </h2>
-      <div className="text-sm leading-relaxed text-accent/75">{children}</div>
+      <div className="break-words text-base leading-[1.8] text-accent/75">{children}</div>
     </section>
   );
 }

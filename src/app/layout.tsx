@@ -1,10 +1,11 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Raleway } from "next/font/google";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { SiteFrame } from "@/components/SiteFrame";
 import { MarketingTracking } from "@/components/MarketingTracking";
 import { SiteEventTracking } from "@/components/SiteEventTracking";
 import "./globals.css";
@@ -39,12 +40,15 @@ export const metadata: Metadata = {
   },
   description:
     "Aprender a aprender com ciência, prática e criatividade.",
+  appleWebApp: { capable: true, statusBarStyle: "default", title: "EdukaCuca" },
   icons: {
     icon: "/images/eduka3.jpeg",
     shortcut: "/images/eduka3.jpeg",
     apple: "/images/eduka3.jpeg",
   },
 };
+
+export const viewport: Viewport = { width: "device-width", initialScale: 1, viewportFit: "cover", themeColor: "#302945" };
 
 export default function RootLayout({
   children,
@@ -69,9 +73,7 @@ export default function RootLayout({
           `}
         </Script>
         </>}
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <SiteFrame header={<Header />} footer={<Footer />}>{children}</SiteFrame>
         {!localPreview && <>
         <MarketingTracking
           pixelId={EDUKACUCA_META_PIXEL_ID}

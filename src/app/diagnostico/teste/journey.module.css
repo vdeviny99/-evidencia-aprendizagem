@@ -105,3 +105,49 @@
 
 .journey[data-moving="false"] *, .journey[data-moving="false"] *::before, .journey[data-moving="false"] *::after { animation: none !important; transition: none !important; }
 @media(max-width:760px) { .guide { grid-template-columns: 7rem minmax(0,1fr); column-gap: .65rem; } .portrait { width: 7rem; } .portrait > svg { width: 7rem; height: 8rem; } }
+/* The free questionnaire is an app-sized surface, including safe areas. */
+.journey { height: 100dvh; min-height: 100svh; overflow: hidden; padding: max(12px, env(safe-area-inset-top)) max(18px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-left)); }
+.content { height: 100%; display: flex; flex-direction: column; min-height: 0; }
+.topbar { flex-shrink: 0; scroll-margin-top: 0; margin-bottom: 14px; }
+.topbar button { min-height: 44px; cursor: pointer; }
+.progressRow, .progress { flex-shrink: 0; }
+.stage { flex: 1; min-height: 0; gap: 3rem; padding-top: 16px; align-items: center; }
+.guide { padding: 1rem; max-height: 100%; }
+.portrait > svg { height: clamp(8rem, 29vh, 18rem); }
+.guide h2 { font-size: 32px; }
+.quote { font-size: 17px; margin-block: 8px; }
+.guideNote { margin-top: 8px; }
+.card { max-height: 100%; overflow: auto; overscroll-behavior: contain; padding: 22px 28px; scrollbar-width: thin; }
+.question { min-height: 0; font-size: clamp(20px, 2vw, 26px); margin-top: 16px; }
+.option { min-height: 44px; padding-block: 10px; }
+.navigation { position: sticky; bottom: -22px; background: #fffdf8; padding-block: 12px 6px; margin-top: 10px; z-index: 2; }
+.bottomNote { flex-shrink: 0; margin-top: 12px; }
+.welcomeStage { flex: 1; min-height: 0; padding-block: 14px; gap: 2rem; }
+.welcomePaper { max-height: 100%; overflow: auto; overscroll-behavior: contain; }
+.welcomeCharacter svg { max-height: 65vh; }
+.map { flex-shrink: 0; max-height: 45dvh; overflow: auto; }
+@media(max-width:760px) {
+ .journey { padding-inline: max(12px, env(safe-area-inset-left)); padding-block: max(8px, env(safe-area-inset-top)) max(8px, env(safe-area-inset-bottom)); }
+ .topbar { padding: 4px 8px; margin-bottom: 8px; gap: 6px; }
+ .exit { font-size: 11px; } .motion { padding: 6px 9px; }
+ .progressRow { font-size: 11px; margin-bottom: 5px; padding: 5px 8px; }
+ .progressRow button { min-height: 32px; }
+ .stage { grid-template-rows: auto minmax(0,1fr); gap: 8px; padding-top: 8px; align-items: stretch; }
+ .guide { grid-template-columns: 60px minmax(0,1fr); padding: 6px 10px; }
+ .portrait { width: 60px; } .portrait > svg { width: 60px; height: 72px; }
+ .realm { font-size: 15px; margin-top: 2px; } .quote { font-size: 12px; margin: 2px 0; }
+ .card { padding: 16px; border-radius: 20px; }
+ .question { font-size: 20px; margin-top: 10px; }
+ .hint { font-size: 12px; margin-bottom: 12px; }
+ .answers { gap: 7px; } .option { padding: 8px 12px; min-height: 44px; }
+ .navigation { bottom: -16px; padding-top: 10px; }
+ .reassurance { font-size: 10px; }
+ .bottomNote { display: none; }
+ .welcomeStage { grid-template-rows: 80px minmax(0,1fr); gap: 4px; padding-block: 0; }
+ .welcomeCharacter { height: 80px; } .welcomeCharacter svg { height: 80px; }
+ .welcomePaper { padding: 20px; } .welcomePaper h1 { font-size: 28px; }
+ .welcomePaper p, .welcomePaper li { font-size: 14px; line-height: 1.65; }
+ .welcomePaper ol { margin-block: 12px; }
+ .map { max-height: 37dvh; margin-top: 8px; padding: 10px; }
+}
+@media(max-height:620px) and (min-width:761px) { .guideNote, .bottomNote { display: none; } .portrait > svg { height: 22vh; } .guide .realm { font-size: 20px; } .card { padding: 16px 24px; } }

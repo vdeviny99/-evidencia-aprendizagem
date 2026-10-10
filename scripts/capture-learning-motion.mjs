@@ -5,6 +5,7 @@ await fs.mkdir('evidence/v2-motion',{recursive:true});
 const b=await chromium.launch({headless:true});
 const c=await b.newContext({viewport:{width:1200,height:900},recordVideo:{dir:'evidence/v2-motion',size:{width:1200,height:900}}});
 await c.route('**/*',r=>{const u=new URL(r.request().url());if(u.hostname!=='localhost')return r.abort();if(u.pathname.startsWith('/api/'))return r.fulfill({status:200,body:'{}'});return r.continue();});
+await c.addInitScript(()=>localStorage.setItem("edukacuca-diagnostico-dados",JSON.stringify({attemptId:"synthetic-motion-review"})));
 const p=await c.newPage();
 await p.goto(base+'/diagnostico/teste');await p.getByRole('button',{name:'Começar jornada',exact:true}).click();
 await p.waitForTimeout(750);

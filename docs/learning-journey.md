@@ -64,3 +64,13 @@ Atlas asset: `public/learning/atlas-v2.png`, generated with the built-in image g
 ## 16Personalities reference
 
 Requested by João during V2. Reviewed the live homepage, personality index, INFP profile and hydrated free questionnaire on 2026-10-10. Reference: https://www.16personalities.com/free-personality-test and https://www.16personalities.com/infp-personality. Applied patterns: a short journey introduction, recognizable illustrated profiles, explicit exploration separate from testing, and a chapter index for the result. The report now offers anchor navigation through habits, the map, observed patterns, practices and next steps. EdukaCuca retains its five frequency choices, all original question wording and scoring. The reference's seven-point agreement scale, personality taxonomy, percentage claims, testimonials and illustration assets are not reused.
+
+## Full-screen free deliverable and editorial website
+
+João clarified that the free diagnosis is a full-screen game-like web experience, without the website header or footer. `SiteFrame` removes the global chrome on capture, questionnaire and result routes, while preserving it on the public editorial pages. Header and server-rendered footer are passed as slots so server-only cookies/auth remain on the server. The diagnosis retains its own exit, motion and route controls. Navigating back restores the website shell.
+
+The question stage uses dynamic viewport height, safe-area spacing and an internally scrolling question panel for small phones and landscape screens. Question changes reset the panel scroll position and focus the heading. Zoom remains enabled. This is a browser experience, not an installed native app; no persistent service or fullscreen permission is started. Capture and the full report can scroll because of their longer content.
+
+In parallel, home, courses and about share scoped editorial paper styling and static character accents. Lessons, contact, blog index, article layout and privacy receive quieter cream surfaces, restrained borders, responsive spacing and green/orange details. The website footer uses forest green. Factual content, prices, offers, forms, queries and destinations are preserved. Article detail styling is statically verified; a real database-backed article is not included in local browser acceptance.
+
+Verification scripts: `verify-immersive-shell.mjs` checks four viewports (1440x900, 390x844, 375x667, 844x390), viewport fit, absence of global header/footer, internal navigation, and restoration of website chrome. `verify-editorial-pages.mjs` checks nine public routes at desktop/mobile widths, navigation, overflow, course pricing and presence of the contact form. All outbound and API activity is intercepted for browser checks.
