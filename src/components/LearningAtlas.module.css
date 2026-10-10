@@ -1,0 +1,23 @@
+.atlas { position:relative; aspect-ratio:3/2; width:100%; isolation:isolate; overflow:hidden; border-radius:28px 10px 28px 10px; box-shadow:0 12px 30px #153b2a25,0 0 0 1px #28493835; background:#d7e4d2; }
+.art { object-fit:cover; }
+.vignette { position:absolute; inset:0; box-shadow:inset 0 0 70px #11392633; pointer-events:none; }
+.places { position:absolute; inset:0; list-style:none; padding:0; margin:0; }
+.places li { position:absolute; transform:translate(-50%,-50%); }
+.place { display:flex; flex-direction:column; align-items:center; cursor:pointer; position:relative; transition:transform .2s; filter:drop-shadow(0 3px 6px #112b2760); }
+.marker { position:relative; width:58px; height:58px; display:grid; place-items:center; background:#fff8dd; border:3px solid #fff8dd; border-radius:50%; }
+.marker img { width:100%; height:100%; object-fit:contain; }
+.marker i { position:absolute; right:-3px; bottom:-2px; width:20px; height:20px; font-style:normal; display:grid; place-items:center; background:#255a43; color:#fff8dd; border:2px solid #fff8dd; border-radius:50%; font-size:11px; }
+.label { font:700 11px var(--font-geist-sans),sans-serif; background:#fff8dd; padding:3px 10px; border-radius:12px; margin-top:-2px; color:#244335; white-space:nowrap; }
+.place:hover { transform:translateY(-4px); }
+.place:focus-visible { outline:3px solid #ffffff; outline-offset:5px; border-radius:24px; }
+.selected .marker { box-shadow:0 0 0 3px #2d6c4e,0 0 0 7px #fff6dccc; transform:scale(1.08); }
+.selected .label { background:#244d3e; color:#fff9df; }
+.place:disabled { filter:grayscale(.55) drop-shadow(0 2px 5px #112b2740); opacity:.75; cursor:default; }
+.place:disabled:hover { transform:none; }
+.cartouche { position:absolute; top:46%; left:48%; transform:translate(-50%,-50%) rotate(-5deg); color:#fff8dd; font:italic 17px Georgia,serif; text-shadow:0 1px 3px #15372b; pointer-events:none; width:145px; text-align:center; }
+.cartouche span { display:block; font-size:23px; }
+.compact .marker { width:44px; height:44px; }
+.compact .label { font-size:9px; padding:3px 6px; }
+.compact .cartouche { font-size:13px; width:110px; }
+@media(max-width:760px) { .marker { width:44px; height:44px; border-width:2px; }.label { font-size:10px; padding:3px 6px; }.cartouche { font-size:13px; width:100px; }.atlas {border-radius:20px 8px 20px 8px;} }
+@media(prefers-reduced-motion:reduce) { .place {transition:none;} .place:hover {transform:none;} }

@@ -2,7 +2,8 @@
 
 import { ArrowRight, LockKeyhole, Mail, MessageCircle, UserRound } from "lucide-react";
 import { useState } from "react";
-import Image from "next/image";
+import { LearningCharacter } from "@/components/LearningCharacter";
+import revealStyles from "@/components/LearningReveal.module.css";
 import { LearningLandscape } from "@/components/LearningLandscape";
 import { learningGuides } from "@/lib/learningJourney";
 
@@ -100,6 +101,7 @@ export default function CapturaDiagnostico() {
     // any failed write keeps the user here, with form inputs only in React memory.
     try {
       window.localStorage.removeItem(leadStorageKey);
+      window.sessionStorage.removeItem("edukacuca-jornada-v2");
       window.localStorage.removeItem("edukacuca-diagnostico-respostas");
       window.localStorage.removeItem("edukacuca-diagnostico-resultado");
       window.localStorage.setItem(
@@ -114,6 +116,7 @@ export default function CapturaDiagnostico() {
           objetivo: formData.goal,
           tipo: "gratuito",
           data: new Date().toISOString(),
+          attemptId: window.crypto.randomUUID(),
         }),
       );
     } catch {
@@ -134,9 +137,10 @@ export default function CapturaDiagnostico() {
           <h1 className="mt-5 font-heading text-4xl font-black tracking-tight text-accent sm:text-5xl">
             Seu caminho de aprendizagem começa aqui.
           </h1>
-          <div className="mt-6 flex items-center gap-4">
-            <Image src={`/para/personagens/${guide.id}.png`} alt="Cuca, guia do início da jornada" width={96} height={96} className="h-24 w-24 object-contain" />
-            <p className="text-sm leading-relaxed text-accent/75">{guide.quote} <span className="mt-1 block font-semibold">{guide.realm}</span></p>
+          <div className={revealStyles.captureArt}>
+            <LearningCharacter guide={guide} moving={false} decorative className={revealStyles.captureCharacter} />
+            <p className={revealStyles.captureQuote}>“{guide.quote}”</p>
+            <p className={revealStyles.captureCaption}>Cuca prepara o caminho no {guide.realm.toLowerCase()}. Responda pensando na sua rotina de hoje, sem buscar uma resposta perfeita.</p>
           </div>
           <p className="mt-5 text-lg leading-relaxed text-accent/70">
             Preencha seus dados para acessar o diagnóstico gratuito e receber sua devolutiva ao final do teste.

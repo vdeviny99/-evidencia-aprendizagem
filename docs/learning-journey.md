@@ -8,7 +8,7 @@ The diagnosis landing replaces the sample numerical graph with an invitation to 
 
 The existing questions become a journey through eight scenery chapters: Cuca's garden, Saci's wind valley, Curupira's trail, Boitatá's clearing, Caipora's forest, Iara's river, Boto's waters, and Uirapuru's grove. Chapters follow question position, never answer values or scoring dimensions. Progress counts answered questions. Explicit confirmation advances the question; native radio controls support keyboard selection and changing an answer.
 
-Original SVG landscapes provide hills, plants, paths or rivers, clouds and character-specific drawings. CSS animates leaves, clouds, glints and portraits. The question screen has a motion toggle; system reduced-motion preferences disable its animations. Capture, explorer and result scenery are static. Question changes focus the heading and restore the top of the journey below the sticky header.
+Original SVG landscapes provide hills, plants, paths or rivers, clouds and character-specific drawings. CSS animates leaves, clouds, glints and portraits. The question screen has a motion toggle; system reduced-motion preferences disable its animations. Capture uses static scenery. Explorer and result include controllable motion. Question changes focus the heading and restore the top of the journey below the sticky header.
 
 The capture and result screens reuse the scenery and original character badges. Courses, recorded-course price, mentoring, institutional talks, the paid diagnosis and all existing destinations remain the site's commercial context.
 
@@ -25,14 +25,14 @@ The capture and result screens reuse the scenery and original character badges. 
 
 The eight transparent badge PNGs are reused from the existing NEL-516 artwork at commit `9de644c`, `public/para/personagens/`. Landscapes are newly authored SVG shapes, with no new asset service or animation dependency.
 
-Trade-offs: SVG and CSS provide lightweight scenery rather than a canvas engine or complex illustrated character rigs. Eight chapters cover 33 questions, so the last chapter contains five. Partial answers remain in component memory and are lost on reload or exit. This candidate does not add resume/history, attempt IDs, sounds, score-based rewards or backend schema changes. Browser storage has no transaction; clearing old attribution before writing a new lead can discard the previous local diagnostic if a subsequent write fails.
+Trade-offs: SVG and CSS provide lightweight scenery rather than a canvas engine or complex illustrated character rigs. Eight chapters cover 33 questions, so the last chapter contains five. V2 stores a same-tab session draft for four hours, bound to the free capture attempt identifier. It contains only answers, position, expiry and attempt ID. Expired drafts and another respondent's draft are rejected. Closing the tab ends the draft. Storage failure preserves in-memory answers and explains that resume is unavailable. The client identifier is not backend idempotency. No sounds, score-based rewards or backend schema changes are added. Browser storage has no transaction; clearing old attribution before writing a new lead can discard the previous local diagnostic if a subsequent write fails.
 
 ## Verification
 
 - `npm run build`: passed, including TypeScript and all 28 generated pages.
 - Targeted ESLint and `git diff --check`: passed.
 - `npx tsx scripts/verify-learning-scoring.ts`: original questions/scoring source equality and all eight profile fixtures passed; invalid and incomplete answers rejected.
-- `node scripts/verify-learning-journey.mjs`: desktop 1440 and mobile 390, all 33 answers, zero-valued answers, back navigation, progress, failed submission, successful mocked submission, keyboard radio arrows, no-result state, and reduced motion.
+- `node scripts/verify-learning-journey.mjs`: desktop 1440 and mobile 390, all 33 answers, zero-valued answers, back navigation, same-tab resume, cross-respondent and expired draft rejection, Escape dismissal of exit confirmation, complete animation pause, progress, failed submission, successful mocked submission, keyboard radio arrows, no-result state, and reduced motion.
 - `node scripts/verify-learning-explorer.mjs`: eight choices, empty initial selection, one active choice, eight synthetic previews, fictitious identity isolation, fractional-preview rejection, capture/explorer/result overflow.
 
 Browser checks intercept all POSTs and non-local requests. They create no real leads, emails, payments or advertising events. Generated screenshots and JSON receipts live under `evidence/` and are excluded from git. Backend production persistence, real PDF generation and paid checkout were not accepted by these tests.
@@ -52,3 +52,15 @@ EDUKACUCA_LOCAL_PREVIEW=1 npm run start -- --hostname 127.0.0.1 --port 3117
 - `/diagnostico/resultado?matriz=6`: explicitly synthetic Iara result preview.
 
 Publication remains a separate action-specific gate after visual review and release follow-ups.
+
+## V2 refinement
+
+Following João's request to go substantially beyond v1, the explorer now uses an interactive illustrated atlas. The eight biomes are connected by paths and water, with native buttons over their locations. During the questionnaire, the atlas permits revisiting reached chapters and disables future chapters. A welcome screen introduces the journey and offers an explicit resume choice when a valid draft exists. Native exit confirmation permits returning to the question with Escape.
+
+Each folklore guide now has an original full-body SVG illustration with independent expressions and small CSS movements. Every landscape has its own composition and environmental motifs. Guide and navigation text use opaque paper surfaces for readability over all palettes. Chapter changes animate the guide's entrance; reduced motion and the pause toggle freeze animations. The result is presented as an illustrated paper reveal with immediate access to the educational report.
+
+Atlas asset: `public/learning/atlas-v2.png`, generated with the built-in image generation tool on 2026-10-10, from an original prompt describing eight Brazilian folklore biomes, no text or logos. Original source: `/Users/jow/.codex/generated_images/01a1220a-1dcb-7591-8a22-71b927a0e4dc/exec-5a7967c9-1f33-4ac2-b196-c8165fb9789e.png`. Character and landscape SVGs are authored in source. Existing badge PNGs remain the atlas markers. The atlas is raster art; movement and character rigs are vector CSS/SVG.
+
+## 16Personalities reference
+
+Requested by João during V2. Reviewed the live homepage, personality index, INFP profile and hydrated free questionnaire on 2026-10-10. Reference: https://www.16personalities.com/free-personality-test and https://www.16personalities.com/infp-personality. Applied patterns: a short journey introduction, recognizable illustrated profiles, explicit exploration separate from testing, and a chapter index for the result. The report now offers anchor navigation through habits, the map, observed patterns, practices and next steps. EdukaCuca retains its five frequency choices, all original question wording and scoring. The reference's seven-point agreement scale, personality taxonomy, percentage claims, testimonials and illustration assets are not reused.

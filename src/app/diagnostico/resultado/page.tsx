@@ -3,6 +3,8 @@
 import { ArrowRight, BarChart3, BookOpen, CalendarCheck, Download, Languages, LockKeyhole, MessageCircle, Presentation, } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { LearningReveal } from "@/components/LearningReveal";
+import revealStyles from "@/components/LearningReveal.module.css";
 import { LearningLandscape } from "@/components/LearningLandscape";
 import { learningGuides } from "@/lib/learningJourney";
 import { useState, useMemo, useSyncExternalStore } from "react";
@@ -280,28 +282,18 @@ export default function ResultadoDiagnostico() {
             className="no-export mt-6 inline-flex cursor-pointer items-center justify-center gap-2 rounded-full bg-accent px-5 py-3 font-heading text-xs font-bold uppercase tracking-wider text-white transition-colors hover:bg-accent-dark focus:outline-none focus:ring-2 focus:ring-gold/40 disabled:cursor-not-allowed disabled:opacity-60"
           >
             <Download className="h-4 w-4" />
-            {pdfStatus === "loading" ? "Preparando devolutiva..." : "Baixar devolutiva gratuita"}
+            {pdfStatus === "loading" ? "Preparando devolutiva" : "Baixar devolutiva gratuita"}
           </button>
         </header>
 
         <div className="px-6 py-8 sm:px-10 sm:py-10">
-          <section className="mx-auto mb-10 max-w-3xl text-center">
-            <div className="profile-reveal-stage relative mx-auto flex h-44 w-44 items-center justify-center rounded-full border border-[#A97C2B]/55 bg-[radial-gradient(circle_at_38%_28%,#F4E1A2_0%,#D6B866_30%,#C9A44C_58%,#A97C2B_100%)] shadow-2xl shadow-[#B9933D]/30 ring-1 ring-white/50 sm:h-56 sm:w-56">
-              <div className="absolute inset-4 rounded-full bg-[#6B4A16]/20 blur-2xl" />
-              <div className={`absolute inset-0 ${reveal.effect}`} />
-              <Image src={`/para/personagens/${guide.id}.png`} alt={`Emblema de ${result.styleName}`} width={224} height={224} priority className="relative h-36 w-36 object-contain drop-shadow-lg sm:h-48 sm:w-48" />
+          <div className="mb-10">
+            <LearningReveal guide={guide} quote={reveal.quote} preview={isPreview} />
+            <div className="mt-5 flex items-center justify-center gap-3 text-sm text-accent/75">
+              <Image src={`/para/personagens/${guide.id}.png`} alt="" width={56} height={56} className="h-14 w-14 rounded-full border border-gold/30 bg-cream object-contain p-1" />
+              <p><strong className="block font-heading text-accent">{isPreview ? "Exemplo de selo de participação" : "Selo de participação na jornada"}</strong>{isPreview ? "Ilustração da prévia sintética." : "Você concluiu as 33 perguntas."} Este emblema não é uma nota.</p>
             </div>
-            <h2 className="animate-fade-in-up relative mx-auto mt-6 inline-flex px-6 py-1 font-heading text-4xl font-black tracking-tight text-accent sm:text-6xl">
-              <span className="absolute inset-x-0 bottom-2 -z-0 h-4 rounded-full bg-[#D6B866]/35" />
-              <span className="relative z-10">{result.styleName}</span>
-            </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-balance font-heading text-2xl font-semibold leading-snug text-accent sm:text-3xl">
-              “{reveal.quote}”
-            </p>
-            <p className="mt-5 text-center font-heading text-sm font-bold uppercase tracking-[0.18em] text-accent/45">
-              Seu estilo de aprendizagem é {result.styleName}
-            </p>
-          </section>
+          </div>
 
           <section className="overflow-hidden rounded-3xl border border-accent/10">
             {identification.map(([label, value]) => (
@@ -312,7 +304,10 @@ export default function ResultadoDiagnostico() {
             ))}
           </section>
 
-          <section className="mt-10">
+          <nav aria-label="Explorar sua leitura" className={revealStyles.reportNav}>
+            <a href="#entender-habitos">Entenda seus hábitos</a><a href="#seu-mapa">Seu mapa</a><a href="#padroes-estudo">Padrões observados</a><a href="#experimentar">Experimente</a><a href="#proximo-passo">Próximo passo</a>
+          </nav>
+          <section id="entender-habitos" className={`mt-10 ${revealStyles.reportIntro}`}>
             <h2 className="font-heading text-2xl font-bold text-accent">1. Apresentação do diagnóstico e fatores avaliados</h2>
             <div className="mt-5 space-y-4 leading-relaxed text-accent/70">
               <p>{markText("Olá, esta é a sua devolutiva do diagnóstico de hábitos de estudo versão gratuita. Este questionário foi criado por mim, José Vinicius, com base na minha experiência como professor de idiomas e estratégias de aprendizagem e em pesquisas sobre aprendizagem, autorregulação, metacognição, memória e motivação.", introHighlightTerms, "rounded bg-gold/15 px-1 text-accent/80")}</p>
@@ -335,7 +330,7 @@ export default function ResultadoDiagnostico() {
             </div>
           </section>
 
-          <section className="mt-12">
+          <section id="seu-mapa" className="mt-12">
             <div className="flex items-center gap-3">
               <BarChart3 className="h-8 w-8 text-gold" />
               <div>
@@ -382,7 +377,7 @@ export default function ResultadoDiagnostico() {
             </div>
           </section>
 
-          <section className="mt-12 rounded-[2rem] bg-cream p-6 sm:p-8">
+          <section id="padroes-estudo" className="mt-12 rounded-[2rem] bg-cream p-6 sm:p-8">
             <h2 className="font-heading text-2xl font-bold text-accent">3. Padrões observados no seu estudo - {result.styleName}</h2>
             <p className="mt-4 text-lg leading-relaxed text-accent/75">{result.styleDescription}</p>
             <div className="mt-5 space-y-4 leading-relaxed text-accent/70">
@@ -392,7 +387,7 @@ export default function ResultadoDiagnostico() {
             </div>
           </section>
 
-          <section className="no-export mt-12">
+          <section id="experimentar" className="no-export mt-12">
             <h2 className="font-heading text-2xl font-bold text-accent">4. Boas práticas recomendadas pelo professor</h2>
             <p className="mt-4 leading-relaxed text-accent/70">Se eu tivesse apenas 2 minutos para te ajudar a aprender melhor baseado em meus 8 anos de experiência como professor, faria mais ou menos assim.</p>
             <p className="mt-6 font-heading text-sm font-bold uppercase tracking-wider text-green">Os 4 passos fundamentais</p>
@@ -408,7 +403,7 @@ export default function ResultadoDiagnostico() {
             </p>
           </section>
 
-          <section className="mt-12">
+          <section id="proximo-passo" className="mt-12">
             <h2 className="font-heading text-2xl font-bold text-accent">5. Como podemos ajudar você</h2>
             <p className="mt-4 leading-relaxed text-accent/70">A EdukaCuca oferece formas de colocar essas estratégias em prática com acompanhamento. Para o seu perfil, estas opções fazem mais sentido:</p>
             <div className="mt-6 grid gap-4 sm:grid-cols-2">

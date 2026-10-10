@@ -1,8 +1,6 @@
 import { ArrowRight, CheckCircle, ShieldCheck, Sparkles } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
-import { LearningLandscape } from "@/components/LearningLandscape";
-import { learningGuides } from "@/lib/learningJourney";
+import { LearningAtlas } from "@/components/LearningAtlas";
 import explorerStyles from "@/components/LearningStyleExplorer.module.css";
 import LearningStyleExplorer from "@/components/LearningStyleExplorer";
 
@@ -75,13 +73,7 @@ export default function DiagnosticoPage() {
             </div>
           </div>
           <div className={explorerStyles.heroCard}>
-            <div className={explorerStyles.heroArt} aria-hidden="true">
-              <LearningLandscape guide={learningGuides[0]} moving={false} />
-              <div className={explorerStyles.heroCharacters}>
-                {learningGuides.map((guide) => <Image key={guide.id} src={`/para/personagens/${guide.id}.png`} width={100} height={100} sizes="(max-width: 640px) 64px, 80px" alt="" />)}
-              </div>
-              <span className={explorerStyles.heroCaption}>Personagens da nossa jornada</span>
-            </div>
+            <LearningAtlas mode="decoration" />
             <div className="bg-accent p-6 text-white sm:p-8">
               <Sparkles className="h-7 w-7 text-gold" aria-hidden="true" />
               <p className="mt-5 font-heading text-xs font-bold uppercase tracking-[0.2em] text-white/75">Um convite à descoberta</p>

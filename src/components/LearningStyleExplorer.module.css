@@ -79,3 +79,10 @@
 .heroCharacters img:nth-child(odd) { transform: rotate(-4deg); }
 .heroCaption { position: absolute; bottom: .8rem; left: 50%; transform: translateX(-50%); white-space: nowrap; border-radius: 1rem; background: #fffdf6e8; color: #244438; padding: .3rem .9rem; font-size: .7rem; font-weight: 800; }
 @media (max-width: 540px) { .heroArt { min-height: 14rem; } .heroCharacters { padding: 1rem 1.3rem 2.6rem; } .heroCharacters img { height: 5rem; } }
+
+.portrait > svg { height: 16rem; width: 15rem; filter: drop-shadow(0 12px 8px #213e3520); }
+.motionToggle { position: absolute; top: .7rem; right: .7rem; z-index: 3; min-height: 44px; padding: .4rem .8rem; border-radius: 2rem; background: #fffdf4; color: #244438; font: 700 .7rem var(--font-geist-sans), sans-serif; border: 1px solid #24443830; cursor: pointer; }
+.motionToggle:focus-visible { outline: 3px solid #244438; outline-offset: 3px; }
+.stage { grid-template-columns: minmax(0, 1.35fr) minmax(0, .85fr); }
+.selector { position: sticky; top: 6rem; }
+@media(max-width: 900px) { .stage { grid-template-columns: 1fr; } .selector { position: static; } }

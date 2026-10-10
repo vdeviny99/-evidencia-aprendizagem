@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, type CSSProperties } from "react";
-import Image from "next/image";
+import { LearningCharacter } from "@/components/LearningCharacter";
+import { LearningAtlas } from "@/components/LearningAtlas";
 import Link from "next/link";
 import { ArrowRight, Leaf, Compass } from "lucide-react";
 import { LearningLandscape } from "@/components/LearningLandscape";
@@ -24,6 +25,7 @@ const contexts: Record<string, { asset: string; context: string; practice: strin
 };
 
 export default function LearningStyleExplorer() {
+  const [moving, setMoving] = useState(true);
   const [selectedName, setSelectedName] = useState<string | null>(null);
   const guide = learningGuides.find((item) => item.name === selectedName);
   const context = guide ? contexts[guide.name] : undefined;
@@ -44,26 +46,16 @@ export default function LearningStyleExplorer() {
         <div className={styles.stage}>
           <div className={styles.selector}>
             <p className={styles.selectorTitle}>Quem vamos conhecer?</p>
-            <div className={styles.buttons} role="group" aria-label="Personagens dos oito estilos educativos">
-              {learningGuides.map((item) => {
-                const entry = contexts[item.name];
-                return (
-                  <button key={item.id} type="button" aria-pressed={selectedName === item.name} aria-controls="style-story" className={styles.character} onClick={() => setSelectedName(item.name)}>
-                    {entry && <Image src={`/para/personagens/${entry.asset}.png`} width={72} height={72} alt="" className={styles.badge} />}
-                    <span>{item.name}</span>
-                    <span className={styles.selectionMark} aria-hidden="true">{selectedName === item.name ? "✓" : "+"}</span>
-                  </button>
-                );
-              })}
-            </div>
+            <LearningAtlas selectedId={guide?.id} onSelect={(item) => setSelectedName(item.name)} />
             <p className={styles.selectorHint}>Você pode visitar todos. Escolher um personagem não altera seu diagnóstico.</p>
           </div>
           <div id="style-story" className={styles.story}>
+            <button type="button" className={styles.motionToggle} aria-pressed={!moving} onClick={() => setMoving(value => !value)}>{moving ? "Pausar movimento" : "Ativar movimento"}</button>
             {guide && context ? (
               <>
                 <div className={styles.scene} aria-hidden="true">
-                  <LearningLandscape guide={guide} moving={false} />
-                  <div className={styles.portrait}><Image src={`/para/personagens/${context.asset}.png`} alt="" width={280} height={280} sizes="(max-width: 640px) 180px, 240px" /></div>
+                  <LearningLandscape guide={guide} moving={moving} />
+                  <div className={styles.portrait}><LearningCharacter guide={guide} moving={moving} decorative /></div>
                   <span className={styles.realm}>{guide.realm}</span>
                 </div>
                 <div className={styles.storyCopy}>

@@ -1,13 +1,15 @@
 "use client";
 
 import { ArrowLeft, ArrowRight, Loader2, Pause, Play, Check, Map, X } from "lucide-react";
-import { useState, useTransition, useEffect, useRef } from "react";
+import { useState, useTransition, useEffect, useRef, useMemo, useSyncExternalStore } from "react";
 import { calculateDiagnosticResult, isCompleteDiagnosticAnswers } from "@/lib/diagnosticoResultado";
 
-import Image from "next/image";
+import { LearningCharacter } from "@/components/LearningCharacter";
+import { LearningAtlas } from "@/components/LearningAtlas";
+import { readJourneyDraft, writeJourneyDraft, clearJourneyDraft } from "@/lib/learningJourneyDraft";
 import Link from "next/link";
 import { LearningLandscape } from "@/components/LearningLandscape";
-import { guideForQuestion, learningGuides } from "@/lib/learningJourney";
+import { guideForQuestion } from "@/lib/learningJourney";
 import styles from "./journey.module.css";
 
 const questions = [
@@ -71,7 +73,21 @@ type StoredLead = {
   relacao?: string;
 };
 
+const subscribe = () => () => {};
 export default function TesteGratuito() {
+  const hydrated = useSyncExternalStore(subscribe, () => true, () => false);
+  const draft = useMemo(() => hydrated ? readJourneyDraft() : null, [hydrated]);
+  const [storageNote, setStorageNote] = useState("");
+  const [started, setStarted] = useState(false);
+  const exitDialog = useRef<HTMLDialogElement>(null);
+  function begin(resume: boolean) {
+    if (resume && draft) { setAnswers(draft.answers); setCurrent(draft.current); }
+    else { clearJourneyDraft(); setAnswers({}); setCurrent(0); }
+    setStarted(true);
+  }
+  function navigate(index: number) { writeJourneyDraft(answers, index); startTransition(() => setCurrent(index)); }
+  function choose(value: number) { const updated = { ...answers, [current]: value }; setAnswers(updated); const saved = writeJourneyDraft(updated, current); setStorageNote(saved ? "" : "Não foi possível salvar um rascunho nesta aba. Suas respostas continuam disponíveis enquanto esta tela estiver aberta."); }
+
   const [current, setCurrent] = useState(0);
   const [answers, setAnswers] = useState<Record<number, number>>({});
   const [submitError, setSubmitError] = useState("");
@@ -145,7 +161,7 @@ export default function TesteGratuito() {
 
         if (missingLeadFields) {
           setSubmitError("Complete seus dados obrigatórios antes de finalizar o diagnóstico.");
-          window.location.href = "/diagnostico/captura";
+          window.location.assign("/diagnostico/captura");
           return;
         }
 
@@ -164,10 +180,11 @@ export default function TesteGratuito() {
         }
         const stored = window.localStorage.getItem(leadStorageKey);
         const savedLead = stored ? (JSON.parse(stored) as StoredLead) : null;
-        window.location.href = savedLead?.plan === "paid" ? "/diagnostico/enviar-comprovante" : "/diagnostico/resultado";
+        clearJourneyDraft();
+        window.location.assign(savedLead?.plan === "paid" ? "/diagnostico/enviar-comprovante" : "/diagnostico/resultado");
         return;
       }
-      startTransition(() => setCurrent((value) => value + 1));
+      navigate(current + 1);
     } catch {
       setIsSubmitting(false);
       setSubmitError("Não conseguimos acessar os dados desta jornada no navegador. Suas respostas continuam nesta tela. Verifique as permissões de armazenamento antes de tentar novamente.");
@@ -175,16 +192,29 @@ export default function TesteGratuito() {
   }
 
   return (
-    <section className={styles.journey} style={{ "--journey-color": guide.color, "--journey-ink": guide.ink } as React.CSSProperties}>
+    <section data-moving={moving} className={styles.journey} style={{ "--journey-color": guide.color, "--journey-ink": guide.ink } as React.CSSProperties}>
       <LearningLandscape guide={guide} moving={moving} />
       <div className={styles.content}>
         <div ref={journeyTop} className={styles.topbar}>
-          <Link href="/diagnostico" className={styles.exit}><X size={16} /> Sair da jornada</Link>
+          <button type="button" onClick={() => exitDialog.current?.showModal()} className={styles.exit}><X size={16} /> Sair da jornada</button>
           <span className={styles.eyebrow}>SEU MAPA DE APRENDIZAGEM</span>
           <button className={styles.motion} aria-pressed={!moving} onClick={() => setMoving(value => !value)} type="button">
             {moving ? <Pause size={15} /> : <Play size={15} />}{moving ? "Pausar movimento" : "Ativar movimento"}
           </button>
         </div>
+        {!started ? <div className={styles.welcomeStage}>
+          <div className={styles.welcomeCharacter}><LearningCharacter guide={guide} moving={moving} decorative /></div>
+          <div className={styles.welcomePaper}>
+            <span className={styles.eyebrow}>Seu caderno de descobertas</span>
+            <h1>Uma trilha para observar como você aprende.</h1>
+            <p>Você vai atravessar oito paisagens e responder a 33 perguntas sobre sua rotina. Os personagens acompanham o caminho. Seu resultado nasce das suas respostas.</p>
+            <ol><li>Escolha a frequência que representa sua experiência.</li><li>Volte quando quiser rever uma resposta.</li><li>Ao terminar, receba uma leitura educativa e ideias para estudar.</li></ol>
+            {draft && <p className={styles.resumeNote}>Há {Object.keys(draft.answers).length} respostas salvas nesta aba. Você pode continuar de onde parou.</p>}
+            <button className={styles.next} type="button" onClick={() => begin(Boolean(draft))}>{draft ? "Retomar jornada" : "Começar jornada"}<ArrowRight size={18} /></button>
+            {draft && <button className={styles.back} type="button" onClick={() => begin(false)}>Começar de novo</button>}
+            <p className={styles.hint}>As respostas ficam disponíveis nesta aba por até 4 horas. Fechar a aba encerra esse rascunho.</p>
+          </div>
+        </div> : <>
         <div className={styles.progressRow}>
           <span>{answeredCount} de 33 respondidas</span>
           <button onClick={() => setMapOpen(value => !value)} aria-expanded={mapOpen} aria-controls="journey-map" type="button"><Map size={16} /> Ver percurso</button>
@@ -194,17 +224,14 @@ export default function TesteGratuito() {
         </div>
         {mapOpen && <div id="journey-map" className={styles.map}>
           <p>Os personagens acompanham o percurso. Seu resultado aparece só depois das 33 respostas.</p>
-          <ol>{learningGuides.map((character, index) => <li key={character.id} aria-current={chapter === index ? "step" : undefined}>
-            <Image src={`/para/personagens/${character.id}.png`} alt="" width={44} height={44} />
-            <span>{character.name}</span><small>{index < chapter ? "Visitado" : index === chapter ? "Você está aqui" : "Adiante"}</small>
-          </li>)}</ol>
+          <LearningAtlas mode="journey" compact currentChapter={chapter} furthestChapter={Math.min(7, Math.floor(Math.max(current, ...Object.keys(answers).map(Number)) / 4))} onSelect={(_, index) => { navigate(index * 4); setMapOpen(false); }} />
         </div>}
         <div className={styles.stage}>
-          <aside className={styles.guide}>
+          <aside key={guide.id} className={styles.guide} style={{ animation: moving ? undefined : "none" }}>
             <div className={styles.chapter}>PARADA {chapter + 1} DE 8</div>
             <p className={styles.realm}>{guide.realm}</p>
             <div className={`${styles.portrait} ${moving ? styles.floating : ""}`}>
-              <Image key={guide.id} src={`/para/personagens/${guide.id}.png`} alt={`Personagem ${guide.name}`} width={240} height={240} loading="eager" priority={current === 0} />
+              <LearningCharacter key={guide.id} guide={guide} moving={moving} />
               <span className={styles.doodle}>✦</span>
             </div>
             <h2>{guide.name}</h2>
@@ -219,7 +246,7 @@ export default function TesteGratuito() {
               <fieldset className={styles.answers} disabled={isSubmitting}>
                 <legend className={styles.srOnly}>Escolha a frequência que representa sua rotina</legend>
                 {scale.map(option => <label key={option.value} className={`${styles.option} ${answers[current] === option.value ? styles.selected : ""}`}>
-                  <input type="radio" name={`question-${current}`} value={option.value} checked={answers[current] === option.value} onChange={() => setAnswers(prev => ({ ...prev, [current]: option.value }))} />
+                  <input type="radio" name={`question-${current}`} value={option.value} checked={answers[current] === option.value} onChange={() => choose(option.value)} />
                   <span className={styles.optionNumber} aria-hidden="true">{answers[current] === option.value ? <Check size={17} /> : option.value}</span>
                   <span>{option.label}</span>
                   <span className={styles.frequency} aria-hidden="true">{Array.from({ length: 5 }, (_, index) => <i key={index} className={index <= option.value ? styles.dotFilled : ""} />)}</span>
@@ -227,15 +254,18 @@ export default function TesteGratuito() {
               </fieldset>
             </div>
             <div className={styles.navigation}>
-              <button type="button" onClick={() => setCurrent(value => Math.max(0, value - 1))} disabled={current === 0 || isPending || isSubmitting} className={styles.back}><ArrowLeft size={17} /> Voltar</button>
+              <button type="button" onClick={() => navigate(Math.max(0, current - 1))} disabled={current === 0 || isPending || isSubmitting} className={styles.back}><ArrowLeft size={17} /> Voltar</button>
               <button type="button" onClick={next} disabled={answers[current] === undefined || isPending || isSubmitting} className={styles.next}>
                 {isSubmitting ? <><Loader2 size={17} className="animate-spin" /> Enviando</> : <>{current === questions.length - 1 ? "Ver meu resultado" : "Continuar"}<ArrowRight size={17} /></>}
               </button>
             </div>
             <p className={styles.reassurance}>Não há resposta certa ou errada. Vale a sua experiência.</p>
+            {storageNote && <p role="status" className={styles.hint}>{storageNote}</p>}
             {submitError && <p role="alert" className={styles.error}>{submitError}</p>}
           </div>
         </div>
+        </>}
+        <dialog ref={exitDialog} className={styles.exitDialog}><h2>Fazer uma pausa?</h2><p>Se você mantiver esta aba aberta, suas respostas ficam salvas por até 4 horas. Volte ao questionário para retomar.</p><div><button type="button" className={styles.next} onClick={() => exitDialog.current?.close()}>Continuar aqui</button><Link href="/diagnostico" className={styles.back}>Sair agora</Link></div></dialog>
         <p className={styles.bottomNote}>Uma jornada educativa pelos seus hábitos. Você pode voltar e ajustar suas respostas.</p>
       </div>
     </section>
