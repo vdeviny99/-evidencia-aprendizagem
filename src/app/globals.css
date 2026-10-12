@@ -11,16 +11,20 @@
   --c-card: #ffffff;
   --c-text-muted: rgba(46, 58, 51, 0.6);
   --c-text-dim: rgba(46, 58, 51, 0.35);
-  --font-geist-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-geist-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-  --font-geist-serif: Georgia, "Times New Roman", serif;
-  --font-raleway: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  /*
+   * Fontes do site, num lugar so.
+   * Texto corrido: troque a linha --fonte-texto abaixo.
+   * Titulos: a fonte vem de src/app/layout.tsx (Raleway, variavel --fonte-titulos).
+   * Para usar outra fonte do Google nos titulos, troque Raleway no layout.tsx.
+   */
+  --fonte-texto: Georgia, "Times New Roman", serif;
 }
 
 @theme inline {
-  --font-sans: var(--font-geist-sans);
-  --font-serif: var(--font-geist-serif);
-  --font-heading: var(--font-raleway);
+  --font-sans: var(--fonte-sans), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: var(--fonte-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-serif: var(--fonte-texto);
+  --font-heading: var(--fonte-titulos), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --color-accent: var(--c-accent);
   --color-accent-dark: var(--c-accent-dark);
   --color-cream: var(--c-cream);
@@ -38,17 +42,17 @@ html {
 }
 
 body {
-  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+  font-family: var(--fonte-texto);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 .font-heading {
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: var(--font-heading);
 }
 
 .font-sans {
-  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  font-family: var(--font-sans);
 }
 
 @keyframes fadeIn {

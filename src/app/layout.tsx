@@ -14,17 +14,17 @@ const EDUKACUCA_GOOGLE_ADS_ID = process.env.NEXT_PUBLIC_EDUKACUCA_GOOGLE_ADS_ID?
 const EDUKACUCA_GOOGLE_WHATSAPP_CONVERSION_LABEL = process.env.NEXT_PUBLIC_EDUKACUCA_GOOGLE_WHATSAPP_CONVERSION_LABEL?.trim() || "W63kCJrQm48dEIHM3b9E";
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
+  variable: "--fonte-sans",
   subsets: ["latin"],
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+  variable: "--fonte-mono",
   subsets: ["latin"],
 });
 
 const raleway = Raleway({
-  variable: "--font-raleway",
+  variable: "--fonte-titulos",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "900"],
 });
