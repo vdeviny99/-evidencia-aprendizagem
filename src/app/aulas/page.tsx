@@ -30,7 +30,7 @@ const aulas = [
     descricao:
       "O aluno no centro: priorizamos suas necessidades através da comunicação autêntica.",
     nivel: "Iniciante ao avançado",
-    color: "from-sky/20 via-white to-white border-sky/40 text-sky-deep",
+    color: "border-accent/15 text-green",
     detail: "Conversação, compreensão, repertório e confiança para usar o idioma em situações reais.",
   },
   {
@@ -39,7 +39,7 @@ const aulas = [
     descricao:
       "O aluno no centro: priorizamos suas necessidades através da comunicação autêntica.",
     nivel: "Iniciante ao avançado",
-    color: "from-green/12 via-white to-white border-green/25 text-green",
+    color: "border-green/25 text-green",
     detail: "Base sólida, escuta ativa e prática orientada para construir autonomia no idioma.",
   },
   {
@@ -48,7 +48,7 @@ const aulas = [
     descricao:
       "Aprenda a estudar com mais clareza, método e consciência do que funciona para você.",
     nivel: "Estudo e organização",
-    color: "from-gold/15 via-white to-white border-gold/35 text-gold",
+    color: "border-gold/25 text-gold",
     detail: "Rotina, revisão, foco, memória e técnicas baseadas em evidências para aprender melhor.",
   },
 ];
@@ -92,7 +92,7 @@ const packages = [
     desc: "Para quem quer manter constância, criar rotina e evoluir com acompanhamento semanal.",
     items: ["1 encontro semanal ao vivo", "Plano adaptado ao objetivo", "Feedback e próximos passos", "Suporte pelo WhatsApp"],
     featured: false,
-    color: "from-sky/20 via-white to-white border-sky/40",
+    color: "border-accent/15",
   },
   {
     title: "2 aulas por semana",
@@ -101,7 +101,7 @@ const packages = [
     desc: "Para quem busca mais ritmo, prática frequente e evolução mais acompanhada ao longo da semana.",
     items: ["2 encontros semanais ao vivo", "Mais tempo de prática guiada", "Acompanhamento mais próximo", "Melhor custo por aula"],
     featured: true,
-    color: "from-green/12 via-white to-white border-green/25",
+    color: "border-green/25",
   },
   {
     title: "Estratégias de aprendizagem",
@@ -110,44 +110,44 @@ const packages = [
     desc: "Para quem quer organizar estudos, melhorar rotina, revisar métodos e aprender com mais consciência.",
     items: ["Sessão avulsa", "Plano prático de estudo", "Orientação personalizada", "Foco em rotina, revisão e autonomia"],
     featured: false,
-    color: "from-gold/15 via-white to-white border-gold/35",
+    color: "border-gold/25",
   },
 ];
 
 export default function AulasPage() {
   return (
     <>
-      <section className="relative overflow-hidden bg-[radial-gradient(circle_at_top_left,rgba(234,88,12,0.09),transparent_28%),linear-gradient(135deg,#f6f8f6_0%,#ffffff_52%,#f4faf6_100%)] py-16 sm:py-24">
-        <div className="absolute right-0 top-20 hidden h-72 w-72 rounded-full bg-green/10 blur-3xl lg:block" />
-        <div className="relative mx-auto grid max-w-6xl gap-12 px-4 lg:grid-cols-[1.03fr_0.97fr] lg:items-center">
+      <section className="relative overflow-hidden bg-cream py-16 sm:py-24">
+        <div className="pointer-events-none absolute -right-24 top-12 hidden h-72 w-72 rounded-[48%_52%_64%_36%] border border-green/15 lg:block" />
+        <div className="relative mx-auto grid max-w-6xl gap-12 px-5 sm:px-8 lg:grid-cols-[1.03fr_0.97fr] lg:items-center">
           <div>
-            <span className="inline-flex items-center gap-2 rounded-full border border-accent/10 bg-white/80 px-4 py-2 font-heading text-xs font-bold uppercase tracking-[0.22em] text-accent shadow-sm">
+            <span className="inline-flex items-center gap-2 border-l-2 border-gold pl-3 py-1 font-heading text-xs font-bold uppercase tracking-[0.16em] text-accent">
               <Sparkles className="h-4 w-4 text-gold" />
               Aulas Edukacuca
             </span>
-            <h1 className="mt-6 max-w-3xl font-heading text-4xl font-black tracking-tight text-accent sm:text-5xl">
+            <h1 className="mt-6 max-w-3xl font-serif text-4xl font-medium leading-[1.12] tracking-tight text-accent sm:text-5xl">
               Aulas pensadas para o seu jeito de aprender
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-accent/75 sm:text-xl">
               Inglês, francês e estratégias de aprendizagem com foco no aluno, comunicação autêntica e acompanhamento próximo.
             </p>
             <div className="mt-8 flex">
-              <a href="#aulas" className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gold px-7 py-3.5 text-center font-heading text-sm font-bold uppercase leading-snug tracking-wider text-white shadow-lg shadow-gold/25 transition-all hover:-translate-y-0.5 hover:bg-gold/90 sm:w-auto">
+              <a href="#aulas" className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gold px-7 py-3.5 text-center font-heading text-sm font-bold uppercase leading-snug tracking-wider text-white transition-colors hover:bg-gold/90 sm:w-auto">
                 Conheça as opções de aulas
                 <ArrowRight className="h-4 w-4" />
               </a>
             </div>
           </div>
 
-          <div className="rounded-[2rem] border border-accent/10 bg-white/70 p-6 shadow-sm backdrop-blur">
-            <p className="font-heading text-xs font-bold uppercase tracking-[0.25em] text-gold">experiência do aluno</p>
-            <h2 className="mt-3 font-heading text-2xl font-bold text-accent">O que guia cada aula</h2>
-            <p className="mt-3 text-sm leading-relaxed text-accent/62">
+          <div className="rounded-2xl border border-accent/10 bg-white p-6 sm:p-8">
+            <p className="font-heading text-xs font-bold uppercase tracking-[0.16em] text-gold">experiência do aluno</p>
+            <h2 className="mt-3 font-serif text-2xl font-medium leading-tight text-accent">O que guia cada aula</h2>
+            <p className="mt-3 text-sm leading-relaxed text-accent/70">
               O ponto de partida é entender o aluno, seus objetivos e os obstáculos que aparecem no caminho.
             </p>
             <div className="mt-6 space-y-3">
               {principles.map((item) => (
-                <div key={item} className="flex gap-3 rounded-2xl border border-accent/10 bg-white/70 p-4 text-sm leading-relaxed text-accent/70">
+                <div key={item} className="flex gap-3 border-t border-accent/10 pt-4 text-sm leading-relaxed text-accent/70">
                   <CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-green" />
                   <span>{item}</span>
                 </div>
@@ -158,11 +158,11 @@ export default function AulasPage() {
       </section>
 
       <section id="aulas" className="bg-white py-16 sm:py-24">
-        <div className="mx-auto max-w-6xl px-4">
+        <div className="mx-auto max-w-6xl px-5 sm:px-8">
           <div className="mx-auto max-w-2xl text-center">
-            <span className="font-heading text-xs font-bold uppercase tracking-[0.25em] text-green">opções de aula</span>
-            <h2 className="mt-3 font-heading text-3xl font-bold text-accent sm:text-4xl">Escolha o caminho que faz sentido para você</h2>
-            <p className="mt-4 leading-relaxed text-accent/65">
+            <span className="font-heading text-xs font-bold uppercase tracking-[0.16em] text-green">opções de aula</span>
+            <h2 className="mt-3 font-serif text-3xl font-medium leading-tight text-accent sm:text-4xl">Escolha o caminho que faz sentido para você</h2>
+            <p className="mt-4 leading-relaxed text-accent/70">
               Cada proposta parte do mesmo princípio: entender suas necessidades e transformar a aula em prática significativa.
             </p>
           </div>
@@ -171,18 +171,18 @@ export default function AulasPage() {
             {aulas.map((aula) => {
               const Icon = aula.icon;
               return (
-                <article key={aula.titulo} className={`group flex min-h-[390px] flex-col rounded-[2rem] border bg-gradient-to-br ${aula.color} p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-accent/10`}>
+                <article key={aula.titulo} className={`group flex flex-col rounded-2xl border bg-cream ${aula.color} p-6 sm:p-8 transition-colors duration-200 hover:border-green/30`}>
                   <div className="flex items-start justify-between gap-4">
-                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white shadow-sm">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[40%_60%_50%_50%] bg-green/8">
                       <Icon className="h-7 w-7" />
                     </div>
-                    <span className="rounded-full bg-white/80 px-3 py-1 text-xs font-semibold text-accent/55 shadow-sm">
+                    <span className="max-w-[10rem] text-right text-xs leading-relaxed text-accent/70">
                       {aula.nivel}
                     </span>
                   </div>
-                  <h3 className="mt-7 font-heading text-2xl font-bold text-accent">{aula.titulo}</h3>
+                  <h3 className="mt-7 font-serif text-2xl font-medium leading-tight text-accent">{aula.titulo}</h3>
                   <p className="mt-3 text-base leading-relaxed text-accent/75">{aula.descricao}</p>
-                  <p className="mt-4 flex-1 text-sm leading-relaxed text-accent/58">{aula.detail}</p>
+                  <p className="mt-4 flex-1 text-sm leading-relaxed text-accent/70">{aula.detail}</p>
                   <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 text-center font-heading text-xs font-bold uppercase leading-snug tracking-wider text-white transition-colors hover:bg-accent-dark">
                     Contratar
                     <ArrowRight className="h-4 w-4" />
@@ -195,10 +195,10 @@ export default function AulasPage() {
       </section>
 
       <section className="bg-cream py-16 sm:py-24">
-        <div className="mx-auto max-w-6xl px-4">
+        <div className="mx-auto max-w-6xl px-5 sm:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <span className="font-heading text-xs font-bold uppercase tracking-[0.25em] text-gold">método</span>
-            <h2 className="mt-3 font-heading text-3xl font-bold text-accent sm:text-4xl">Como a aula vira progresso real</h2>
+            <span className="font-heading text-xs font-bold uppercase tracking-[0.16em] text-gold">método</span>
+            <h2 className="mt-3 font-serif text-3xl font-medium leading-tight text-accent sm:text-4xl">Como a aula vira progresso real</h2>
             <p className="mt-4 leading-relaxed text-accent/68">
               A experiência não começa pelo material. Começa por entender quem está aprendendo, qual é o objetivo e quais obstáculos aparecem no caminho.
             </p>
@@ -208,20 +208,20 @@ export default function AulasPage() {
             {steps.map((step, index) => {
               const Icon = step.icon;
               return (
-                <article key={step.title} className="flex min-h-[300px] flex-col rounded-[2rem] border border-accent/10 bg-white p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-accent/10">
+                <article key={step.title} className="flex flex-col rounded-2xl border border-accent/10 bg-white p-6 sm:p-8 transition-colors duration-200 hover:border-green/30">
                   <div className="flex items-center justify-between gap-4">
-                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-accent text-white shadow-sm">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-green/8 text-green">
                       <Icon className="h-7 w-7" />
                     </div>
-                    <span className="font-heading text-5xl font-black leading-none text-accent/8">0{index + 1}</span>
+                    <span className="font-heading text-sm font-medium leading-none text-green/70">0{index + 1}</span>
                   </div>
                   <div className="mt-8 flex flex-1 flex-col">
                     <h3 className="font-heading text-xl font-bold leading-tight text-accent">{step.title}</h3>
-                    <p className="mt-4 flex-1 text-sm leading-relaxed text-accent/62">{step.desc}</p>
+                    <p className="mt-4 flex-1 text-sm leading-relaxed text-accent/70">{step.desc}</p>
                   </div>
                   <div className="mt-7 flex items-center justify-between border-t border-accent/10 pt-4">
-                    <span className="font-heading text-[0.65rem] font-bold uppercase tracking-[0.22em] text-gold">Etapa 0{index + 1}</span>
-                    <span className="h-1.5 w-14 rounded-full bg-gold/80" />
+                    <span className="font-heading text-[0.65rem] font-bold uppercase tracking-[0.16em] text-gold">Etapa 0{index + 1}</span>
+                    <span className="h-px w-10 bg-gold/50" />
                   </div>
                 </article>
               );
@@ -231,35 +231,35 @@ export default function AulasPage() {
       </section>
 
       <section className="bg-white py-16 sm:py-24">
-        <div className="mx-auto max-w-6xl px-4">
+        <div className="mx-auto max-w-6xl px-5 sm:px-8">
           <div className="mx-auto max-w-2xl text-center">
-            <span className="font-heading text-xs font-bold uppercase tracking-[0.25em] text-gold">pacotes</span>
-            <h2 className="mt-3 font-heading text-3xl font-bold text-accent sm:text-4xl">Escolha o formato das aulas</h2>
-            <p className="mt-4 leading-relaxed text-accent/65">
+            <span className="font-heading text-xs font-bold uppercase tracking-[0.16em] text-gold">pacotes</span>
+            <h2 className="mt-3 font-serif text-3xl font-medium leading-tight text-accent sm:text-4xl">Escolha o formato das aulas</h2>
+            <p className="mt-4 leading-relaxed text-accent/70">
               Os pacotes de idiomas são mensais. As aulas de estratégias de aprendizagem podem ser contratadas por hora.
             </p>
           </div>
 
           <div className="mt-12 grid gap-6 lg:grid-cols-3">
             {packages.map((pkg) => (
-              <div key={pkg.title} className={`flex min-h-[520px] flex-col rounded-[2rem] border bg-gradient-to-br ${pkg.color} p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-accent/10`}>
-                <div className="min-h-[154px]">
+              <div key={pkg.title} className={`flex flex-col rounded-2xl border bg-cream ${pkg.color} p-6 sm:p-8 transition-colors duration-200 hover:border-green/30`}>
+                <div className="space-y-1">
                   <div className="flex min-h-8 flex-col items-start gap-3 sm:flex-row sm:justify-between">
-                    <h3 className="font-heading text-2xl font-bold leading-tight text-accent">{pkg.title}</h3>
+                    <h3 className="font-serif text-2xl font-medium leading-tight text-accent">{pkg.title}</h3>
                     {pkg.featured ? (
-                      <span className="shrink-0 rounded-full bg-white/80 px-3 py-1 font-heading text-[0.62rem] font-bold uppercase tracking-wider text-accent/55 shadow-sm">
+                      <span className="shrink-0 border-l border-green/30 pl-3 font-heading text-[0.62rem] font-medium uppercase tracking-wider text-green">
                         Mais intensivo
                       </span>
                     ) : (
                       <span className="hidden shrink-0 px-3 py-1 lg:block" aria-hidden="true" />
                     )}
                   </div>
-                  <p className="mt-4 leading-relaxed text-accent/65">{pkg.desc}</p>
+                  <p className="mt-4 leading-relaxed text-accent/70">{pkg.desc}</p>
                 </div>
-                <div className="mt-6 rounded-3xl border border-accent/10 bg-white/80 px-5 py-4 shadow-sm">
-                  <p className="font-heading text-[0.65rem] font-bold uppercase tracking-[0.22em] text-accent/45">{pkg.note === "por hora" ? "aula avulsa" : "mensalidade"}</p>
+                <div className="mt-6 border-y border-accent/10 py-5">
+                  <p className="font-heading text-[0.65rem] font-bold uppercase tracking-[0.16em] text-accent/45">{pkg.note === "por hora" ? "aula avulsa" : "mensalidade"}</p>
                   <div className="mt-1 flex items-end gap-2 text-accent">
-                    <span className="font-heading text-4xl font-black tracking-tight">{pkg.price}</span>
+                    <span className="font-serif text-4xl font-medium leading-[1.12] tracking-tight">{pkg.price}</span>
                     <span className="pb-1 text-sm text-accent/55">{pkg.note}</span>
                   </div>
                 </div>
@@ -282,24 +282,24 @@ export default function AulasPage() {
       </section>
 
       <section className="bg-cream py-16 sm:py-24">
-        <div className="mx-auto grid max-w-6xl gap-8 px-4 lg:grid-cols-[1fr_0.9fr] lg:items-start">
-          <div className="rounded-[2rem] border border-accent/10 bg-white p-8 shadow-sm">
-            <span className="font-heading text-xs font-bold uppercase tracking-[0.25em] text-green">aulas online</span>
-            <h2 className="mt-3 font-heading text-3xl font-bold text-accent">Estrutura leve, acompanhamento próximo</h2>
+        <div className="mx-auto grid max-w-6xl gap-8 px-5 sm:px-8 lg:grid-cols-[1fr_0.9fr] lg:items-start">
+          <div className="rounded-2xl border border-accent/10 bg-white p-6 sm:p-8">
+            <span className="font-heading text-xs font-bold uppercase tracking-[0.16em] text-green">aulas online</span>
+            <h2 className="mt-3 font-serif text-3xl font-medium leading-tight text-accent">Estrutura leve, acompanhamento próximo</h2>
             <div className="mt-8 grid gap-4 sm:grid-cols-2">
               {features.map(([Icon, title, text]) => (
-                <div key={title} className="rounded-3xl bg-cream p-5">
+                <div key={title} className="rounded-xl bg-cream p-5">
                   <Icon className="h-6 w-6 text-gold" />
                   <h3 className="mt-4 font-heading text-base font-bold text-accent">{title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-accent/62">{text}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-accent/70">{text}</p>
                 </div>
               ))}
             </div>
           </div>
 
-          <aside className="rounded-[2rem] border border-accent/10 bg-white p-8 text-accent shadow-xl shadow-accent/8">
+          <aside className="rounded-2xl border border-accent/10 bg-white p-6 text-accent sm:p-8">
             <CalendarCheck className="h-10 w-10 text-gold" />
-            <h2 className="mt-5 font-heading text-3xl font-bold">Agende sua conversa de 15 minutos</h2>
+            <h2 className="mt-5 font-serif text-3xl font-medium leading-tight">Agende sua conversa de 15 minutos</h2>
             <p className="mt-4 leading-relaxed text-accent/68">
               Uma conversa breve para entender sua demanda, tirar dúvidas e explicar como funciona meu acompanhamento.
             </p>
@@ -311,7 +311,7 @@ export default function AulasPage() {
                 </li>
               ))}
             </ul>
-            <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-gold px-7 py-4 text-center font-heading text-sm font-bold uppercase leading-snug tracking-wider text-white shadow-lg shadow-gold/20 transition-all hover:-translate-y-0.5 hover:bg-gold/90">
+            <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-gold px-7 py-4 text-center font-heading text-sm font-bold uppercase leading-snug tracking-wider text-white transition-colors hover:bg-gold/90">
               <MessageCircle className="h-4 w-4" />
               Agendar conversa pelo WhatsApp
             </a>

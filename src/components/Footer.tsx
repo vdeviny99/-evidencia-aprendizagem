@@ -18,7 +18,7 @@ export async function Footer() {
   }
 
   return (
-    <footer className="bg-black">
+    <footer className="border-t border-white/10 bg-[#243f35]">
       <div className="mx-auto max-w-5xl px-4 py-16">
         <div className="grid gap-10 sm:grid-cols-4">
           <div className="sm:col-span-1">

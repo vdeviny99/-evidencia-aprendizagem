@@ -1,0 +1,62 @@
+.character {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  isolation: isolate;
+}
+
+.body,
+.sway,
+.fin,
+.tail,
+.eye,
+.wind,
+.spark {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.sway { transform-origin: center bottom; }
+.fin { transform-origin: left top; }
+.tail { transform-origin: center top; }
+
+.character[data-moving="true"] .body { animation: breathe 6s ease-in-out infinite; }
+.character[data-moving="true"] .sway { animation: sway 5.5s ease-in-out infinite; }
+.character[data-moving="true"] .fin { animation: flutter 4.8s ease-in-out infinite; }
+.character[data-moving="true"] .tail { animation: sway 6.5s ease-in-out infinite; }
+.character[data-moving="true"] .eye { animation: blink 7.4s ease-in-out infinite; }
+.character[data-moving="true"] .wind { animation: drift 6s ease-in-out infinite; }
+.character[data-moving="true"] .spark { animation: shimmer 5s ease-in-out infinite; }
+
+@keyframes breathe {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+@keyframes sway {
+  0%, 100% { transform: rotate(-1deg); }
+  50% { transform: rotate(1.5deg); }
+}
+@keyframes flutter {
+  0%, 100% { transform: rotate(0); }
+  50% { transform: rotate(-3deg); }
+}
+@keyframes blink {
+  0%, 43%, 47%, 100% { transform: scaleY(1); }
+  45% { transform: scaleY(.08); }
+}
+@keyframes drift {
+  0%, 100% { transform: translateX(-2px); }
+  50% { transform: translateX(3px); }
+}
+@keyframes shimmer {
+  0%, 100% { opacity: .75; }
+  50% { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .character[data-moving="true"] :is(.body, .sway, .fin, .tail, .eye, .wind, .spark) {
+    animation: none;
+    transform: none;
+  }
+}

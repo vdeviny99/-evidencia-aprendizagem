@@ -1,13 +1,17 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Raleway } from "next/font/google";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { SiteFrame } from "@/components/SiteFrame";
 import { MarketingTracking } from "@/components/MarketingTracking";
 import { SiteEventTracking } from "@/components/SiteEventTracking";
 import "./globals.css";
+
+// Local visual review must not send production analytics or advertising events.
+const localPreview = process.env.EDUKACUCA_LOCAL_PREVIEW === "1";
 
 const EDUKACUCA_META_PIXEL_ID = "2180875479476314";
 const EDUKACUCA_GOOGLE_ADS_ID = process.env.NEXT_PUBLIC_EDUKACUCA_GOOGLE_ADS_ID?.trim() || "AW-18354282148";
@@ -36,12 +40,15 @@ export const metadata: Metadata = {
   },
   description:
     "Aprender a aprender com ciência, prática e criatividade.",
+  appleWebApp: { capable: true, statusBarStyle: "default", title: "EdukaCuca" },
   icons: {
     icon: "/images/eduka3.jpeg",
     shortcut: "/images/eduka3.jpeg",
     apple: "/images/eduka3.jpeg",
   },
 };
+
+export const viewport: Viewport = { width: "device-width", initialScale: 1, viewportFit: "cover", themeColor: "#302945" };
 
 export default function RootLayout({
   children,
@@ -55,6 +62,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${raleway.variable} h-full`}
     >
       <body className="flex min-h-full flex-col bg-cream text-accent antialiased">
+        {!localPreview && <>
         <Script src={`https://www.googletagmanager.com/gtag/js?id=${EDUKACUCA_GOOGLE_ADS_ID}`} strategy="afterInteractive" />
         <Script id="edukacuca-google-tag" strategy="afterInteractive">
           {`
@@ -64,9 +72,9 @@ export default function RootLayout({
             gtag('config', '${EDUKACUCA_GOOGLE_ADS_ID}');
           `}
         </Script>
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        </>}
+        <SiteFrame header={<Header />} footer={<Footer />}>{children}</SiteFrame>
+        {!localPreview && <>
         <MarketingTracking
           pixelId={EDUKACUCA_META_PIXEL_ID}
           googleAdsId={EDUKACUCA_GOOGLE_ADS_ID}
@@ -74,6 +82,7 @@ export default function RootLayout({
         />
         <SiteEventTracking />
         <Analytics />
+        </>}
       </body>
     </html>
   );

@@ -1,7 +1,12 @@
 "use client";
 
 import { ArrowRight, LockKeyhole, Mail, MessageCircle, UserRound } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
+import { LearningCharacter } from "@/components/LearningCharacter";
+import revealStyles from "@/components/LearningReveal.module.css";
+import { LearningLandscape } from "@/components/LearningLandscape";
+import { learningGuides } from "@/lib/learningJourney";
 
 const leadStorageKey = "edukacuca-diagnostico-dados";
 
@@ -39,6 +44,8 @@ const initialForm = {
 
 export default function CapturaDiagnostico() {
   const [formData, setFormData] = useState(initialForm);
+  const [storageError, setStorageError] = useState<string | null>(null);
+  const guide = learningGuides[0];
   const [errors, setErrors] = useState<FieldErrors>({});
 
   function validateForm() {
@@ -90,33 +97,53 @@ export default function CapturaDiagnostico() {
       return;
     }
 
-    window.localStorage.setItem(
-      leadStorageKey,
-      JSON.stringify({
-        plan: "free",
-        nome: formData.nome.trim(),
-        email: formData.email.trim(),
-        whatsapp: formData.whatsapp.trim(),
-        idade: formData.idade.trim(),
-        fase: formData.fase.trim(),
-        objetivo: formData.goal,
-        tipo: "gratuito",
-        data: new Date().toISOString(),
-      }),
-    );
+    setStorageError(null);
+    // Trade-offs: browser storage has no transaction. Invalidate old attribution first;
+    // any failed write keeps the user here, with form inputs only in React memory.
+    try {
+      window.localStorage.removeItem(leadStorageKey);
+      window.sessionStorage.removeItem("edukacuca-jornada-v2");
+      window.localStorage.removeItem("edukacuca-diagnostico-respostas");
+      window.localStorage.removeItem("edukacuca-diagnostico-resultado");
+      window.localStorage.setItem(
+        leadStorageKey,
+        JSON.stringify({
+          plan: "free",
+          nome: formData.nome.trim(),
+          email: formData.email.trim(),
+          whatsapp: formData.whatsapp.trim(),
+          idade: formData.idade.trim(),
+          fase: formData.fase.trim(),
+          objetivo: formData.goal,
+          tipo: "gratuito",
+          data: new Date().toISOString(),
+          attemptId: window.crypto.randomUUID(),
+        }),
+      );
+    } catch {
+      setStorageError("Não foi possível iniciar o diagnóstico neste navegador. Permita o armazenamento local e tente novamente. Seus dados continuam neste formulário enquanto esta página estiver aberta.");
+      return;
+    }
     window.location.href = "/diagnostico/teste";
   }
 
   return (
-    <section className="bg-[linear-gradient(135deg,#f6f8f6_0%,#ffffff_55%,#eef7f2_100%)] py-16 sm:py-24">
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-        <div className="lg:sticky lg:top-24">
+    <section className="relative isolate min-h-dvh overflow-hidden px-[env(safe-area-inset-left)] pb-[max(24px,env(safe-area-inset-bottom))] pt-[max(16px,env(safe-area-inset-top))] sm:py-12">
+      <Link href="/diagnostico" className="relative z-20 mx-auto mb-6 flex min-h-11 w-fit items-center rounded-full border border-accent/15 bg-cream px-5 text-sm font-semibold text-accent">Voltar ao site</Link>
+      <LearningLandscape guide={guide} moving={false} />
+      <div className="relative z-10 mx-auto grid max-w-6xl gap-10 px-4 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+        <div className="rounded-[2rem] bg-white/85 p-6 backdrop-blur-sm lg:sticky lg:top-8">
           <span className="inline-flex rounded-full bg-gold/10 px-4 py-2 font-heading text-xs font-bold uppercase tracking-[0.22em] text-gold">
-            diagnóstico gratuito
+            Sua jornada · primeiro passo
           </span>
           <h1 className="mt-5 font-heading text-4xl font-black tracking-tight text-accent sm:text-5xl">
-            Antes de começar, para onde enviamos seu resultado?
+            Seu caminho de aprendizagem começa aqui.
           </h1>
+          <div className={revealStyles.captureArt}>
+            <LearningCharacter guide={guide} moving={false} decorative className={revealStyles.captureCharacter} />
+            <p className={revealStyles.captureQuote}>“{guide.quote}”</p>
+            <p className={revealStyles.captureCaption}>Cuca prepara o caminho no {guide.realm.toLowerCase()}. Responda pensando na sua rotina de hoje, sem buscar uma resposta perfeita.</p>
+          </div>
           <p className="mt-5 text-lg leading-relaxed text-accent/70">
             Preencha seus dados para acessar o diagnóstico gratuito e receber sua devolutiva ao final do teste.
           </p>
@@ -133,6 +160,7 @@ export default function CapturaDiagnostico() {
         </div>
 
         <form onSubmit={handleSubmit} className="rounded-[2rem] border border-accent/10 bg-white p-6 shadow-xl shadow-accent/5 sm:p-8">
+          <p className="mb-6 font-heading text-sm font-bold text-accent">Vamos conhecer você antes das 33 perguntas.</p>
           <div className="grid gap-5 sm:grid-cols-2">
             <label className="block sm:col-span-2">
               <span className="font-heading text-xs font-bold uppercase tracking-wider text-accent/60">Nome</span>
@@ -178,6 +206,7 @@ export default function CapturaDiagnostico() {
           </div>
 
           <div className="mt-8 space-y-3 rounded-3xl bg-cream p-5">
+            <p className="text-xs font-semibold text-accent/70">O aceite dos termos é obrigatório. As duas autorizações seguintes são opcionais.</p>
             <label className="flex gap-3 text-sm leading-relaxed text-accent/75">
               <input type="checkbox" checked={formData.terms} onChange={(event) => updateField("terms", event.target.checked)} className="mt-1 accent-gold" />
               <span>Aceito os Termos de Uso e a Política de Privacidade.</span>
@@ -193,6 +222,7 @@ export default function CapturaDiagnostico() {
             </label>
           </div>
 
+          {storageError && <p role="alert" className="mt-6 rounded-2xl border border-red-300 bg-red-50 p-4 text-sm text-red-900">{storageError}</p>}
           <button type="submit" className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-gold px-7 py-4 text-center font-heading text-sm font-bold uppercase leading-snug tracking-wider text-white shadow-lg shadow-gold/20 transition-all hover:-translate-y-0.5 hover:bg-gold/90">
             <UserRound className="h-4 w-4" />
             Começar diagnóstico

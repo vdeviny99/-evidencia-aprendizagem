@@ -56,39 +56,39 @@ export default async function ArtigoPage({
     <>
       <ReadingProgress />
 
-      <div className="mx-auto max-w-5xl px-4 py-8">
+      <div className="mx-auto max-w-5xl px-5 sm:px-8 py-8 sm:py-12">
         <Link
           href="/artigos"
-          className="inline-flex items-center gap-2 text-sm text-accent/50 transition-colors hover:text-accent"
+          className="inline-flex items-center gap-2 text-sm text-accent/70 transition-colors hover:text-accent"
         >
           <ArrowLeft className="h-4 w-4" />
           Voltar para artigos
         </Link>
       </div>
 
-      <article className="mx-auto max-w-3xl px-4 pb-16">
-        <header className="animate-fade-in">
+      <article className="mx-auto max-w-3xl px-5 sm:px-8 pb-16 sm:pb-24">
+        <header className="border-b border-accent/15 pb-8 sm:pb-10">
           <div className="flex flex-wrap gap-2">
             {article.categories.map((cat) => (
               <Link
                 key={cat.slug}
                 href={`/artigos?categoria=${cat.slug}`}
-                className="inline-block rounded-full bg-accent/10 px-3 py-1 font-heading text-[10px] font-bold uppercase tracking-widest text-accent transition-colors hover:bg-accent hover:text-white"
+                className="inline-block rounded-sm bg-green/8 px-3 py-1.5 font-heading text-[10px] font-bold uppercase tracking-widest text-accent transition-colors hover:bg-accent hover:text-white"
               >
                 {cat.name}
               </Link>
             ))}
           </div>
 
-          <h1 className="mt-4 font-heading text-3xl font-bold text-accent sm:text-4xl">
+          <h1 className="mt-4 font-serif text-3xl font-medium leading-tight text-accent sm:text-4xl">
             {article.title}
           </h1>
 
           {article.subtitle && (
-            <p className="mt-3 text-lg text-accent/60">{article.subtitle}</p>
+            <p className="mt-5 text-lg leading-relaxed text-accent/70">{article.subtitle}</p>
           )}
 
-          <div className="mt-6 flex flex-wrap items-center gap-5 text-sm text-accent/40">
+          <div className="mt-6 flex flex-wrap items-center gap-5 text-sm text-accent/65">
             {article.author.name && (
               <span className="flex items-center gap-1.5">
                 <User className="h-4 w-4" />
@@ -114,20 +114,20 @@ export default async function ArtigoPage({
           </div>
         </header>
 
-        <div className="mt-10 rounded-xl bg-card p-6 shadow-sm sm:p-10">
+        <div className="mt-8 break-words text-base leading-[1.8] sm:mt-10 sm:text-lg">
           <MDXContent source={article.content} />
         </div>
       </article>
 
       <section className="border-t border-accent/10 bg-cream">
-        <div className="mx-auto max-w-3xl px-4 py-16">
+        <div className="mx-auto max-w-3xl px-5 sm:px-8 py-16">
           <AuthorCard />
         </div>
       </section>
 
       <section className="border-t border-accent/10 bg-cream">
-        <div className="mx-auto max-w-5xl px-4 pb-16">
-          <h2 className="text-center font-heading text-2xl font-bold text-accent">
+        <div className="mx-auto max-w-5xl px-5 sm:px-8 py-12 sm:py-16">
+          <h2 className="text-center font-serif text-2xl font-medium leading-tight text-accent">
             Artigos Relacionados
           </h2>
           <div className="mt-8 grid gap-4 sm:grid-cols-2">
@@ -135,9 +135,9 @@ export default async function ArtigoPage({
               <Link
                 key={r.slug}
                 href={`/artigos/${r.slug}`}
-                className="group rounded-lg bg-card p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
+                className="group border-t border-accent/15 py-5 transition-colors hover:border-green/50"
               >
-                <h3 className="font-heading text-sm font-semibold text-accent transition-colors group-hover:text-accent-dark">
+                <h3 className="font-serif text-lg font-medium leading-relaxed text-accent transition-colors group-hover:text-accent-dark">
                   {r.title}
                 </h3>
               </Link>
