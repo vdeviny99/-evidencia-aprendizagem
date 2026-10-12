@@ -54,3 +54,7 @@ As 33 perguntas originais, as cinco frequências de resposta, inversões, fatore
 Build, TypeScript, lint e cálculo original passaram. Browser cobriu 33 perguntas, oito perfis, valor zero, revisão, retomada, isolamento, falha/sucesso simulado, pausa e movimento reduzido. Tela cheia verificada em 1440×900, 390×844, 375×667 e 844×390. Nove rotas editoriais verificadas em desktop/mobile. Nenhum diagnóstico real foi enviado nos testes. Artigo real, PDF de produção e checkout pago não têm aceitação completa nesta revisão.
 
 Antes de produção: registrar consentimentos opcionais corretamente, adequar inicialização de tracking ao consentimento, evitar duplicidade em retries, reconciliar captura paga com validação compartilhada e concluir o tratamento de idade/responsável com revisão de produto. Validação visual do Zé não equivale à conclusão desses pontos nem à autorização de produção.
+
+## Tracking e conversões
+
+[Mapa completo de tracking e conversões](tracking-conversions.md): gatilho, destino, consentimento e significado de cada evento atual; funil proposto; deduplicação, atribuição e roteiro de aceitação. Diagnóstico salvo é a conversão principal recomendada do gratuito. Clique no WhatsApp não confirma conversa e plano pago não confirma pagamento. As lacunas estão explícitas, sem apresentar eventos propostos como já ativos.

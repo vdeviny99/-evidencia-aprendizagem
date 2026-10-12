@@ -74,3 +74,7 @@ The question stage uses dynamic viewport height, safe-area spacing and an intern
 In parallel, home, courses and about share scoped editorial paper styling and static character accents. Lessons, contact, blog index, article layout and privacy receive quieter cream surfaces, restrained borders, responsive spacing and green/orange details. The website footer uses forest green. Factual content, prices, offers, forms, queries and destinations are preserved. Article detail styling is statically verified; a real database-backed article is not included in local browser acceptance.
 
 Verification scripts: `verify-immersive-shell.mjs` checks four viewports (1440x900, 390x844, 375x667, 844x390), viewport fit, absence of global header/footer, internal navigation, and restoration of website chrome. `verify-editorial-pages.mjs` checks nine public routes at desktop/mobile widths, navigation, overflow, course pricing and presence of the contact form. All outbound and API activity is intercepted for browser checks.
+
+## Measurement map
+
+See [tracking and conversions](tracking-conversions.md) for current event triggers, destinations, consent behavior, metric semantics, missing funnel instrumentation and acceptance criteria. Mapping does not change runtime tracking or ad-account settings.
